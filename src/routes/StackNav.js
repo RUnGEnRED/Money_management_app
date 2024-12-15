@@ -12,7 +12,7 @@ const Stack = createStackNavigator();
 function WalletsStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Wallets" component={WalletsScreen} />
+      <Stack.Screen name="WalletsList" component={WalletsScreen} />
       <Stack.Screen name="Add New Wallet" component={AddNewWalletScreen} />
     </Stack.Navigator>
   );
@@ -22,7 +22,7 @@ function WalletsStack() {
 function CategoriesStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Categories" component={CategoriesScreen} />
+      <Stack.Screen name="CategoriesList" component={CategoriesScreen} />
       <Stack.Screen name="Add New Category" component={AddNewCategoryScreen} />
     </Stack.Navigator>
   );
