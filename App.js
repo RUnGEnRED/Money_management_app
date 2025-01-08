@@ -1,17 +1,20 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { PaperProvider } from 'react-native-paper';
-import { UserProvider } from './src/context/UserContext';
-import DrawerNav from './src/routes/DrawerNav';
+import React from "react";
+
+import { PaperProvider } from "react-native-paper";
+import theme from "./src/theme/theme";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./src/services/i18n/i18n";
+// import { UserProvider } from "./src/context/UserContext";
+// import ShakeDetector from "./src/components/ShakeDetector";
+
+import MainNavigation from "./src/routes/MainNavigator";
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <PaperProvider>
-        <UserProvider>
-          <DrawerNav />
-        </UserProvider>
+    <I18nextProvider i18n={i18n}>
+      <PaperProvider theme={theme.light}>
+        <MainNavigation />
       </PaperProvider>
-    </NavigationContainer>
+    </I18nextProvider>
   );
 }
