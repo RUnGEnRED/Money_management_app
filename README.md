@@ -19,6 +19,7 @@ This is a mobile application built with React Native to help users track their p
 - [Node.js](https://nodejs.org/) (>=16)
 - [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 - [React Native CLI](https://reactnative.dev/docs/environment-setup)
+- [Expo CLI](https://docs.expo.dev/build-reference/variables/)
 - Android Studio (for Android) or Xcode (for iOS) (for running on simulators/devices)
 
 ### Installation
@@ -44,7 +45,13 @@ This is a mobile application built with React Native to help users track their p
    npx react-native start
    ```
 
-4. **Run the app on your device or emulator:**
+4. **Run the app on your device or emulator using Expo:**
+
+   ```bash
+   npx expo start
+   ```
+
+5. **Run the app on your device or emulator using React Native CLI:**
 
    For Android:
 
