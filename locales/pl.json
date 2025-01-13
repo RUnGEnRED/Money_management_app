@@ -1,0 +1,30 @@
+{
+  "startScreen": {
+    "login": "Zaloguj się",
+    "register": "Zarejestruj się"
+  },
+
+  "loginScreen": {
+    "title": "Logowanie",
+    "continue": "Kontynuuj",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "success": "Pomyślnie zalogowano.",
+    "noAccount": "Nie masz konta?"
+  },
+
+  "registerScreen": {
+    "title": "Rejestracja",
+    "email": "Email",
+    "success": "Pomyślnie zarejestrowano.",
+    "terms": "Rejestrując się, akceptujesz nasze Warunki korzystania z usługi i Politykę prywatności.",
+    "alreadyAccount": "Masz już konto?"
+  },
+
+  "authService": {
+    "messageIncData": "Nieprawidłowa nazwa lub hasło.",
+    "messageErrorLogin": "Błąd logowania.",
+    "messageErrorRegister": "Błąd rejestracji.",
+    "messageUserExists": "Nazwa już istnieje."
+  }
+}

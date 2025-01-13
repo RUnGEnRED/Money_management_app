@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthStack } from "./StackNavigator";
 
 // MainNavigation component
-function MainNavigation() {
+function AppNavigation() {
   return (
     <NavigationContainer>
       <AuthStack />
@@ -12,4 +12,4 @@ function MainNavigation() {
   );
 }
 
-export default MainNavigation;
+export default AppNavigation;

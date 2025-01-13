@@ -1,0 +1,73 @@
+{
+  "users": [
+    {
+      "user_id": "unique_user_id_1",
+      "username": "user1",
+      "password": "user1",
+      "wallets": [
+        {
+          "wallet_id": "unique_wallet_id_1",
+          "wallet_name": "Primary Wallet",
+          "balance": 1000,
+          "transactions": [
+            {
+              "transaction_id": "unique_transaction_id_1",
+              "date": "2025-01-12",
+              "amount": -50,
+              "category_id": "unique_category_id_1",
+              "type": "expense"
+            },
+            {
+              "transaction_id": "unique_transaction_id_2",
+              "date": "2025-01-11",
+              "amount": 200,
+              "category_id": "unique_category_id_2",
+              "type": "income"
+            }
+          ]
+        },
+        {
+          "wallet_id": "unique_wallet_id_2",
+          "wallet_name": "Savings",
+          "balance": 5000,
+          "transactions": []
+        }
+      ],
+      "categories": [
+        {
+          "category_id": "unique_category_id_1",
+          "category_name": "Food",
+          "type": "expense"
+        },
+        {
+          "category_id": "unique_category_id_2",
+          "category_name": "Salary",
+          "type": "income"
+        },
+        {
+          "category_id": "unique_category_id_3",
+          "category_name": "Utilities",
+          "type": "expense"
+        }
+      ],
+      "id": "1057"
+    },
+    {
+      "user_id": "unique_user_id_2",
+      "username": "user456",
+      "password": "user456",
+      "wallets": [],
+      "categories": [],
+      "id": "c385"
+    },
+    {
+      "id": "d605",
+      "user_id": "4c48ba2e-f735-4494-a444-c3ef234f1953",
+      "username": "user2",
+      "password": "user1",
+      "email": "ff",
+      "wallets": [],
+      "categories": []
+    }
+  ]
+}
