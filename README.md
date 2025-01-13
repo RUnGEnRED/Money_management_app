@@ -45,13 +45,19 @@ This is a mobile application built with React Native to help users track their p
    npx react-native start
    ```
 
-4. **Run the app on your device or emulator using Expo:**
+4. **Run the JSON server:**
+
+   ```bash
+   npx json-server data/database.json
+   ```
+
+5. **Run the app on your device or emulator using Expo:**
 
    ```bash
    npx expo start
    ```
 
-5. **Run the app on your device or emulator using React Native CLI:**
+6. **Run the app on your device or emulator using React Native CLI:**
 
    For Android:
 
