@@ -1,73 +1,140 @@
 {
   "users": [
     {
-      "user_id": "unique_user_id_1",
+      "id": "3baf",
       "username": "user1",
       "password": "user1",
-      "wallets": [
-        {
-          "wallet_id": "unique_wallet_id_1",
-          "wallet_name": "Primary Wallet",
-          "balance": 1000,
-          "transactions": [
-            {
-              "transaction_id": "unique_transaction_id_1",
-              "date": "2025-01-12",
-              "amount": -50,
-              "category_id": "unique_category_id_1",
-              "type": "expense"
-            },
-            {
-              "transaction_id": "unique_transaction_id_2",
-              "date": "2025-01-11",
-              "amount": 200,
-              "category_id": "unique_category_id_2",
-              "type": "income"
-            }
-          ]
-        },
-        {
-          "wallet_id": "unique_wallet_id_2",
-          "wallet_name": "Savings",
-          "balance": 5000,
-          "transactions": []
-        }
-      ],
-      "categories": [
-        {
-          "category_id": "unique_category_id_1",
-          "category_name": "Food",
-          "type": "expense"
-        },
-        {
-          "category_id": "unique_category_id_2",
-          "category_name": "Salary",
-          "type": "income"
-        },
-        {
-          "category_id": "unique_category_id_3",
-          "category_name": "Utilities",
-          "type": "expense"
-        }
-      ],
-      "id": "1057"
+      "email": "user1@test.com",
+      "avatar": "../assets/avatars/avatar1.svg"
     },
     {
-      "user_id": "unique_user_id_2",
-      "username": "user456",
-      "password": "user456",
-      "wallets": [],
-      "categories": [],
-      "id": "c385"
-    },
-    {
-      "id": "d605",
-      "user_id": "4c48ba2e-f735-4494-a444-c3ef234f1953",
+      "id": "7bac",
       "username": "user2",
       "password": "user1",
-      "email": "ff",
-      "wallets": [],
-      "categories": []
+      "email": "user1",
+      "avatar": "../assets/avatars/avatar1.svg"
+    }
+  ],
+  "wallets": [
+    {
+      "id": "a294",
+      "name": "Wallet",
+      "balance": 0,
+      "icon": "dollar",
+      "user_id": "3baf",
+      "transactions": []
+    },
+    {
+      "id": "b3c7",
+      "name": "Bank",
+      "balance": 250,
+      "icon": "bank",
+      "user_id": "3baf",
+      "transactions": []
+    },
+    {
+      "id": "fds5",
+      "name": "Bank",
+      "balance": 250,
+      "icon": "bank",
+      "user_id": "3baf",
+      "transactions": []
+    },
+    {
+      "id": "gd32",
+      "name": "Bank",
+      "balance": 250,
+      "icon": "bank",
+      "user_id": "3baf",
+      "transactions": []
+    },
+    {
+      "id": "fs3h",
+      "name": "Bank",
+      "balance": 250,
+      "icon": "bank",
+      "user_id": "3baf",
+      "transactions": []
+    },
+    {
+      "id": "0f8e",
+      "name": "Wallet",
+      "balance": 0,
+      "icon": "../assets/wallets/wallet.svg",
+      "user_id": "7bac",
+      "transactions": []
+    }
+  ],
+  "categories": [
+    {
+      "id": "ae72",
+      "name": "Salary",
+      "type": "income",
+      "icon": "../assets/categories/salary.svg",
+      "user_id": "3baf"
+    },
+    {
+      "id": "8f58",
+      "name": "Bonus",
+      "type": "income",
+      "icon": "../assets/categories/bonus.svg",
+      "user_id": "3baf"
+    },
+    {
+      "id": "c003",
+      "name": "Food",
+      "type": "expense",
+      "icon": "../assets/categories/food.svg",
+      "user_id": "3baf"
+    },
+    {
+      "id": "d1e5",
+      "name": "Investment",
+      "type": "income",
+      "icon": "../assets/categories/investment.svg",
+      "user_id": "3baf"
+    },
+    {
+      "id": "8832",
+      "name": "Transportation",
+      "type": "expense",
+      "icon": "../assets/categories/transportation.svg",
+      "user_id": "3baf"
+    },
+    {
+      "id": "f259",
+      "name": "Entertainment",
+      "type": "expense",
+      "icon": "../assets/categories/entertainment.svg",
+      "user_id": "3baf"
+    },
+    {
+      "id": "07bd",
+      "name": "Salary",
+      "type": "income",
+      "icon": "../assets/categories/salary.svg",
+      "user_id": "7bac"
+    },
+    {
+      "id": "783c",
+      "name": "Bonus",
+      "type": "income",
+      "icon": "../assets/categories/bonus.svg",
+      "user_id": "7bac"
+    },
+    {
+      "id": "0e50",
+      "name": "Food",
+      "type": "expense",
+      "icon": "../assets/categories/food.svg",
+      "user_id": "7bac"
+    },
+    {
+      "id": "f7b8",
+      "name": "Entertainment",
+      "type": "expense",
+      "icon": "../assets/categories/entertainment.svg",
+      "user_id": "7bac"
     }
   ]
 }

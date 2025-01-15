@@ -18,6 +18,12 @@ function LoginScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   const login = async () => {
+    if (!username || !password) {
+      setSnackbarMessage(t("loginScreen.emptyFields"));
+      setSnackbarVisible(true);
+      return; // Stop the login process
+    }
+
     setLoading(true);
     try {
       const result = await onLogin(username, password, t);

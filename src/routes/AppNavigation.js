@@ -1,13 +1,13 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
 
-import { AuthStack } from "./StackNavigator";
+import StackNavigator from "./StackNavigator";
 
-// MainNavigation component
+// AppNavigation component
 function AppNavigation() {
   return (
     <NavigationContainer>
-      <AuthStack />
+      <StackNavigator />
     </NavigationContainer>
   );
 }

@@ -20,6 +20,12 @@ function RegisterScreen({ navigation }) {
   const [loading, setLoading] = useState(false);
 
   const register = async () => {
+    if (!username || !password || !email) {
+      setSnackbarMessage(t("loginScreen.emptyFields"));
+      setSnackbarVisible(true);
+      return; // Stop the login process
+    }
+
     if (!checked) {
       setSnackbarMessage(t("registerScreen.terms"));
       setSnackbarVisible(true);

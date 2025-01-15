@@ -5,6 +5,7 @@ const AxiosInstance = axios.create({
   baseURL: "http://192.168.1.61:3000/", // Use 10.0.2.2 for Android emulator
   responseType: "json",
   withCredentials: true,
+  timeout: 3000,
 });
 
 export default AxiosInstance;

@@ -10,7 +10,8 @@
     "username": "Username",
     "password": "Password",
     "success": "Successfully logged in.",
-    "noAccount": "Don't have an account?"
+    "noAccount": "Don't have an account?",
+    "emptyFields": "Please fill in all fields."
   },
 
   "registerScreen": {
@@ -26,6 +27,10 @@
     "messageErrorLogin": "Error logging in.",
     "messageErrorRegister": "Error registering.",
     "messageUserExists": "Name already exists."
-    
+  },
+
+  "homeScreen": {
+    "errorFetchWallets": "Error fetching wallets.",
+    "totalBalance": "Total Balance"
   }
 }
