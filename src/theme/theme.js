@@ -78,6 +78,91 @@ const theme = {
         },
       },
     },
+    DropdownInput: {
+      styleOverrides: {
+        dropdown: {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: 16,
+          paddingVertical: 12,
+        },
+        leftSection: {
+          flex: 1,
+          alignItems: "flex-start",
+        },
+        labelContainer: {
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 2,
+        },
+        dropdownText: {
+          fontSize: 16,
+          fontWeight: "bold",
+        },
+        dropdownValue: {
+          fontSize: 14,
+          color: "gray",
+        },
+        icon: {
+          marginRight: 8,
+        },
+        arrowIconContainer: {
+          alignItems: "center",
+        },
+      },
+    },
+    DateInput: {
+      styleOverrides: {
+        container: {},
+        dropdown: {
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: 16,
+          paddingVertical: 12,
+        },
+        leftSection: {
+          flex: 1,
+          alignItems: "flex-start",
+        },
+        labelContainer: {
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: 2,
+        },
+
+        dropdownText: {
+          fontSize: 16,
+          fontWeight: "bold",
+        },
+        dropdownValue: {
+          fontSize: 14,
+          color: "gray",
+        },
+        icon: {
+          marginRight: 8,
+        },
+        arrowIconContainer: {
+          alignItems: "center",
+        },
+      },
+    },
+    TransactionTypeButtons: {
+      styleOverrides: {
+        buttonContainer: {
+          flexDirection: "row",
+          justifyContent: "space-around",
+          marginBottom: 20,
+        },
+        typeButton: {
+          flex: 1,
+          marginHorizontal: 5,
+          paddingVertical: 5,
+          borderRadius: 10,
+        },
+      },
+    },
   },
 };
 

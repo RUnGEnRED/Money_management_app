@@ -80,6 +80,10 @@ function LoginScreen({ navigation }) {
         {t("startScreen.login")}
       </CustomButton>
 
+      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
+        <Text style={styles.registerText}>{t("loginScreen.noAccount")}</Text>
+      </TouchableOpacity>
+
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
@@ -87,10 +91,6 @@ function LoginScreen({ navigation }) {
       >
         {snackbarMessage}
       </Snackbar>
-
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text style={styles.registerText}>{t("loginScreen.noAccount")}</Text>
-      </TouchableOpacity>
     </View>
   );
 }

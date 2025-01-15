@@ -104,6 +104,12 @@ function RegisterScreen({ navigation }) {
         {t("startScreen.register")}
       </CustomButton>
 
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.registerText}>
+          {t("registerScreen.alreadyAccount")}
+        </Text>
+      </TouchableOpacity>
+
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
@@ -111,12 +117,6 @@ function RegisterScreen({ navigation }) {
       >
         {snackbarMessage}
       </Snackbar>
-
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text style={styles.registerText}>
-          {t("registerScreen.alreadyAccount")}
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 }

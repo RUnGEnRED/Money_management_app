@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
-  Text,
   StyleSheet,
   ActivityIndicator,
   ScrollView,
   RefreshControl,
-  SafeAreaView,
 } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { Snackbar } from "react-native-paper";
 
 import axios from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
@@ -18,15 +17,18 @@ import WalletList from "../../components/WalletList";
 
 const HomeScreen = ({ navigation }) => {
   const { t } = useTranslation();
-  const [walletList, setWalletList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [refreshing, setRefreshing] = useState(false);
   const isFocused = useIsFocused();
+
+  const [walletList, setWalletList] = useState([]);
+
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [snackbarVisible, setSnackbarVisible] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   const fetchWallets = useCallback(async () => {
     setLoading(true);
-    setError(null);
+
     try {
       const user = await getAuthToken();
       if (user && user.id) {
@@ -36,7 +38,8 @@ const HomeScreen = ({ navigation }) => {
       }
     } catch (error) {
       console.error("Wallets fetch error: ", error);
-      setError(t("homeScreen.errorFetchWallets"));
+      setSnackbarMessage(t("homeScreen.errorFetchWallets"));
+      setSnackbarVisible(true);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -52,12 +55,13 @@ const HomeScreen = ({ navigation }) => {
     fetchWallets();
   }, [fetchWallets]);
 
+  const handleSnackbarDismiss = () => setSnackbarVisible(false);
+
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <>
       <ShakeDetector targetScreen={"Transaction"} navigation={navigation} />
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
-        {error && <Text style={styles.error}>{error}</Text>}
         <ScrollView
           contentContainerStyle={styles.scrollContainer}
           refreshControl={
@@ -65,18 +69,22 @@ const HomeScreen = ({ navigation }) => {
           }
           style={styles.scrollView}
         >
-          {!loading && !error && <WalletList walletList={walletList} />}
+          {!loading && <WalletList walletList={walletList} />}
         </ScrollView>
+
+        <Snackbar
+          visible={snackbarVisible}
+          onDismiss={handleSnackbarDismiss}
+          duration={6000}
+        >
+          {snackbarMessage}
+        </Snackbar>
       </View>
-    </SafeAreaView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: "#f5f5f5",
-  },
   container: {
     flex: 1,
     justifyContent: "flex-start",
@@ -92,10 +100,6 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1, // Ensure the ScrollView takes up available space
     width: "100%",
-  },
-  error: {
-    color: "red",
-    marginTop: 10,
   },
 });
 

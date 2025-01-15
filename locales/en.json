@@ -32,5 +32,10 @@
   "homeScreen": {
     "errorFetchWallets": "Error fetching wallets.",
     "totalBalance": "Total Balance"
+  },
+
+  "transactionScreen": {
+    "errorFetchData": "Error fetching data.",
+    "errorAddTransaction": "Error adding transaction."
   }
 }
