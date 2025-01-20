@@ -38,13 +38,13 @@ const theme = {
         },
       },
     },
-    WalletItem: {
+    WalletInfoItem: {
       styleOverrides: {
-        walletItem: {
+        walletInfoItem: {
           flexDirection: "row",
           justifyContent: "space-between",
           padding: 15,
-          margin: 15,
+          margin: 10,
           backgroundColor: "#D4E4CB",
           borderRadius: 20,
         },
@@ -160,6 +160,174 @@ const theme = {
           marginHorizontal: 5,
           paddingVertical: 5,
           borderRadius: 10,
+        },
+      },
+    },
+    TransactionItem: {
+      styleOverrides: {
+        container: {
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#D4E4CB",
+          borderRadius: 20,
+          padding: 10,
+        },
+        date: {
+          color: "gray",
+          paddingHorizontal: 5,
+          fontSize: 14,
+        },
+        iconContainer: {
+          backgroundColor: "#ffaaaa",
+          borderRadius: 10,
+          padding: 5,
+          marginHorizontal: 5,
+        },
+        textContainer: {
+          flex: 1,
+          marginLeft: 5,
+        },
+        categoryName: {
+          fontSize: 16,
+          fontWeight: "bold",
+        },
+        walletName: {
+          fontSize: 12,
+          color: "gray",
+        },
+        amount: {
+          fontWeight: "bold",
+          fontSize: 16,
+          paddingHorizontal: 5,
+        },
+        deleteButton: {
+          backgroundColor: "red",
+          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 5,
+        },
+        deleteIcon: {
+          color: "white",
+          textAlign: "center",
+        },
+      },
+    },
+    Keypad: {
+      styleOverrides: {
+        keypadContainer: {
+          flexDirection: "row",
+          flexWrap: "wrap",
+        },
+        keyContainer: {
+          width: "33.33%",
+          padding: 5,
+        },
+        keypadButton: {
+          flex: 1,
+        },
+      },
+    },
+    CategoryItem: {
+      styleOverrides: {
+        container: {
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#D4E4CB",
+          borderRadius: 20,
+          padding: 10,
+        },
+        iconContainer: {
+          backgroundColor: "#ffaaaa",
+          borderRadius: 10,
+          padding: 5,
+          marginHorizontal: 5,
+        },
+        textContainer: {
+          flex: 1,
+          marginLeft: 5,
+          justifyContent: "center",
+        },
+        categoryName: {
+          fontSize: 16,
+          fontWeight: "bold",
+        },
+        categoryType: {
+          fontSize: 12,
+          color: "gray",
+        },
+        editButton: {
+          backgroundColor: "orange",
+          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 5,
+        },
+        deleteButton: {
+          backgroundColor: "red",
+          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 5,
+        },
+        icon: {
+          color: "white",
+          textAlign: "center",
+        },
+      },
+    },
+    WalletItem: {
+      styleOverrides: {
+        container: {
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#D4E4CB",
+          borderRadius: 20,
+          padding: 10,
+        },
+        iconContainer: {
+          backgroundColor: "#D4E4CB",
+          borderRadius: 10,
+          padding: 5,
+          marginHorizontal: 5,
+        },
+        textContainer: {
+          flex: 1,
+          marginLeft: 5,
+          justifyContent: "center",
+        },
+        walletName: {
+          fontSize: 16,
+          fontWeight: "bold",
+        },
+        editButton: {
+          backgroundColor: "orange",
+          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 5,
+        },
+        deleteButton: {
+          backgroundColor: "red",
+          borderRadius: 10,
+          padding: 10,
+          marginHorizontal: 5,
+        },
+        icon: {
+          color: "white",
+          textAlign: "center",
+        },
+      },
+    },
+    CustomTextInput: {
+      styleOverrides: {
+        container: {
+          backgroundColor: "#D4E4CB",
+          padding: 10,
+          borderRadius: 10,
+        },
+        label: {
+          fontSize: 14,
+          color: "gray",
+        },
+        input: {
+          fontSize: 16,
         },
       },
     },

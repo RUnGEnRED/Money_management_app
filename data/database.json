@@ -6,13 +6,6 @@
       "password": "user1",
       "email": "user1@test.com",
       "avatar": "../assets/avatars/avatar1.svg"
-    },
-    {
-      "id": "7bac",
-      "username": "user2",
-      "password": "user1",
-      "email": "user1",
-      "avatar": "../assets/avatars/avatar1.svg"
     }
   ],
   "wallets": [
@@ -54,14 +47,6 @@
       "balance": 250,
       "icon": "bank",
       "user_id": "3baf",
-      "transactions": []
-    },
-    {
-      "id": "0f8e",
-      "name": "Wallet",
-      "balance": 0,
-      "icon": "../assets/wallets/wallet.svg",
-      "user_id": "7bac",
       "transactions": []
     }
   ],
@@ -107,34 +92,6 @@
       "type": "expense",
       "icon": "../assets/categories/entertainment.svg",
       "user_id": "3baf"
-    },
-    {
-      "id": "07bd",
-      "name": "Salary",
-      "type": "income",
-      "icon": "../assets/categories/salary.svg",
-      "user_id": "7bac"
-    },
-    {
-      "id": "783c",
-      "name": "Bonus",
-      "type": "income",
-      "icon": "../assets/categories/bonus.svg",
-      "user_id": "7bac"
-    },
-    {
-      "id": "0e50",
-      "name": "Food",
-      "type": "expense",
-      "icon": "../assets/categories/food.svg",
-      "user_id": "7bac"
-    },
-    {
-      "id": "f7b8",
-      "name": "Entertainment",
-      "type": "expense",
-      "icon": "../assets/categories/entertainment.svg",
-      "user_id": "7bac"
     }
   ]
 }

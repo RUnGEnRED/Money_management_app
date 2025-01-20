@@ -4,13 +4,7 @@ import { Menu, useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 
-const DropdownInput = ({
-  label,
-  iconName,
-  selectedValue,
-  onValueChange,
-  items,
-}) => {
+const DropdownInput = ({ label, iconName, value, setValue, items }) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const { t } = useTranslation();
   const theme = useTheme();
@@ -37,7 +31,7 @@ const DropdownInput = ({
                 <Text style={dropdownTheme.dropdownText}>{t(label)}</Text>
               </View>
               <Text style={dropdownTheme.dropdownValue}>
-                {selectedValue || t("choose")}
+                {value || t("choose")}
               </Text>
             </View>
             <View style={dropdownTheme.arrowIconContainer}>
@@ -52,7 +46,7 @@ const DropdownInput = ({
           key={item.value}
           title={item.label}
           onPress={() => {
-            onValueChange(item.value);
+            setValue(item.value);
             closeMenu();
           }}
         />
