@@ -13,7 +13,7 @@ import { Snackbar } from "react-native-paper";
 import axios from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
 import ShakeDetector from "../../components/ShakeDetector";
-import WalletList from "../../components/WalletList";
+import WalletInfoItem from "../../components/WalletInfoItem";
 
 const HomeScreen = ({ navigation }) => {
   const { t } = useTranslation();
@@ -63,13 +63,14 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.container}>
         {loading && <ActivityIndicator size="large" />}
         <ScrollView
-          contentContainerStyle={styles.scrollContainer}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
-          style={styles.scrollView}
         >
-          {!loading && <WalletList walletList={walletList} />}
+          {!loading &&
+            walletList.map((wallet) => (
+              <WalletInfoItem key={wallet.id} wallet={wallet} />
+            ))}
         </ScrollView>
 
         <Snackbar
@@ -87,19 +88,8 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "center",
+    padding: 5,
     backgroundColor: "#f5f5f5",
-    paddingTop: 20,
-  },
-  scrollContainer: {
-    width: "100%", // Scroll content width
-    alignItems: "center",
-    paddingBottom: 20, // Add some bottom padding for long lists
-  },
-  scrollView: {
-    flex: 1, // Ensure the ScrollView takes up available space
-    width: "100%",
   },
 });
 

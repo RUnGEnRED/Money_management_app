@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Accelerometer } from "expo-sensors";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 
 const ShakeDetector = ({ targetScreen, navigation }) => {
   // Add the navigation prop
