@@ -12,7 +12,7 @@
     {
       "id": "a294",
       "name": "Wallet",
-      "balance": 30,
+      "balance": 50,
       "icon": "dollar",
       "user_id": "3baf"
     },
@@ -26,7 +26,7 @@
     {
       "id": "fds5",
       "name": "Bank_2",
-      "balance": 250,
+      "balance": 260,
       "icon": "bank",
       "user_id": "3baf"
     },
@@ -50,42 +50,56 @@
       "id": "ae72",
       "name": "Salary",
       "type": "income",
-      "icon": "../assets/categories/salary.svg",
+      "icon": "currency-usd",
       "user_id": "3baf"
     },
     {
       "id": "8f58",
       "name": "Bonus",
       "type": "income",
-      "icon": "../assets/categories/bonus.svg",
+      "icon": "gift",
       "user_id": "3baf"
     },
     {
       "id": "c003",
       "name": "Food",
       "type": "expense",
-      "icon": "../assets/categories/food.svg",
+      "icon": "food",
       "user_id": "3baf"
     },
     {
       "id": "d1e5",
       "name": "Investment",
       "type": "income",
-      "icon": "../assets/categories/investment.svg",
+      "icon": "trending-up",
       "user_id": "3baf"
     },
     {
       "id": "8832",
       "name": "Transportation",
       "type": "expense",
-      "icon": "../assets/categories/transportation.svg",
+      "icon": "car",
       "user_id": "3baf"
     },
     {
       "id": "f259",
       "name": "Entertainment",
       "type": "expense",
-      "icon": "../assets/categories/entertainment.svg",
+      "icon": "movie",
+      "user_id": "3baf"
+    },
+    {
+      "id": "18bb",
+      "name": "Cigarettes",
+      "type": "expense",
+      "icon": "hammer",
+      "user_id": "3baf"
+    },
+    {
+      "id": "72d3",
+      "name": "Vinted",
+      "type": "income",
+      "icon": "scale-balance",
       "user_id": "3baf"
     }
   ],
@@ -152,6 +166,24 @@
       "wallet_id": "gd32",
       "date": "2025-01-25T14:53:28.559Z",
       "type": "income"
+    },
+    {
+      "id": "ba95",
+      "amount": 20,
+      "wallet_id": "a294",
+      "category_id": "ae72",
+      "type": "income",
+      "date": "2025-01-25T20:25:52.160Z",
+      "user_id": "3baf"
+    },
+    {
+      "id": "3bb4",
+      "amount": 10,
+      "wallet_id": "fds5",
+      "category_id": "d1e5",
+      "type": "income",
+      "date": "2025-01-25T20:25:52.160Z",
+      "user_id": "3baf"
     }
   ]
 }

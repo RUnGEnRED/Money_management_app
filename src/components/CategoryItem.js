@@ -30,8 +30,7 @@ const CategoryItem = ({
         style={{
           ...categoryItemTheme.iconContainer,
           backgroundColor: iconColor + "40",
-        }}
-      >
+        }}>
         <Icon name={iconName} size={24} color={iconColor} />
       </View>
       <View style={categoryItemTheme.textContainer}>
@@ -40,15 +39,13 @@ const CategoryItem = ({
       </View>
       <TouchableOpacity
         style={categoryItemTheme.editButton}
-        onPress={handleEdit}
-      >
-        <Icon name="pencil" style={categoryItemTheme.icon} size={24} />
+        onPress={handleEdit}>
+        <Icon name='pencil' style={categoryItemTheme.icon} size={24} />
       </TouchableOpacity>
       <TouchableOpacity
         style={categoryItemTheme.deleteButton}
-        onPress={handleDelete}
-      >
-        <Icon name="close" style={categoryItemTheme.icon} size={24} />
+        onPress={handleDelete}>
+        <Icon name='close' style={categoryItemTheme.icon} size={24} />
       </TouchableOpacity>
     </View>
   );

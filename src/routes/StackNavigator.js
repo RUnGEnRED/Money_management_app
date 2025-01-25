@@ -7,6 +7,7 @@ import LoginScreen from "../screens/Auth/LoginScreen";
 import RegisterScreen from "../screens/Auth/RegisterScreen";
 import AddNewWalletScreen from "../screens/Wallets/AddNewWalletScreen";
 import AddNewCategoryScreen from "../screens/Categories/AddNewCategoryScreen";
+import EditCategoryScreen from "../screens/Categories/EditCategoryScreen";
 import DrawerNavigator from "./DrawerNavigator";
 
 const Stack = createStackNavigator();
@@ -25,27 +26,27 @@ function StackNavigator() {
           fontSize: 26,
         },
         headerTitleAlign: "center",
-      }}
-    >
+      }}>
       <Stack.Screen
-        name="Start"
+        name='Start'
         component={StartScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Login"
+        name='Login'
         component={LoginScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Register"
+        name='Register'
         component={RegisterScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Add New Wallet" component={AddNewWalletScreen} />
-      <Stack.Screen name="Add New Category" component={AddNewCategoryScreen} />
+      <Stack.Screen name='Add New Wallet' component={AddNewWalletScreen} />
+      <Stack.Screen name='Add New Category' component={AddNewCategoryScreen} />
+      <Stack.Screen name='Edit Category' component={EditCategoryScreen} />
       <Stack.Screen
-        name="DrawerNavigator"
+        name='DrawerNavigator'
         component={DrawerNavigator}
         options={{ headerShown: false }}
       />

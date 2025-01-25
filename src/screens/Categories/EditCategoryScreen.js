@@ -1,21 +1,26 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Snackbar } from "react-native-paper";
-import { useTranslation } from "react-i18next";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
+import { useTranslation } from "react-i18next";
+import { useRoute, useNavigation } from "@react-navigation/native";
 import axios from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
-
 import CustomButton from "../../components/CustomButton";
 import CustomTextInput from "../../components/CustomTextInput";
 import TransactionTypeButtons from "../../components/TransactionTypeButtons";
 
-const AddNewCategoryScreen = ({ navigation }) => {
+const EditCategoryScreen = () => {
   const { t } = useTranslation();
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [text, setText] = useState("");
-  const [transactionType, setTransactionType] = useState("expense");
+  const navigation = useNavigation();
+  const route = useRoute();
+
+  const { categoryId, categoryName, categoryType, iconName, iconColor } =
+    route.params;
+
+  const [selectedCategory, setSelectedCategory] = useState(iconName);
+  const [categoryNameInput, setCategoryNameInput] = useState(categoryName);
+  const [transactionType, setTransactionType] = useState(categoryType);
 
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
@@ -58,12 +63,18 @@ const AddNewCategoryScreen = ({ navigation }) => {
     "bicycle",
   ];
 
+  useEffect(() => {
+    setSelectedCategory(iconName);
+    setTransactionType(categoryType);
+    setCategoryNameInput(categoryName);
+  }, [categoryName, categoryType, iconName]);
+
   const handleIconSelect = (icon) => {
     setSelectedCategory(icon);
   };
 
   const saveCategory = async () => {
-    if (!selectedCategory || text.trim() === "") {
+    if (!selectedCategory || categoryNameInput.trim() === "") {
       setSnackbarMessage("Please select an icon and enter a category name.");
       setSnackbarVisible(true);
       return;
@@ -71,33 +82,30 @@ const AddNewCategoryScreen = ({ navigation }) => {
 
     try {
       const user = await getAuthToken();
-
       if (user && user.id) {
         const categoryData = {
-          name: text,
+          name: categoryNameInput,
           type: transactionType,
           icon: selectedCategory,
           user_id: user.id,
         };
 
-        const response = await axios.post("/categories", categoryData);
-        const transaction = response.data;
-
+        await axios.put(`/categories/${categoryId}`, categoryData);
         navigation.goBack();
       } else {
-        throw new Error("Brak autentykacji użytkownika.");
+        throw new Error("User is not authenticated.");
       }
     } catch (error) {
-      throw new Error("Błąd przy tworzeniu kategorii: " + error.message);
+      setSnackbarMessage("Error updating category: " + error.message);
+      setSnackbarVisible(true);
     }
-
-    setSnackbarVisible(true);
   };
 
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
 
   return (
     <View style={styles.container}>
+      {/* TransactionTypeButtons */}
       <TransactionTypeButtons
         transactionType={transactionType}
         setTransactionType={setTransactionType}
@@ -105,11 +113,12 @@ const AddNewCategoryScreen = ({ navigation }) => {
 
       <CustomTextInput
         label='Category Name'
-        value={text}
-        onChangeText={setText}
+        value={categoryNameInput}
+        onChangeText={setCategoryNameInput}
         style={{ marginBottom: 12 }}
       />
 
+      {/* Icon Selection */}
       <View style={styles.iconContainer}>
         <View style={styles.iconRow}>
           {icons.map((icon, index) => (
@@ -134,6 +143,7 @@ const AddNewCategoryScreen = ({ navigation }) => {
         {t("test.save")}
       </CustomButton>
 
+      {/* Snackbar for feedback */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
@@ -153,11 +163,6 @@ const styles = StyleSheet.create({
   iconContainer: {
     flex: 1,
     marginVertical: 20,
-  },
-  iconContentContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-evenly",
   },
   iconRow: {
     flexDirection: "row",
@@ -184,4 +189,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddNewCategoryScreen;
+export default EditCategoryScreen;
