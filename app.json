@@ -27,7 +27,14 @@
     },
     "plugins": [
       "expo-router",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Allow $(PRODUCT_NAME) to access your calendar",
+          "remindersPermission": "Allow $(PRODUCT_NAME) to access your reminders"
+        }
+      ]
     ]
   }
 }
