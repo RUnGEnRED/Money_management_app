@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import { TextInput, Snackbar, Divider } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -17,6 +17,7 @@ const TransactionScreen = () => {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
 
+  // TEST START - TO DELETE UNNECESSARY CODE LATER
   const [categoryExpenseList, setCategoryExpenseList] = useState([]);
   const [categoryIncomeList, setCategoryIncomeList] = useState([]);
   const [walletList, setWalletList] = useState([]);
@@ -64,31 +65,15 @@ const TransactionScreen = () => {
     fetchData();
   }, [isFocused, fetchData]);
 
-  const handleNumberPress = (number) => {
-    if (amount.includes(".")) {
-      const decimalPart = amount.split(".")[1];
-      if (decimalPart.length < 2) {
-        setAmount(amount + number);
-      }
-    } else {
-      setAmount(amount + number);
-    }
-  };
-
-  const handleDotPress = () => {
-    if (amount !== "" && !amount.includes(".")) {
-      setAmount(amount + ".");
-    }
-  };
-
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
+  // TEST END
 
   return (
-    <>
-      <ScrollView style={styles.container}>
+    <View style={styles.container}>
+      <ScrollView>
         <TransactionTypeButtons
           transactionType={transactionType}
-          onTransactionTypeChange={setTransactionType}
+          setTransactionType={setTransactionType}
         />
 
         <TextInput
@@ -98,18 +83,13 @@ const TransactionScreen = () => {
           mode="outlined"
         />
 
-        <Keypad
-          amount={amount}
-          setAmount={setAmount}
-          handleDotPress={handleDotPress}
-          handleNumberPress={handleNumberPress}
-        />
+        <Keypad number={amount} setNumber={setAmount} />
 
         <DropdownInput
-          label="category"
+          label={t("test.category")}
           iconName="cart"
-          selectedValue={selectedCategory}
-          onValueChange={setSelectedCategory}
+          value={selectedCategory}
+          setValue={setSelectedCategory}
           items={[
             { value: "food", label: "Food" },
             { value: "transport", label: "Transport" },
@@ -123,10 +103,10 @@ const TransactionScreen = () => {
         <Divider />
 
         <DropdownInput
-          label="wallet"
+          label={t("test.wallet")}
           iconName="wallet"
-          selectedValue={selectedWallet}
-          onValueChange={setSelectedWallet}
+          value={selectedWallet}
+          setValue={setSelectedWallet}
           items={[
             { value: "cash", label: "Cash" },
             {
@@ -139,7 +119,7 @@ const TransactionScreen = () => {
 
         <Divider />
 
-        <DateInput label="date" selectedValue={date} onValueChange={setDate} />
+        <DateInput label={t("test.data")} date={date} setDate={setDate} />
 
         <Divider />
 
@@ -149,18 +129,18 @@ const TransactionScreen = () => {
           onPress={() => {}}
           icon="content-save-outline"
         >
-          {t("save")}
+          {t("test.save")}
         </CustomButton>
-
-        <Snackbar
-          visible={snackbarVisible}
-          onDismiss={handleSnackbarDismiss}
-          duration={6000}
-        >
-          {snackbarMessage}
-        </Snackbar>
       </ScrollView>
-    </>
+
+      <Snackbar
+        visible={snackbarVisible}
+        onDismiss={handleSnackbarDismiss}
+        duration={6000}
+      >
+        {snackbarMessage}
+      </Snackbar>
+    </View>
   );
 };
 
