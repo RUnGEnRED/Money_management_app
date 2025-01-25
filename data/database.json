@@ -12,42 +12,37 @@
     {
       "id": "a294",
       "name": "Wallet",
-      "balance": 0,
+      "balance": 30,
       "icon": "dollar",
-      "user_id": "3baf",
-      "transactions": []
+      "user_id": "3baf"
     },
     {
       "id": "b3c7",
       "name": "Bank",
-      "balance": 250,
+      "balance": 220,
       "icon": "bank",
-      "user_id": "3baf",
-      "transactions": []
+      "user_id": "3baf"
     },
     {
       "id": "fds5",
-      "name": "Bank",
+      "name": "Bank_2",
       "balance": 250,
       "icon": "bank",
-      "user_id": "3baf",
-      "transactions": []
+      "user_id": "3baf"
     },
     {
       "id": "gd32",
-      "name": "Bank",
-      "balance": 250,
+      "name": "Bank_3",
+      "balance": 460,
       "icon": "bank",
-      "user_id": "3baf",
-      "transactions": []
+      "user_id": "3baf"
     },
     {
       "id": "fs3h",
-      "name": "Bank",
-      "balance": 250,
+      "name": "Bank_4",
+      "balance": 800,
       "icon": "bank",
-      "user_id": "3baf",
-      "transactions": []
+      "user_id": "3baf"
     }
   ],
   "categories": [
@@ -92,6 +87,71 @@
       "type": "expense",
       "icon": "../assets/categories/entertainment.svg",
       "user_id": "3baf"
+    }
+  ],
+  "transactions": [
+    {
+      "id": "txn1",
+      "amount": 100,
+      "wallet_id": "a294",
+      "date": "2025-01-25T12:30:00Z",
+      "type": "income"
+    },
+    {
+      "id": "txn2",
+      "amount": 50,
+      "wallet_id": "b3c7",
+      "date": "2025-01-25T14:30:00Z",
+      "type": "expanse"
+    },
+    {
+      "id": "7580",
+      "amount": 50,
+      "wallet_id": "b3c7",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "expense"
+    },
+    {
+      "id": "12db",
+      "amount": 50,
+      "wallet_id": "a294",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "income"
+    },
+    {
+      "id": "7291",
+      "amount": 50,
+      "wallet_id": "b3c7",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "expense"
+    },
+    {
+      "id": "3599",
+      "amount": 20,
+      "wallet_id": "a294",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "expense"
+    },
+    {
+      "id": "8a90",
+      "amount": 20,
+      "wallet_id": "b3c7",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "income"
+    },
+    {
+      "id": "e1f4",
+      "amount": 10,
+      "wallet_id": "fs3h",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "expense"
+    },
+    {
+      "id": "687a",
+      "amount": 10,
+      "wallet_id": "gd32",
+      "date": "2025-01-25T14:53:28.559Z",
+      "type": "income"
     }
   ]
 }

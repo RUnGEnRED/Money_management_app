@@ -4,48 +4,78 @@ import { TextInput, Snackbar, Divider } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
-import axios from "../../api/AxiosInstance";
-import { getAuthToken } from "../../services/Auth/AuthService";
-
 import CustomButton from "../../components/CustomButton";
 import Keypad from "../../components/Keypad";
 import DropdownInput from "../../components/DropdownInput";
+import { fetchWallets, handleTransfer } from "../../services/TransferService";
 
 const TransferScreen = () => {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
 
-  const [categoryExpenseList, setCategoryExpenseList] = useState([]);
-  const [categoryIncomeList, setCategoryIncomeList] = useState([]);
   const [walletList, setWalletList] = useState([]);
-
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState(new Date());
 
-  const [selectedCategory, setSelectedCategory] = useState("Choose");
-  const [selectedWallet, setSelectedWallet] = useState("Choose");
+  const [selectedFromWallet, setSelectedFromWallet] = useState("Choose");
+  const [selectedToWallet, setSelectedToWallet] = useState("Choose");
 
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  const handleNumberPress = (number) => {
-    if (amount.includes(".")) {
-      const decimalPart = amount.split(".")[1];
-      if (decimalPart.length < 2) {
-        setAmount(amount + number);
-      }
-    } else {
-      setAmount(amount + number);
+  const fetchWalletsData = useCallback(async () => {
+    try {
+      const wallets = await fetchWallets();
+      setWalletList(wallets);
+    } catch (error) {
+      setSnackbarMessage(t("transferScreen.errorFetchWallets"));
+      setSnackbarVisible(true);
+    }
+  }, [t]);
+
+  useEffect(() => {
+    fetchWalletsData();
+  }, [isFocused, fetchWalletsData]);
+
+  const handleTransferPress = async () => {
+    const fromWallet = walletList.find(
+      (wallet) => wallet.id === selectedFromWallet
+    );
+    const toWallet = walletList.find(
+      (wallet) => wallet.id === selectedToWallet
+    );
+    const transferAmount = parseFloat(amount);
+
+    if (!fromWallet || !toWallet) {
+      setSnackbarMessage(t("transferScreen.selectWallets"));
+      setSnackbarVisible(true);
+      return;
+    }
+
+    if (isNaN(transferAmount) || transferAmount <= 0) {
+      setSnackbarMessage(t("transferScreen.invalidAmount"));
+      setSnackbarVisible(true);
+      return;
+    }
+
+    try {
+      const message = await handleTransfer(
+        fromWallet,
+        toWallet,
+        transferAmount,
+        date
+      );
+      setSnackbarMessage(message);
+      setSnackbarVisible(true);
+
+      setAmount("");
+      setSelectedFromWallet("Choose");
+      setSelectedToWallet("Choose");
+    } catch (error) {
+      setSnackbarMessage(error.message || t("transferScreen.transferFailed"));
+      setSnackbarVisible(true);
     }
   };
-
-  const handleDotPress = () => {
-    if (amount !== "" && !amount.includes(".")) {
-      setAmount(amount + ".");
-    }
-  };
-
-  const handleSnackbarDismiss = () => setSnackbarVisible(false);
 
   return (
     <View style={styles.container}>
@@ -54,60 +84,50 @@ const TransferScreen = () => {
           style={styles.amountInput}
           value={`$ ${amount}`}
           editable={false}
-          mode="outlined"
+          mode='outlined'
         />
 
         <Keypad number={amount} setNumber={setAmount} />
 
         <DropdownInput
-          label={t("test.wallet")}
-          iconName="wallet"
-          value={selectedWallet}
-          setValue={setSelectedWallet}
-          items={[
-            { value: "cash", label: "Cash" },
-            {
-              value: "credit",
-              label: "Credit Card",
-            },
-            { value: "bank", label: "Bank Account" },
-          ]}
+          label={t("test.fromWallet")}
+          iconName='wallet'
+          value={selectedFromWallet}
+          setValue={setSelectedFromWallet}
+          items={walletList.map((wallet) => ({
+            value: wallet.id,
+            label: `${wallet.name} ($${wallet.balance})`,
+          }))}
         />
 
         <Divider />
 
         <DropdownInput
-          label={t("test.wallet")}
-          iconName="wallet"
-          value={selectedWallet}
-          setValue={setSelectedWallet}
-          items={[
-            { value: "cash", label: "Cash" },
-            {
-              value: "credit",
-              label: "Credit Card",
-            },
-            { value: "bank", label: "Bank Account" },
-          ]}
+          label={t("test.toWallet")}
+          iconName='wallet'
+          value={selectedToWallet}
+          setValue={setSelectedToWallet}
+          items={walletList.map((wallet) => ({
+            value: wallet.id,
+            label: `${wallet.name} ($${wallet.balance})`,
+          }))}
         />
 
         <Divider />
 
         <CustomButton
-          mode="contained"
+          mode='contained'
           style={styles.saveButton}
-          onPress={() => {}}
-          icon="content-save-outline"
-        >
+          onPress={handleTransferPress}
+          icon='content-save-outline'>
           {t("test.save")}
         </CustomButton>
       </ScrollView>
 
       <Snackbar
         visible={snackbarVisible}
-        onDismiss={handleSnackbarDismiss}
-        duration={6000}
-      >
+        onDismiss={() => setSnackbarVisible(false)}
+        duration={6000}>
         {snackbarMessage}
       </Snackbar>
     </View>

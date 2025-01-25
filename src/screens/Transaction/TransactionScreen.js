@@ -17,7 +17,6 @@ const TransactionScreen = () => {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
 
-  // TEST START - TO DELETE UNNECESSARY CODE LATER
   const [categoryExpenseList, setCategoryExpenseList] = useState([]);
   const [categoryIncomeList, setCategoryIncomeList] = useState([]);
   const [walletList, setWalletList] = useState([]);
@@ -32,6 +31,7 @@ const TransactionScreen = () => {
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
+  // Pobranie portfeli i kateogrii z serwera?
   const fetchData = useCallback(async () => {
     try {
       const user = await getAuthToken();
@@ -44,14 +44,19 @@ const TransactionScreen = () => {
         console.log("Wallets response: ", walletsList.data);
         console.log("Categories response: ", categoriesList.data);
 
-        categoriesList.data.forEach((category) => {
-          if (category.type === "expense") {
-            setCategoryExpenseList((prev) => [...prev, category]);
-          } else {
-            setCategoryIncomeList((prev) => [...prev, category]);
-          }
-        });
+        // Zamiast dodawać do istniejącej listy, zastępujemy listę nowymi kategoriami
+        const expenseCategories = categoriesList.data.filter(
+          (category) => category.type === "expense"
+        );
+        const incomeCategories = categoriesList.data.filter(
+          (category) => category.type === "income"
+        );
 
+        // Ustawiamy stan zaktualizowanymi kategoriami
+        setCategoryExpenseList(expenseCategories);
+        setCategoryIncomeList(incomeCategories);
+
+        // Ustawiamy portfele
         setWalletList(walletsList.data);
       }
     } catch (error) {
@@ -65,8 +70,21 @@ const TransactionScreen = () => {
     fetchData();
   }, [isFocused, fetchData]);
 
+  // Dismiss the Snackbar
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
-  // TEST END
+
+  // Filter categories based on transactionType (income/expense)
+  const filteredCategories =
+    transactionType === "expense" ? categoryExpenseList : categoryIncomeList;
+
+  // Handle category and wallet change
+  const handleCategoryChange = (newCategory) => {
+    setSelectedCategory(newCategory);
+  };
+
+  const handleWalletChange = (newWallet) => {
+    setSelectedWallet(newWallet);
+  };
 
   return (
     <View style={styles.container}>
@@ -80,41 +98,33 @@ const TransactionScreen = () => {
           style={styles.amountInput}
           value={`$ ${amount}`}
           editable={false}
-          mode="outlined"
+          mode='outlined'
         />
 
         <Keypad number={amount} setNumber={setAmount} />
 
         <DropdownInput
           label={t("test.category")}
-          iconName="cart"
+          iconName='cart'
           value={selectedCategory}
-          setValue={setSelectedCategory}
-          items={[
-            { value: "food", label: "Food" },
-            { value: "transport", label: "Transport" },
-            {
-              value: "shopping",
-              label: "Shopping",
-            },
-          ]}
+          setValue={handleCategoryChange}
+          items={filteredCategories.map((category) => ({
+            value: category.id,
+            label: category.name,
+          }))}
         />
 
         <Divider />
 
         <DropdownInput
           label={t("test.wallet")}
-          iconName="wallet"
+          iconName='wallet'
           value={selectedWallet}
-          setValue={setSelectedWallet}
-          items={[
-            { value: "cash", label: "Cash" },
-            {
-              value: "credit",
-              label: "Credit Card",
-            },
-            { value: "bank", label: "Bank Account" },
-          ]}
+          setValue={handleWalletChange}
+          items={walletList.map((wallet) => ({
+            value: wallet.id,
+            label: wallet.name,
+          }))}
         />
 
         <Divider />
@@ -124,11 +134,10 @@ const TransactionScreen = () => {
         <Divider />
 
         <CustomButton
-          mode="contained"
+          mode='contained'
           style={styles.saveButton}
           onPress={() => {}}
-          icon="content-save-outline"
-        >
+          icon='content-save-outline'>
           {t("test.save")}
         </CustomButton>
       </ScrollView>
@@ -136,8 +145,7 @@ const TransactionScreen = () => {
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}
-      >
+        duration={6000}>
         {snackbarMessage}
       </Snackbar>
     </View>
