@@ -8,6 +8,7 @@ import RegisterScreen from "../screens/Auth/RegisterScreen";
 import AddNewWalletScreen from "../screens/Wallets/AddNewWalletScreen";
 import AddNewCategoryScreen from "../screens/Categories/AddNewCategoryScreen";
 import EditCategoryScreen from "../screens/Categories/EditCategoryScreen";
+import EditWalletScreen from "../screens/Wallets/EditWalletScreen";
 import DrawerNavigator from "./DrawerNavigator";
 
 const Stack = createStackNavigator();
@@ -45,6 +46,7 @@ function StackNavigator() {
       <Stack.Screen name='Add New Wallet' component={AddNewWalletScreen} />
       <Stack.Screen name='Add New Category' component={AddNewCategoryScreen} />
       <Stack.Screen name='Edit Category' component={EditCategoryScreen} />
+      <Stack.Screen name='Edit Wallet' component={EditWalletScreen} />
       <Stack.Screen
         name='DrawerNavigator'
         component={DrawerNavigator}

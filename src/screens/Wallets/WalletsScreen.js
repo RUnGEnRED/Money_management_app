@@ -6,7 +6,7 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from "react-native";
-import { Snackbar, Divider } from "react-native-paper";
+import { Snackbar } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
@@ -20,31 +20,25 @@ const WalletsScreen = ({ navigation }) => {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
 
-  const [categoryExpenseList, setCategoryExpenseList] = useState([]);
-  const [categoryIncomeList, setCategoryIncomeList] = useState([]);
-  const [walletList, setWalletList] = useState([]);
-
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(new Date());
-
-  const [selectedCategory, setSelectedCategory] = useState("Choose");
-  const [selectedWallet, setSelectedWallet] = useState("Choose");
-
+  // Stan portfeli i innych zmiennych
+  const [walletList, setWalletList] = useState([]); // Lista portfeli z bazy danych
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
-
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
+  // Pobieranie danych z API
   const fetchData = useCallback(async () => {
     try {
-      // Simulate a network request
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // Set your data here
-      // setCategoryIncomeList([...]); // Replace with actual data
-      // setWalletList([...]); // Replace with actual data
+      const user = await getAuthToken();
+      if (user && user.id) {
+        const response = await axios.get(`/wallets?user_id=${user.id}`); // Pobieranie danych portfeli
+        setWalletList(response.data); // Ustawianie danych w stanie
+      } else {
+        throw new Error("User is not authenticated or invalid token.");
+      }
     } catch (error) {
-      console.error("Data fetch error: ", error);
+      console.error("Error fetching data:", error);
       setSnackbarMessage(t("homeScreen.errorFetchWallets"));
       setSnackbarVisible(true);
     } finally {
@@ -53,78 +47,87 @@ const WalletsScreen = ({ navigation }) => {
     }
   }, [t]);
 
+  const deleteWallet = async (id) => {
+    try {
+      const user = await getAuthToken();
+      if (user && user.id) {
+        await axios.delete(`/wallets/${id}?user_id=${user.id}`);
+        setSnackbarMessage(t("Wallet deleted successfully"));
+        setSnackbarVisible(true);
+
+        fetchData();
+      }
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      setSnackbarMessage(t("Category delete failed"));
+      setSnackbarVisible(true);
+    }
+  };
+
+  // Efekt wywołania przy załadowaniu ekranu
   useEffect(() => {
     fetchData();
   }, [isFocused, fetchData]);
 
+  // Odświeżanie listy
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     fetchData();
   }, [fetchData]);
 
+  // Obsługa zamknięcia powiadomienia Snackbar
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
 
-  // TEST TO DELETE TRANSACTIONS
-  const [wallets, setWallets] = useState([
-    {
-      id: 1,
-      walletName: "Credit Card",
-      iconName: "credit-card",
-      iconColor: "#339933",
-    },
-    { id: 2, walletName: "Cash", iconName: "cash", iconColor: "#339933" },
-    {
-      id: 3,
-      walletName: "Bank Account",
-      iconName: "bank",
-      iconColor: "#339933",
-    },
-  ]);
+  // Funkcje do edytowania i usuwania portfeli
   const handleEditWallet = (id) => {
     console.log(`Edit wallet with ID: ${id}`);
   };
-  const handleDeleteWallet = (id) => {
-    setWallets(wallets.filter((wallet) => wallet.id !== id));
-  };
-  // TEST END
 
+  // Render
   return (
     <View style={styles.container}>
-      {loading && <ActivityIndicator size="large" />}
+      {loading && <ActivityIndicator size='large' />}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
+        }>
+        {/* Wyświetlanie listy portfeli */}
         {!loading &&
-          wallets.map((wallet) => (
+          walletList.map((wallet) => (
             <WalletItem
               key={wallet.id}
               id={wallet.id}
-              walletName={wallet.walletName}
-              iconName={wallet.iconName}
-              iconColor={wallet.iconColor}
-              onEdit={handleEditWallet}
-              onDelete={handleDeleteWallet}
+              walletName={wallet.name} // Zakładam, że API zwraca nazwę portfela w polu "name"
+              iconName={wallet.icon} // Zakładam, że API zwraca ikonę w polu "icon"
+              iconColor={wallet.color || "#339933"} // Zakładam, że API zwraca kolor w polu "color"
+              onEdit={() =>
+                navigation.navigate("Edit Wallet", {
+                  walletId: wallet.id,
+                  walletName: wallet.name,
+                  walletBalance: wallet.balance,
+                  iconName: wallet.icon,
+                })
+              }
+              onDelete={deleteWallet}
               style={{ marginBottom: 10 }}
             />
           ))}
 
+        {/* Przycisk do dodawania portfela */}
         <CustomButton
           style={styles.addButton}
-          mode="contained"
+          mode='contained'
           onPress={() => navigation.navigate("Add New Wallet")}
-          icon="database"
-        >
+          icon='database'>
           {t("test.add")}
         </CustomButton>
       </ScrollView>
 
+      {/* Snackbar z informacjami o błędach */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}
-      >
+        duration={6000}>
         {snackbarMessage}
       </Snackbar>
     </View>

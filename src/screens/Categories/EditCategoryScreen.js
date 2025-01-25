@@ -15,8 +15,7 @@ const EditCategoryScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  const { categoryId, categoryName, categoryType, iconName, iconColor } =
-    route.params;
+  const { categoryId, categoryName, categoryType, iconName } = route.params;
 
   const [selectedCategory, setSelectedCategory] = useState(iconName);
   const [categoryNameInput, setCategoryNameInput] = useState(categoryName);

@@ -10,13 +10,6 @@
   ],
   "wallets": [
     {
-      "id": "a294",
-      "name": "Wallet",
-      "balance": 50,
-      "icon": "dollar",
-      "user_id": "3baf"
-    },
-    {
       "id": "b3c7",
       "name": "Bank",
       "balance": 220,
@@ -24,24 +17,31 @@
       "user_id": "3baf"
     },
     {
-      "id": "fds5",
-      "name": "Bank_2",
-      "balance": 260,
-      "icon": "bank",
+      "id": "05d0",
+      "name": "Visa",
+      "balance": 120,
+      "icon": "flower",
       "user_id": "3baf"
     },
     {
-      "id": "gd32",
-      "name": "Bank_3",
-      "balance": 460,
-      "icon": "bank",
+      "id": "4428",
+      "name": "Wallet",
+      "balance": 110,
+      "icon": "wallet",
       "user_id": "3baf"
     },
     {
-      "id": "fs3h",
-      "name": "Bank_4",
-      "balance": 800,
-      "icon": "bank",
+      "name": "Revolut",
+      "balance": 1110,
+      "icon": "heart",
+      "user_id": "3baf",
+      "id": "dd78"
+    },
+    {
+      "id": "8deb",
+      "name": "Pocket",
+      "balance": 83,
+      "icon": "bicycle",
       "user_id": "3baf"
     }
   ],
@@ -101,6 +101,13 @@
       "type": "income",
       "icon": "scale-balance",
       "user_id": "3baf"
+    },
+    {
+      "name": "Pets",
+      "type": "expense",
+      "icon": "heart",
+      "user_id": "3baf",
+      "id": "53f7"
     }
   ],
   "transactions": [
@@ -184,6 +191,52 @@
       "type": "income",
       "date": "2025-01-25T20:25:52.160Z",
       "user_id": "3baf"
+    },
+    {
+      "id": "b361",
+      "amount": 200,
+      "wallet_id": "dd78",
+      "category_id": "18bb",
+      "type": "expense",
+      "date": "2025-01-25T22:37:51.041Z",
+      "user_id": "3baf"
+    },
+    {
+      "id": "7806",
+      "amount": 20,
+      "wallet_id": "4428",
+      "date": "2025-01-25T22:38:32.548Z",
+      "type": "expense"
+    },
+    {
+      "id": "2f6e",
+      "amount": 20,
+      "wallet_id": "05d0",
+      "date": "2025-01-25T22:38:32.548Z",
+      "type": "income"
+    },
+    {
+      "id": "6a60",
+      "amount": 20,
+      "wallet_id": "dd78",
+      "category_id": "53f7",
+      "type": "expense",
+      "date": "2025-01-25T22:37:51.041Z",
+      "user_id": "3baf"
+    },
+    {
+      "id": "6efd",
+      "amount": 30,
+      "wallet_id": "4428",
+      "date": "2025-01-25T22:38:32.548Z",
+      "type": "expense"
+    },
+    {
+      "id": "39da",
+      "amount": 30,
+      "wallet_id": "dd78",
+      "date": "2025-01-25T22:38:32.548Z",
+      "type": "income"
     }
   ]
 }

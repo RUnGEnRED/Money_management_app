@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "react-native-paper";
 import { FontAwesome } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 
 const WalletInfoItem = ({ wallet }) => {
@@ -21,7 +22,7 @@ const WalletInfoItem = ({ wallet }) => {
         <Text style={walletInfoItemStyles.walletNameText}>{wallet.name}</Text>
       </View>
       <View style={walletInfoItemStyles.iconContainer}>
-        <FontAwesome
+        <Icon
           name={wallet.icon}
           size={40}
           color={theme.colors.tabColorFocused}
