@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View, StyleSheet, ScrollView } from "react-native";
 import { TextInput, Snackbar, Divider } from "react-native-paper";
 import { useIsFocused } from "@react-navigation/native";
+import axios from "../../api/AxiosInstance"; // Poprawnie zaimportowane axios
+
 import { useTranslation } from "react-i18next";
 
-import axios from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
+import { createTransaction } from "../../services/TransactionService"; // Import funkcji z TransactionService
 
 import CustomButton from "../../components/CustomButton";
 import Keypad from "../../components/Keypad";
@@ -31,20 +33,20 @@ const TransactionScreen = () => {
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  // Pobranie portfeli i kateogrii z serwera?
   const fetchData = useCallback(async () => {
     try {
       const user = await getAuthToken();
       if (user && user.id) {
+        console.log("User token:", user);
+
         const walletsList = await axios.get(`/wallets?user_id=${user.id}`);
+        console.log("Wallets response:", walletsList.data);
+
         const categoriesList = await axios.get(
           `/categories?user_id=${user.id}`
         );
+        console.log("Categories response:", categoriesList.data);
 
-        console.log("Wallets response: ", walletsList.data);
-        console.log("Categories response: ", categoriesList.data);
-
-        // Zamiast dodawać do istniejącej listy, zastępujemy listę nowymi kategoriami
         const expenseCategories = categoriesList.data.filter(
           (category) => category.type === "expense"
         );
@@ -52,15 +54,14 @@ const TransactionScreen = () => {
           (category) => category.type === "income"
         );
 
-        // Ustawiamy stan zaktualizowanymi kategoriami
         setCategoryExpenseList(expenseCategories);
         setCategoryIncomeList(incomeCategories);
-
-        // Ustawiamy portfele
         setWalletList(walletsList.data);
+      } else {
+        throw new Error("User is not authenticated or invalid token.");
       }
     } catch (error) {
-      console.error("Transaction fetch error: ", error);
+      console.error("Error fetching data:", error);
       setSnackbarMessage(t("transactionScreen.errorFetchData"));
       setSnackbarVisible(true);
     }
@@ -70,20 +71,42 @@ const TransactionScreen = () => {
     fetchData();
   }, [isFocused, fetchData]);
 
-  // Dismiss the Snackbar
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
 
-  // Filter categories based on transactionType (income/expense)
   const filteredCategories =
     transactionType === "expense" ? categoryExpenseList : categoryIncomeList;
 
-  // Handle category and wallet change
   const handleCategoryChange = (newCategory) => {
     setSelectedCategory(newCategory);
   };
 
   const handleWalletChange = (newWallet) => {
     setSelectedWallet(newWallet);
+  };
+
+  const handleSaveTransaction = async () => {
+    if (!amount || !selectedCategory || !selectedWallet) {
+      setSnackbarMessage(t("Fill all fields"));
+      setSnackbarVisible(true);
+      return;
+    }
+
+    try {
+      await createTransaction(
+        parseFloat(amount),
+        selectedWallet,
+        selectedCategory,
+        transactionType,
+        date
+      );
+
+      setSnackbarMessage(t("Transaction saved successfully"));
+      setSnackbarVisible(true);
+      setAmount("");
+    } catch (error) {
+      setSnackbarMessage(error.message);
+      setSnackbarVisible(true);
+    }
   };
 
   return (
@@ -93,16 +116,13 @@ const TransactionScreen = () => {
           transactionType={transactionType}
           setTransactionType={setTransactionType}
         />
-
         <TextInput
           style={styles.amountInput}
           value={`$ ${amount}`}
           editable={false}
           mode='outlined'
         />
-
         <Keypad number={amount} setNumber={setAmount} />
-
         <DropdownInput
           label={t("test.category")}
           iconName='cart'
@@ -113,9 +133,7 @@ const TransactionScreen = () => {
             label: category.name,
           }))}
         />
-
         <Divider />
-
         <DropdownInput
           label={t("test.wallet")}
           iconName='wallet'
@@ -126,17 +144,13 @@ const TransactionScreen = () => {
             label: wallet.name,
           }))}
         />
-
         <Divider />
-
         <DateInput label={t("test.data")} date={date} setDate={setDate} />
-
         <Divider />
-
         <CustomButton
           mode='contained'
           style={styles.saveButton}
-          onPress={() => {}}
+          onPress={handleSaveTransaction}
           icon='content-save-outline'>
           {t("test.save")}
         </CustomButton>
@@ -163,6 +177,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "left",
     backgroundColor: "#e0e0e0",
+  },
+  saveButton: {
+    marginTop: 20,
   },
 });
 
