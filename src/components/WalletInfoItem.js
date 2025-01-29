@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { useTheme } from "react-native-paper";
-import { FontAwesome } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
+import useCurrency from "../hooks/useCurrency";
 
 const WalletInfoItem = ({ wallet }) => {
   const { t } = useTranslation();
+  const currency = useCurrency();
   const theme = useTheme();
   const walletInfoItemStyles = theme.components.WalletInfoItem.styleOverrides;
 
@@ -14,10 +15,10 @@ const WalletInfoItem = ({ wallet }) => {
     <View key={wallet.id} style={walletInfoItemStyles.walletInfoItem}>
       <View style={walletInfoItemStyles.textContainer}>
         <Text style={walletInfoItemStyles.totalBalanceText}>
-          {t("homeScreen.totalBalance")}
+          {t("walletInfoItem.totalBalance")}
         </Text>
         <Text style={walletInfoItemStyles.balanceText}>
-          $ {wallet.balance.toLocaleString()}
+          {currency} {wallet.balance.toLocaleString()}
         </Text>
         <Text style={walletInfoItemStyles.walletNameText}>{wallet.name}</Text>
       </View>

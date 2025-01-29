@@ -23,7 +23,7 @@ const TransactionTypeButtons = ({ transactionType, setTransactionType }) => {
         onPress={() => setTransactionType("expense")}
         icon="minus-circle-outline"
       >
-        {t("test.expense")}
+        {t("transactionTypeButtons.expense")}
       </CustomButton>
       <CustomButton
         mode={transactionType === "income" ? "outlined" : "contained"}
@@ -36,7 +36,7 @@ const TransactionTypeButtons = ({ transactionType, setTransactionType }) => {
         onPress={() => setTransactionType("income")}
         icon="plus-circle-outline"
       >
-        {t("test.income")}
+        {t("transactionTypeButtons.income")}
       </CustomButton>
     </View>
   );

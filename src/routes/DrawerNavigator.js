@@ -50,7 +50,7 @@ const DrawerNavigator = () => {
         component={TabNavigator}
         options={{ title: "Main" }}
       />
-      <Drawer.Screen name="Raport" component={ReportScreen} />
+      <Drawer.Screen name="Report" component={ReportScreen} />
       <Drawer.Screen name="Wallets" component={WalletsScreen} />
       <Drawer.Screen name="Categories" component={CategoriesScreen} />
       <Drawer.Screen name="Settings" component={SettingsScreen} />

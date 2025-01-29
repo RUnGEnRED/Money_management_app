@@ -16,7 +16,8 @@
 
   "registerScreen": {
     "title": "Register",
-    "email": "Email",
+    "confirmPassword": "Confirm Password",
+    "passwordsNotMatch": "Passwords do not match.",
     "success": "Successfully registered.",
     "terms": "By registering, you agree to our Terms of Service and Privacy Policy.",
     "alreadyAccount": "Already have an account?"
@@ -30,12 +31,47 @@
   },
 
   "homeScreen": {
-    "errorFetchWallets": "Error fetching wallets.",
+    "errorFetchWallets": "Error fetching wallets."
+  },
+
+  "walletInfoItem": {
     "totalBalance": "Total Balance"
   },
 
   "transactionScreen": {
+    "category": "Category",
+    "chooseCategory": "Choose a category",
+    "wallet": "Wallet",
+    "chooseWallet": "Choose a wallet",
+    "date": "Date",
+    "save": "Save"
+  },
+
+  "useTransactionForm": {
     "errorFetchData": "Error fetching data.",
-    "errorAddTransaction": "Error adding transaction."
+    "emptyFields": "Please fill in all fields.",
+    "success": "Transaction successfully added."
+  },
+
+  "transactionService": {
+    "createTransactionError": "Error creating transaction: ",
+    "messageNoAuth": "You are not authorized to perform this action.",
+    "walletUpdateError": "Error updating wallet."
+  },
+
+  "calendarService": {
+    "incomeEvent": "Income: ",
+    "expenseEvent": "Expense: ",
+    "amount": "Amount: ",
+    "category": "Category: ",
+    "wallet": "Wallet: ",
+    "user": "User: ",
+    "calendarSaveError": "Error saving calendar event.",
+    "calendarError": "Error fetching calendar events."
+  },
+
+  "transactionTypeButtons" : {
+    "income": "Income",
+    "expense": "Expense"
   }
 }
