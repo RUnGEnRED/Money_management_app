@@ -11,7 +11,7 @@
       "id": "f483",
       "name": "Wallet",
       "icon": "wallet",
-      "balance": 0,
+      "balance": 123.45,
       "user_id": "2358"
     }
   ],
@@ -45,5 +45,15 @@
       "user_id": "2358"
     }
   ],
-  "transactions": []
+  "transactions": [
+    {
+      "id": "7263",
+      "type": "income",
+      "amount": 123.45,
+      "wallet_id": "f483",
+      "categorie_id": "78d9",
+      "user_id": "2358",
+      "date": "2025-01-27T21:59:00.000Z"
+    }
+  ]
 }
