@@ -1,54 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, TextInput, Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
 import CustomButton from "../../components/CustomButton";
-import { onLogin } from "../../services/Auth/AuthService";
+import useLogin from "../../hooks/Auth/useLogin";
 
-function LoginScreen({ navigation }) {
+const LoginScreen = ({ navigation }) => {
   const { t } = useTranslation();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const [loading, setLoading] = useState(false);
-
-  const login = async () => {
-    if (!username || !password) {
-      setSnackbarMessage(t("loginScreen.emptyFields"));
-      setSnackbarVisible(true);
-      return; // Stop the login process
-    }
-
-    setLoading(true);
-    try {
-      const result = await onLogin(username, password, t);
-      console.log("Login result:", result);
-      if (result.success) {
-        setSnackbarMessage(t("loginScreen.success"));
-        setSnackbarVisible(true);
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "DrawerNavigator" }],
-        });
-      } else {
-        setSnackbarMessage(result.message);
-        setSnackbarVisible(true);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      setSnackbarMessage(t("authService.messageErrorLogin"));
-      setSnackbarVisible(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSnackbarDismiss = () => setSnackbarVisible(false);
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    snackbarVisible,
+    setSnackbarVisible,
+    snackbarMessage,
+    loading,
+    handleLogin,
+    handleSnackbarDismiss,
+  } = useLogin();
 
   return (
     <View style={styles.container}>
@@ -74,7 +45,7 @@ function LoginScreen({ navigation }) {
       <CustomButton
         title="Login"
         style={styles.button}
-        onPress={login}
+        onPress={handleLogin}
         loading={loading}
       >
         {t("startScreen.login")}
@@ -93,7 +64,7 @@ function LoginScreen({ navigation }) {
       </Snackbar>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,31 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 
 import CustomButton from "../../components/CustomButton";
-import { getAuthToken } from "../../services/Auth/AuthService";
+import useAuthCheck from "../../hooks/Auth/useAuthCheck";
 
-function StartScreen({ navigation }) {
-  const { t } = useTranslation(); // Access the t function to translate strings
-
-  // TODO: Add correct authentication logic for checking if user is already logged in
-  useEffect(() => {
-    const checkForToken = async () => {
-      try {
-        const userData = await getAuthToken();
-        if (userData) {
-          navigation.reset({
-            index: 0,
-            routes: [{ name: "DrawerNavigator" }],
-          });
-        }
-      } catch (error) {
-        console.error("Auth check error:", error);
-      }
-    };
-
-    checkForToken();
-  }, [navigation]);
+const StartScreen = ({ navigation }) => {
+  const { t } = useTranslation();
+  useAuthCheck();
 
   return (
     <View style={styles.container}>
@@ -50,7 +32,7 @@ function StartScreen({ navigation }) {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

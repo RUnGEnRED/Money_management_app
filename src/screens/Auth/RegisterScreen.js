@@ -1,62 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, TextInput, Snackbar, Checkbox } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
 import CustomButton from "../../components/CustomButton";
-import { onRegister } from "../../services/Auth/AuthService";
+import useRegister from "../../hooks/Auth/useRegister";
 
-function RegisterScreen({ navigation }) {
+const RegisterScreen = ({ navigation }) => {
   const { t } = useTranslation();
-
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-
-  const [checked, setChecked] = useState(false);
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const [loading, setLoading] = useState(false);
-
-  const register = async () => {
-    if (!username || !password || !email) {
-      setSnackbarMessage(t("loginScreen.emptyFields"));
-      setSnackbarVisible(true);
-      return; // Stop the login process
-    }
-
-    if (!checked) {
-      setSnackbarMessage(t("registerScreen.terms"));
-      setSnackbarVisible(true);
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const result = await onRegister(username, password, email, t);
-      console.log("Register result:", result);
-      if (result.success) {
-        setSnackbarMessage(t("registerScreen.success"));
-        setSnackbarVisible(true);
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "DrawerNavigator" }],
-        });
-      } else {
-        setSnackbarMessage(result.message);
-        setSnackbarVisible(true);
-      }
-    } catch (error) {
-      console.error("Register error:", error);
-      setSnackbarMessage(t("authService.messageErrorRegister"));
-      setSnackbarVisible(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSnackbarDismiss = () => setSnackbarVisible(false);
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    passwordConfirm,
+    setPasswordConfirm,
+    checked,
+    setChecked,
+    snackbarVisible,
+    setSnackbarVisible,
+    snackbarMessage,
+    loading,
+    handleRegister,
+    handleSnackbarDismiss,
+  } = useRegister();
 
   return (
     <View style={styles.container}>
@@ -80,11 +47,12 @@ function RegisterScreen({ navigation }) {
       />
 
       <TextInput
-        label={t("registerScreen.email")}
-        value={email}
-        onChangeText={setEmail}
+        label={t("registerScreen.confirmPassword")}
+        value={passwordConfirm}
+        onChangeText={setPasswordConfirm}
         style={styles.input}
         mode="outlined"
+        secureTextEntry={true}
       />
 
       <View style={styles.checkboxContainer}>
@@ -98,7 +66,7 @@ function RegisterScreen({ navigation }) {
       <CustomButton
         title="Register"
         style={styles.button}
-        onPress={register}
+        onPress={handleRegister}
         loading={loading}
       >
         {t("startScreen.register")}
@@ -119,7 +87,7 @@ function RegisterScreen({ navigation }) {
       </Snackbar>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

@@ -1,21 +1,21 @@
-import axios from "../../api/AxiosInstance";
 import * as SecureStore from "expo-secure-store";
 import "react-native-get-random-values";
 
+import AxiosInstance from "../../api/AxiosInstance";
+
 const USER_STORAGE_KEY = "userInfo";
 
-// TODO: Add correct authentication logic for login and register e.g. using axios, via context, using SecureStore and JWT scheme
-const login = async (username, password, t) => {
+const loginUser = async (username, password, t) => {
   try {
     console.log(
       `Making request to login with username: ${username} and password: ${password}`
     );
 
-    const response = await axios.get("/users", {
+    const response = await AxiosInstance.get("/users", {
       params: { username, password },
     });
 
-    console.log("Response received:", response.data);
+    console.log("Login response received:", response.data);
 
     if (response.data.length > 0) {
       const user = response.data[0];
@@ -39,13 +39,13 @@ const login = async (username, password, t) => {
   }
 };
 
-const register = async (username, password, email, t) => {
+const registerUser = async (username, password, t) => {
   try {
     console.log(
       `Making request to check if username ${username} already exists.`
     );
 
-    const checkResponse = await axios.get("/users", {
+    const checkResponse = await AxiosInstance.get("/users", {
       params: { username },
     });
 
@@ -57,104 +57,46 @@ const register = async (username, password, email, t) => {
       `Making request to register with username: ${username} and password: ${password}`
     );
 
-    // const registerResult = await axios.post("/users", {
-    //   user_id: user_id,
-    //   username: username,
-    //   password: password,
-    //   email: email,
-    //   avatar: "../assets/avatars/avatar1.svg",
-    //   wallets: [
-    //     {
-    //       wallet_id: wallet_id, // Generate a unique ID
-    //       wallet_name: "Wallet",
-    //       balance: 0, // Default balance of 0
-    //       wallet_icon: "../assets/wallets/wallet.svg",
-    //       transactions: [],
-    //     },
-    //   ],
-    //   categories: [
-    //     {
-    //       category_id: category_ids[0], // Generate unique IDs
-    //       category_name: "Salary",
-    //       type: "income",
-    //       category_icon: "../assets/categories/salary.svg",
-    //     },
-    //     {
-    //       category_id: category_ids[1],
-    //       category_name: "Bonus",
-    //       type: "income",
-    //       category_icon: "../assets/categories/bonus.svg",
-    //     },
-    //     {
-    //       category_id: category_ids[2],
-    //       category_name: "Investment",
-    //       type: "income",
-    //       category_icon: "../assets/categories/investment.svg",
-    //     },
-    //     {
-    //       category_id: category_ids[3],
-    //       category_name: "Food",
-    //       type: "expense",
-    //       category_icon: "../assets/categories/food.svg",
-    //     },
-    //     {
-    //       category_id: category_ids[4],
-    //       category_name: "Transportation",
-    //       type: "expense",
-    //       category_icon: "../assets/categories/transportation.svg",
-    //     },
-    //     {
-    //       category_id: category_ids[5],
-    //       category_name: "Entertainment",
-    //       type: "expense",
-    //       category_icon: "../assets/categories/entertainment.svg",
-    //     },
-    //   ],
-    // });
-
-    const createdUser = await axios.post("/users", {
+    const createResponse = await AxiosInstance.post("/users", {
       username: username,
       password: password,
-      email: email,
-      avatar: "../assets/avatars/avatar1.svg",
     });
-    const createdUserId = createdUser.data.id;
+    const createdUserId = createResponse.data.id;
 
-    const createdWallet = await axios.post("/wallets", {
+    console.log("Register response received:", createResponse.data);
+
+    await AxiosInstance.post("/wallets", {
       name: "Wallet",
+      icon: "wallet",
       balance: 0,
-      icon: "../assets/wallets/wallet.svg",
       user_id: createdUserId,
-      transactions: [],
     });
 
     const categoriesData = [
       {
         name: "Salary",
         type: "income",
-        icon: "../assets/categories/salary.svg",
+        icon: "coins",
       },
-      { name: "Bonus", type: "income", icon: "../assets/categories/bonus.svg" },
       {
-        name: "Investment",
+        name: "Saving",
         type: "income",
-        icon: "../assets/categories/investment.svg",
-      },
-      { name: "Food", type: "expense", icon: "../assets/categories/food.svg" },
-      {
-        name: "Transportation",
-        type: "expense",
-        icon: "../assets/categories/transportation.svg",
+        icon: "piggy-bank",
       },
       {
-        name: "Entertainment",
+        name: "Food",
         type: "expense",
-        icon: "../assets/categories/entertainment.svg",
+        icon: "food",
+      },
+      {
+        name: "Transport",
+        type: "expense",
+        icon: "car",
       },
     ];
 
     const categoryPromises = categoriesData.map(async (category) => {
-      return axios.post("/categories", {
+      return AxiosInstance.post("/categories", {
         name: category.name,
         type: category.type,
         icon: category.icon,
@@ -163,8 +105,6 @@ const register = async (username, password, email, t) => {
     });
 
     await Promise.all(categoryPromises);
-
-    console.log("Result received:", createdUser.data);
 
     await SecureStore.setItemAsync(
       USER_STORAGE_KEY,
@@ -175,7 +115,7 @@ const register = async (username, password, email, t) => {
       })
     );
 
-    return { success: true, user: createdUser.data };
+    return { success: true, user: createResponse.data };
   } catch (error) {
     console.error("Register error:", error);
     return { success: false, message: t("authService.messageErrorRegister") };
@@ -201,8 +141,8 @@ const removeUserInfo = async () => {
 };
 
 export {
-  login as onLogin,
-  register as onRegister,
+  loginUser,
+  registerUser,
   getUserInfo as getAuthToken,
   removeUserInfo as removeAuthToken,
 };
