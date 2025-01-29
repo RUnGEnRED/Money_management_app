@@ -1,62 +1,20 @@
 import React from "react";
-import { View } from "react-native";
-import { useTheme } from "react-native-paper";
+import { StyleSheet } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import {
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from "@react-navigation/drawer";
+import { useTheme } from "react-native-paper";
 
 import TabNavigator from "./TabNavigator";
 import ReportScreen from "../screens/Report/ReportScreen";
 import WalletsScreen from "../screens/Wallets/WalletsScreen";
 import CategoriesScreen from "../screens/Categories/CategoriesScreen";
 import SettingsScreen from "../screens/Settings/SettingsScreen";
-import { removeAuthToken } from "../services/Auth/AuthService";
-import { useNavigation } from "@react-navigation/native";
-import { StyleSheet } from "react-native";
+
+import CustomDrawerContent from "../components/CustomDrawerContent";
 
 const Drawer = createDrawerNavigator();
 
-function CustomDrawerContent(props) {
-  const theme = useTheme();
-  const navigation = useNavigation();
-
-  const handleLogOut = async () => {
-    try {
-      await removeAuthToken();
-    } catch (error) {
-      console.error("Error removing auth token:", error);
-    } finally {
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Start" }],
-      });
-    }
-  };
-
-  return (
-    <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <DrawerItemList {...props} />
-      </View>
-      <View>
-        <DrawerItem
-          label="Log out"
-          onPress={handleLogOut}
-          style={{
-            backgroundColor: theme.colors.buttonBackground,
-          }}
-          labelStyle={{ color: theme.colors.buttonText, textAlign: "center" }}
-        />
-      </View>
-    </DrawerContentScrollView>
-  );
-}
-
 // DrawerNavigator component
-function DrawerNavigator() {
+const DrawerNavigator = () => {
   const theme = useTheme();
 
   const styles = StyleSheet.create({
@@ -98,6 +56,6 @@ function DrawerNavigator() {
       <Drawer.Screen name="Settings" component={SettingsScreen} />
     </Drawer.Navigator>
   );
-}
+};
 
 export default DrawerNavigator;

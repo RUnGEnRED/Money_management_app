@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "react-native-paper";
 
@@ -14,46 +15,52 @@ import DrawerNavigator from "./DrawerNavigator";
 const Stack = createStackNavigator();
 
 // StackNavigator component
-function StackNavigator() {
+const StackNavigator = () => {
   const theme = useTheme();
+
+  const styles = StyleSheet.create({
+    header: {
+      backgroundColor: theme.colors.header,
+    },
+    headerTitle: {
+      fontSize: 26,
+    },
+  });
 
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: theme.colors.header,
-        },
-        headerTitleStyle: {
-          fontSize: 26,
-        },
+        headerStyle: styles.header,
+        headerTitleStyle: styles.headerTitle,
         headerTitleAlign: "center",
-      }}>
+      }}
+    >
       <Stack.Screen
-        name='Start'
+        name="Start"
         component={StartScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='Login'
+        name="Login"
         component={LoginScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name='Register'
+        name="Register"
         component={RegisterScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name='Add New Wallet' component={AddNewWalletScreen} />
-      <Stack.Screen name='Add New Category' component={AddNewCategoryScreen} />
-      <Stack.Screen name='Edit Category' component={EditCategoryScreen} />
-      <Stack.Screen name='Edit Wallet' component={EditWalletScreen} />
+      <Stack.Screen name="Add New Wallet" component={AddNewWalletScreen} />
+      <Stack.Screen name="Add New Category" component={AddNewCategoryScreen} />
+      <Stack.Screen name="Edit Category" component={EditCategoryScreen} />
+      <Stack.Screen name="Edit Wallet" component={EditWalletScreen} />
       <Stack.Screen
-        name='DrawerNavigator'
+        name="DrawerNavigator"
         component={DrawerNavigator}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
-}
+};
 
 export default StackNavigator;
