@@ -76,7 +76,7 @@ const registerUser = async (username, password, t) => {
       {
         name: "Salary",
         type: "income",
-        icon: "coins",
+        icon: "cash",
       },
       {
         name: "Saving",

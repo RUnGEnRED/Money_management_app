@@ -331,6 +331,87 @@ const theme = {
         },
       },
     },
+    PieChart: {
+      styleOverrides: {
+        container: {
+          backgroundColor: "#D4E4CB",
+          borderRadius: 20,
+          padding: 15,
+          margin: 5,
+        },
+        title: {
+          fontSize: 20,
+          fontWeight: "bold",
+          marginBottom: 10,
+          textAlign: "center",
+        },
+        legendContainer: {
+          flex: 1,
+          paddingLeft: 10,
+          marginTop: 10,
+          marginLeft: 10,
+        },
+        legendItem: {
+          marginBottom: 5,
+        },
+        legendColor: {
+          width: 10,
+          height: 10,
+          borderRadius: 5,
+          marginRight: 5,
+        },
+        legendText: {
+          fontSize: 14,
+          textAlign: "left",
+        },
+        legendValues: {
+          fontSize: 12,
+          textAlign: "left",
+        },
+      },
+    },
+    SummaryView: {
+      styleOverrides: {
+        container: {
+          backgroundColor: "#D4E4CB",
+          borderRadius: 20,
+          padding: 15,
+          margin: 5,
+        },
+        titleText: {
+          fontSize: 16,
+        },
+        amountText: {
+          fontSize: 20,
+          fontWeight: "bold",
+          textAlign: "right",
+        },
+        summaryItem: {
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: 10,
+        },
+      },
+    },
+    IconPicker: {
+      styleOverrides: {
+        iconContainer: {},
+        iconRow: {
+          flexDirection: "row",
+          flexWrap: "wrap",
+        },
+        iconBox: {
+          width: "20%",
+          padding: 10,
+          alignItems: "center",
+          justifyContent: "center",
+        },
+        selectedIcon: {
+          backgroundColor: "lightgreen",
+          borderRadius: 10,
+        },
+      },
+    },
   },
 };
 

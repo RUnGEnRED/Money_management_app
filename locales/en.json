@@ -117,6 +117,31 @@
     "deleteTransactionError": "Error deleting transaction."
   },
 
+  "reportScreen": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "wallet": "Wallet",
+    "allWallets": "All Wallets",
+    "expense": "Expenses",
+    "income": "Incomes"
+  },
+
+  "useReportData": {
+    "errorFetchData": "Error fetching data."
+  },
+
+  "reportService": {
+    "messageNoAuth": "User is not authenticated or invalid token.",
+    "categoriesError": "Error fetching categories.",
+    "walletsError": "Error fetching wallets.",
+    "transactionsError": "Error fetching transactions."
+  },
+
+  "summaryView": {
+    "expense": "Expenses",
+    "income": "Incomes"
+  },
+
   "general":{
     "unknown": "Unknown"
   }
