@@ -7,7 +7,7 @@ import { getAuthToken } from "../../services/Auth/AuthService";
 import { createTransaction } from "../../services/Transaction/TransactionService";
 import useCurrency from "../useCurrency";
 
-function useTransactionForm() {
+const useTransactionForm = () => {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
   const currency = useCurrency();
@@ -126,6 +126,6 @@ function useTransactionForm() {
     handleSaveTransaction,
     currency,
   };
-}
+};
 
 export default useTransactionForm;

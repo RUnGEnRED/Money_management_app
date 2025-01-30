@@ -5,7 +5,7 @@ const fetchWallets = async (t) => {
   try {
     const user = await getAuthToken();
     if (!user || !user.id) {
-      throw new Error("User is not authenticated or invalid token.");
+      throw new Error(t("transferService.messageNoAuth"));
     }
 
     const response = await AxiosInstance.get(`/wallets?user_id=${user.id}`);
@@ -47,8 +47,12 @@ const transferFunds = async (transferData, t) => {
     const toWalletResponse = await AxiosInstance.get(`/wallets/${toWalletId}`);
     const toWallet = toWalletResponse.data;
 
-    const newFromWalletBalance = fromWallet.balance - amount;
-    const newToWalletBalance = toWallet.balance + amount;
+    const newFromWalletBalance = parseFloat(
+      (fromWallet.balance - amount).toFixed(2)
+    );
+    const newToWalletBalance = parseFloat(
+      (toWallet.balance + amount).toFixed(2)
+    );
 
     await AxiosInstance.put(`/wallets/${fromWalletId}`, {
       ...fromWallet,

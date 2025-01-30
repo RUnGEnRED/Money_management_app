@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function useCurrency() {
+const useCurrency = () => {
   const [currency, setCurrency] = useState("USD");
 
   useEffect(() => {
@@ -18,6 +18,6 @@ function useCurrency() {
     fetchCurrency();
   }, []);
   return currency;
-}
+};
 
 export default useCurrency;

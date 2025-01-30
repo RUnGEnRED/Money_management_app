@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
+import useCurrency from "../hooks/useCurrency";
+
 const TransactionItem = ({
   id,
   categoryName,
@@ -14,6 +16,7 @@ const TransactionItem = ({
   onDelete,
   style,
 }) => {
+  const currency = useCurrency();
   const theme = useTheme();
   const transactionItemTheme = theme.components.TransactionItem.styleOverrides;
 
@@ -42,7 +45,7 @@ const TransactionItem = ({
           { color: amount < 0 ? "red" : "green" },
         ]}
       >
-        {amount > 0 ? "+ $" : "- $"}
+        {amount > 0 ? `+ ${currency} ` : `- ${currency} `}
         {Math.abs(amount)}
       </Text>
       <TouchableOpacity

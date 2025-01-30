@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import AxiosInstance from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
 
-function useWallets() {
+const useWallets = () => {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
 
@@ -56,6 +56,6 @@ function useWallets() {
     onRefresh,
     handleSnackbarDismiss,
   };
-}
+};
 
 export default useWallets;
