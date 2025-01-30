@@ -9,12 +9,17 @@ import {
 import { Snackbar, Divider } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components
 import DropdownInput from "../../components/DropdownInput";
 import DateInput from "../../components/DateInput";
 import TransactionItem from "../../components/TransactionItem";
+
+// Import custom hook for managing history data
 import useHistoryData from "../../hooks/History/useHistoryData";
 
+// HistoryScreen component definition
 const HistoryScreen = () => {
+  // Get translation function and history data using the custom hook
   const { t } = useTranslation();
   const {
     categories,
@@ -37,21 +42,23 @@ const HistoryScreen = () => {
   } = useHistoryData();
 
   return (
+    // Main container for history screen including loading indicator, filters, and transaction list
     <View style={styles.container}>
+      {/* Date input to choose the start date for the history filter */}
       <DateInput
         label={t("historyScreen.startDate")}
         date={startDate}
         setDate={setStartDate}
       />
       <Divider />
-
+      {/* Date input to choose the end date for the history filter */}
       <DateInput
         label={t("historyScreen.endDate")}
         date={endDate}
         setDate={setEndDate}
       />
       <Divider />
-
+      {/* Dropdown to filter the transactions by category */}
       <DropdownInput
         label={t("historyScreen.category")}
         iconName="cart"
@@ -70,13 +77,15 @@ const HistoryScreen = () => {
         ]}
       />
       <Divider />
-
+      {/* Show a loading indicator when data is loading */}
       {loading && <ActivityIndicator size="large" />}
+      {/* ScrollView for transactions */}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+        {/* Map through all the transactions to render TransactionItem components */}
         {!loading &&
           filteredTransactions.map((transaction) => (
             <TransactionItem
@@ -93,7 +102,7 @@ const HistoryScreen = () => {
             />
           ))}
       </ScrollView>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

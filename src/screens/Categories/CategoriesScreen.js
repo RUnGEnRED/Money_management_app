@@ -10,12 +10,16 @@ import { Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 
+// Import custom components
 import CategoryItem from "../../components/CategoryItem";
 import CustomButton from "../../components/CustomButton";
 
+// Import custom hook for managing category data
 import useCategoryData from "../../hooks/Categories/useCategoryData";
 
+// CategoriesScreen component definition
 const CategoriesScreen = () => {
+  // Get translation, navigation and category data using custom hook
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
@@ -33,13 +37,17 @@ const CategoriesScreen = () => {
   } = useCategoryData();
 
   return (
+    // Main container for categories screen
     <View style={styles.container}>
+      {/* Show a loading indicator when data is loading */}
       {loading && <ActivityIndicator size="large" />}
+      {/* ScrollView for categories and add button */}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+        {/* Map through all the expense categories to render CategoryItem components */}
         {!loading &&
           categoryExpenseList.map((category) => (
             <CategoryItem
@@ -54,7 +62,7 @@ const CategoriesScreen = () => {
               style={{ marginBottom: 10 }}
             />
           ))}
-
+        {/* Map through all the income categories to render CategoryItem components */}
         {!loading &&
           categoryIncomeList.map((category) => (
             <CategoryItem
@@ -69,7 +77,7 @@ const CategoriesScreen = () => {
               style={{ marginBottom: 10 }}
             />
           ))}
-
+        {/* Custom button to navigate to the add category screen */}
         <CustomButton
           style={styles.addButton}
           mode="contained"
@@ -79,7 +87,7 @@ const CategoriesScreen = () => {
           {t("categoriesScreen.add")}
         </CustomButton>
       </ScrollView>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

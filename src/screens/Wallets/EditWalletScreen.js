@@ -3,14 +3,18 @@ import { View, StyleSheet } from "react-native";
 import { Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components
 import CustomButton from "../../components/CustomButton";
 import IconPicker from "../../components/IconPicker";
 import CustomTextInput from "../../components/CustomTextInput";
 import { iconsWallet } from "../../constants/icons";
 
+// Import custom hook for editing wallets
 import useEditWallet from "../../hooks/Wallets/useEditWallet";
 
+// EditWalletScreen component definition
 const EditWalletScreen = () => {
+  // Get translation function and edit wallet form data using custom hook
   const { t } = useTranslation();
   const {
     selectedIcon,
@@ -24,20 +28,22 @@ const EditWalletScreen = () => {
   } = useEditWallet();
 
   return (
+    // Main container for edit wallet screen including name, icons, and button to save
     <View style={styles.container}>
+      {/* Input to edit the wallet name */}
       <CustomTextInput
         label={t("editWalletScreen.walletName")}
         value={walletNameInput}
         onChangeText={setWalletNameInput}
         style={{ marginBottom: 12 }}
       />
-
+      {/* Icon picker component to select a new icon for the wallet */}
       <IconPicker
         icons={iconsWallet}
         onIconSelect={handleIconSelect}
         selectedIcon={selectedIcon}
       />
-
+      {/* Button to save the edited wallet */}
       <CustomButton
         mode="contained"
         style={styles.saveButton}
@@ -46,7 +52,7 @@ const EditWalletScreen = () => {
       >
         {t("editWalletScreen.save")}
       </CustomButton>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

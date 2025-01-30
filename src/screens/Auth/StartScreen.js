@@ -2,18 +2,24 @@ import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 
+// Import custom components and auth check hook
 import CustomButton from "../../components/CustomButton";
 import useAuthCheck from "../../hooks/Auth/useAuthCheck";
 
+// StartScreen component definition
 const StartScreen = ({ navigation }) => {
+  // Get translation function, and check auth using custom hook
   const { t } = useTranslation();
   useAuthCheck();
 
   return (
+    // Main container with logo and buttons
     <View style={styles.container}>
+      {/* App logo image */}
       <Image source={require("../../../assets/logo.png")} style={styles.logo} />
-
+      {/* Container for the buttons */}
       <View style={styles.buttonContainer}>
+        {/* Custom login button */}
         <CustomButton
           title="Login"
           style={styles.button}
@@ -21,7 +27,7 @@ const StartScreen = ({ navigation }) => {
         >
           {t("startScreen.login")}
         </CustomButton>
-
+        {/* Custom register button */}
         <CustomButton
           title="Register"
           style={styles.button}

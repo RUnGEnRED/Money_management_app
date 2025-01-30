@@ -3,14 +3,18 @@ import { View, StyleSheet } from "react-native";
 import { Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components
 import CustomButton from "../../components/CustomButton";
 import CustomTextInput from "../../components/CustomTextInput";
 import IconPicker from "../../components/IconPicker";
 import { iconsWallet } from "../../constants/icons";
 
+// Import the custom hook for adding wallets
 import useAddWallet from "../../hooks/Wallets/useAddWallet";
 
+// AddNewWalletScreen component definition
 const AddNewWalletScreen = () => {
+  // Get translation function and add wallet form data using custom hook
   const { t } = useTranslation();
   const {
     walletName,
@@ -26,14 +30,16 @@ const AddNewWalletScreen = () => {
   } = useAddWallet();
 
   return (
+    // Main container for add new wallet screen
     <View style={styles.container}>
+      {/* Input to set wallet name */}
       <CustomTextInput
         label={t("addWalletScreen.walletName")}
         value={walletName}
         onChangeText={setWalletName}
         style={{ marginBottom: 12 }}
       />
-
+      {/* Input to set wallet initial balance */}
       <CustomTextInput
         label={t("addWalletScreen.initialBalance")}
         value={balance}
@@ -41,13 +47,13 @@ const AddNewWalletScreen = () => {
         keyboardType="numeric"
         style={{ marginBottom: 24 }}
       />
-
+      {/* Render the icon picker to choose an icon for the wallet */}
       <IconPicker
         icons={iconsWallet}
         onIconSelect={handleIconSelect}
         selectedIcon={selectedIcon}
       />
-
+      {/* Button to add the new wallet */}
       <CustomButton
         mode="contained"
         style={styles.saveButton}
@@ -56,7 +62,7 @@ const AddNewWalletScreen = () => {
       >
         {t("addWalletScreen.add")}
       </CustomButton>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

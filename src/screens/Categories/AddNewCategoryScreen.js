@@ -1,17 +1,21 @@
-// src/screens/Categories/AddNewCategoryScreen.js
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components and hook
 import CustomButton from "../../components/CustomButton";
 import CustomTextInput from "../../components/CustomTextInput";
 import TransactionTypeButtons from "../../components/TransactionTypeButtons";
 import IconPicker from "../../components/IconPicker";
 import { iconsCategorie } from "../../constants/icons";
+
+// Import the custom hook for adding new category
 import useAddCategory from "../../hooks/Categories/useAddCategory";
 
+// AddNewCategoryScreen component definition
 const AddNewCategoryScreen = () => {
+  // Get translation function and add category form data using the custom hook
   const { t } = useTranslation();
   const {
     selectedIcon,
@@ -27,26 +31,27 @@ const AddNewCategoryScreen = () => {
   } = useAddCategory();
 
   return (
+    // Main container for add new category screen
     <View style={styles.container}>
+      {/* Render the transaction type buttons */}
       <TransactionTypeButtons
         transactionType={transactionType}
         setTransactionType={setTransactionType}
       />
-
+      {/* Input to set the category name */}
       <CustomTextInput
         label={t("addCategoryScreen.categoryName")}
         value={categoryName}
         onChangeText={setCategoryName}
         style={{ marginBottom: 12 }}
       />
-
-      {/* Siatka ikon do wyboru */}
+      {/* Render the Icon picker component */}
       <IconPicker
         icons={iconsCategorie}
         onIconSelect={handleIconSelect}
         selectedIcon={selectedIcon}
       />
-
+      {/* Button to add the new category */}
       <CustomButton
         mode="contained"
         style={styles.saveButton}
@@ -55,11 +60,11 @@ const AddNewCategoryScreen = () => {
       >
         {t("addCategoryScreen.add")}
       </CustomButton>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}
+        duration={3000}
       >
         {snackbarMessage}
       </Snackbar>

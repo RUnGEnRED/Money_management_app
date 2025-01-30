@@ -10,12 +10,16 @@ import { Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 
+// Import custom components
 import WalletItem from "../../components/WalletItem";
 import CustomButton from "../../components/CustomButton";
 
+// Import custom hook for managing wallet data
 import useWalletData from "../../hooks/Wallets/useWalletData";
 
+// WalletsScreen component definition
 const WalletsScreen = () => {
+  // Get translation, navigation and wallet data using custom hook
   const { t } = useTranslation();
   const navigation = useNavigation();
   const {
@@ -32,13 +36,17 @@ const WalletsScreen = () => {
   } = useWalletData();
 
   return (
+    // Main container for wallets screen including loading indicator, wallet list and add button
     <View style={styles.container}>
+      {/* Loading indicator to be shown while loading the data */}
       {loading && <ActivityIndicator size="large" />}
+      {/* ScrollView containing wallet items and the add button */}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
+        {/* Map through all the wallets to render a WalletItem component for each one of them */}
         {!loading &&
           walletList.map((wallet) => (
             <WalletItem
@@ -52,7 +60,7 @@ const WalletsScreen = () => {
               style={{ marginBottom: 10 }}
             />
           ))}
-
+        {/* Button to navigate to the add wallet screen */}
         <CustomButton
           style={styles.addButton}
           mode="contained"
@@ -62,7 +70,7 @@ const WalletsScreen = () => {
           {t("walletsScreen.add")}
         </CustomButton>
       </ScrollView>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

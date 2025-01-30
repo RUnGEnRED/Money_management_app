@@ -9,14 +9,18 @@ import {
 import { Snackbar, Divider } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components
 import DropdownInput from "../../components/DropdownInput";
 import DateInput from "../../components/DateInput";
 import PieChart from "../../components/PieChart";
 import SummaryView from "../../components/SummaryView";
 
+// Import custom hook for managing report data
 import useReportData from "../../hooks/Report/useReportData";
 
+// ReportScreen component definition
 const ReportScreen = () => {
+  // Get translation function and report data using custom hook
   const { t } = useTranslation();
   const {
     startDate,
@@ -40,22 +44,23 @@ const ReportScreen = () => {
   } = useReportData();
 
   return (
+    // Main container for report screen including loading indicator, filters, summary, and charts
     <View style={styles.container}>
+      {/* Date input to set the start date of the report filter */}
       <DateInput
         label={t("reportScreen.startDate")}
         date={startDate}
         setDate={setStartDate}
       />
       <Divider />
-
+      {/* Date input to set the end date of the report filter */}
       <DateInput
         label={t("reportScreen.endDate")}
         date={endDate}
         setDate={setEndDate}
       />
-
       <Divider />
-
+      {/* Dropdown to filter the report by wallet */}
       <DropdownInput
         label={t("reportScreen.wallet")}
         iconName="wallet"
@@ -71,16 +76,17 @@ const ReportScreen = () => {
           })),
         ]}
       />
-
       <Divider />
-
+      {/* Show loading indicator when data is loading */}
       {loading && <ActivityIndicator size="large" />}
+      {/* ScrollView for charts and summary */}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
         {!loading && (
+          // Show the SummaryView and two PieChart components if the loading is false
           <>
             <SummaryView
               income={totalIncome}
@@ -92,7 +98,7 @@ const ReportScreen = () => {
           </>
         )}
       </ScrollView>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

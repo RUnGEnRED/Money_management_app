@@ -3,10 +3,13 @@ import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Text, TextInput, Snackbar, Checkbox } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components and hook
 import CustomButton from "../../components/CustomButton";
 import useRegister from "../../hooks/Auth/useRegister";
 
+// RegisterScreen component definition
 const RegisterScreen = ({ navigation }) => {
+  // Get translation and register form data using the custom hook
   const { t } = useTranslation();
   const {
     username,
@@ -26,9 +29,11 @@ const RegisterScreen = ({ navigation }) => {
   } = useRegister();
 
   return (
+    // Main container for register screen with title, inputs, button and navigation text.
     <View style={styles.container}>
+      {/* Screen title */}
       <Text style={styles.title}>{t("registerScreen.title")}</Text>
-
+      {/* Username Input */}
       <TextInput
         label={t("loginScreen.username")}
         value={username}
@@ -36,7 +41,7 @@ const RegisterScreen = ({ navigation }) => {
         style={styles.input}
         mode="outlined"
       />
-
+      {/* Password Input */}
       <TextInput
         label={t("loginScreen.password")}
         value={password}
@@ -45,7 +50,7 @@ const RegisterScreen = ({ navigation }) => {
         mode="outlined"
         secureTextEntry={true}
       />
-
+      {/* Confirm Password Input */}
       <TextInput
         label={t("registerScreen.confirmPassword")}
         value={passwordConfirm}
@@ -54,7 +59,7 @@ const RegisterScreen = ({ navigation }) => {
         mode="outlined"
         secureTextEntry={true}
       />
-
+      {/* Checkbox to accept terms and conditions */}
       <View style={styles.checkboxContainer}>
         <Checkbox
           status={checked ? "checked" : "unchecked"}
@@ -62,7 +67,7 @@ const RegisterScreen = ({ navigation }) => {
         />
         <Text style={styles.checkboxText}>{t("registerScreen.terms")}</Text>
       </View>
-
+      {/* Custom register button */}
       <CustomButton
         title="Register"
         style={styles.button}
@@ -71,13 +76,13 @@ const RegisterScreen = ({ navigation }) => {
       >
         {t("startScreen.register")}
       </CustomButton>
-
+      {/* Text to navigate to the login screen */}
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Text style={styles.registerText}>
           {t("registerScreen.alreadyAccount")}
         </Text>
       </TouchableOpacity>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

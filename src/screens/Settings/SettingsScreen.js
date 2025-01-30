@@ -1,13 +1,15 @@
-// src/screens/Settings/SettingsScreen.js
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Snackbar, Divider } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components and hook
 import DropdownInput from "../../components/DropdownInput";
 import useSettings from "../../hooks/Settings/useSettings";
 
+// SettingsScreen component definition
 const SettingsScreen = () => {
+  // Get translation function and settings data using custom hook
   const { t } = useTranslation();
   const {
     selectedCurrency,
@@ -21,7 +23,9 @@ const SettingsScreen = () => {
   } = useSettings();
 
   return (
+    // Main container for settings screen
     <View style={styles.container}>
+      {/* Dropdown input for choosing the currency of the app */}
       <DropdownInput
         label={t("settingsScreen.currency")}
         iconName="currency-usd"
@@ -33,9 +37,8 @@ const SettingsScreen = () => {
           { value: "£ ", label: "£ - GBP - British Pound" },
         ]}
       />
-
       <Divider />
-
+      {/* Dropdown input to choose the app language */}
       <DropdownInput
         label={t("settingsScreen.language")}
         iconName="translate"
@@ -46,9 +49,8 @@ const SettingsScreen = () => {
           { value: "pl", label: "Polish - PL" },
         ]}
       />
-
       <Divider />
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
