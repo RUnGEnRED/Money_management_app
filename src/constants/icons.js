@@ -1,3 +1,4 @@
+// Desc: List of icons for wallet and categories
 const iconsWallet = [
   "bank",
   "piggy-bank",
@@ -16,6 +17,7 @@ const iconsWallet = [
   "diamond",
 ];
 
+// Desc: List of icons for categories
 const iconsCategorie = [
   "food",
   "car",
