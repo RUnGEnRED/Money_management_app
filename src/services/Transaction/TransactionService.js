@@ -61,7 +61,7 @@ const updateWalletBalance = async (wallet_id, amount, transactionType, t) => {
       balance: newBalance,
     });
 
-    return newBalance;
+    return { sucessfull: true, data: newBalance };
   } catch (error) {
     console.error("Wallet update error: ", error);
     throw new Error(t("transactionScreen.walletUpdateError"));

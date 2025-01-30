@@ -73,5 +73,25 @@
   "transactionTypeButtons" : {
     "income": "Income",
     "expense": "Expense"
+  },
+
+  "transferScreen": {
+    "fromWallet": "From Wallet",
+    "toWallet": "To Wallet",
+    "chooseWallet": "Choose a wallet",
+    "save": "Save"
+  },
+
+  "useTransferForm": {
+    "selectWallets": "Please select wallets.",
+    "sameWallets": "You can't transfer to the same wallet.",
+    "invalidAmount": "Invalid amount."
+  },
+
+  "transferService": {
+    "errorFetchWallets": "Error fetching wallets.",
+    "notEnoughFunds": "Not enough funds.",
+    "transferSuccess": "Transfer successful.",
+    "transferFailed": "Transfer failed."
   }
 }
