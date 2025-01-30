@@ -3,8 +3,10 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
+// Import custom hook for currency
 import useCurrency from "../hooks/useCurrency";
 
+// TransactionItem component definition
 const TransactionItem = ({
   id,
   categoryName,
@@ -16,17 +18,22 @@ const TransactionItem = ({
   onDelete,
   style,
 }) => {
+  // Get currency, theme and style overrides
   const currency = useCurrency();
   const theme = useTheme();
   const transactionItemTheme = theme.components.TransactionItem.styleOverrides;
 
+  // Function to handle delete action
   const handleDelete = () => {
     onDelete(id);
   };
 
   return (
+    // Render the container for the transaction item
     <View style={[transactionItemTheme.container, style]}>
+      {/* Render the date */}
       <Text style={transactionItemTheme.date}>{date}</Text>
+      {/* Icon container with color */}
       <View
         style={{
           ...transactionItemTheme.iconContainer,
@@ -35,10 +42,12 @@ const TransactionItem = ({
       >
         <Icon name={iconName} size={24} color={iconColor} />
       </View>
+      {/* Container for transaction texts */}
       <View style={transactionItemTheme.textContainer}>
         <Text style={transactionItemTheme.categoryName}>{categoryName}</Text>
         <Text style={transactionItemTheme.walletName}>{walletName}</Text>
       </View>
+      {/* Render the amount */}
       <Text
         style={[
           transactionItemTheme.amount,
@@ -48,6 +57,7 @@ const TransactionItem = ({
         {amount > 0 ? `+ ${currency} ` : `- ${currency} `}
         {Math.abs(amount)}
       </Text>
+      {/* Delete button container */}
       <TouchableOpacity
         style={transactionItemTheme.deleteButton}
         onPress={handleDelete}

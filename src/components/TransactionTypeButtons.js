@@ -2,6 +2,8 @@ import React from "react";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
+
+// Import custom component
 import CustomButton from "./CustomButton";
 
 // TransactionTypeButtons component definition

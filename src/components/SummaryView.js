@@ -3,16 +3,21 @@ import { View, Text } from "react-native";
 import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom hook for currency
 import useCurrency from "../hooks/useCurrency";
 
+// SummaryView component definition
 const SummaryView = ({ income, expenses }) => {
+  // Get translation, theme and currency
   const { t } = useTranslation();
   const theme = useTheme();
   const summaryViewTheme = theme.components.SummaryView.styleOverrides;
   const currency = useCurrency();
 
   return (
+    // Render the container that shows the summary of the expenses and income.
     <View style={summaryViewTheme.container}>
+      {/* View to render the expenses summary */}
       <View style={summaryViewTheme.summaryItem}>
         <Text style={summaryViewTheme.titleText}>
           {t("summaryView.expense")}
@@ -23,6 +28,7 @@ const SummaryView = ({ income, expenses }) => {
           {expenses}
         </Text>
       </View>
+      {/* View to render the income summary */}
       <View style={summaryViewTheme.summaryItem}>
         <Text style={summaryViewTheme.titleText}>
           {t("summaryView.income")}
