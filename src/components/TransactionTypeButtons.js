@@ -4,14 +4,18 @@ import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import CustomButton from "./CustomButton";
 
+// TransactionTypeButtons component definition
 const TransactionTypeButtons = ({ transactionType, setTransactionType }) => {
+  // Get theme and translations
   const theme = useTheme();
   const transactionTypeTheme =
     theme.components.TransactionTypeButtons.styleOverrides;
   const { t } = useTranslation();
 
   return (
+    // View container that renders the type of transaction buttons
     <View style={transactionTypeTheme.buttonContainer}>
+      {/* Expense Button */}
       <CustomButton
         mode={transactionType === "expense" ? "outlined" : "contained"}
         style={[
@@ -25,6 +29,7 @@ const TransactionTypeButtons = ({ transactionType, setTransactionType }) => {
       >
         {t("transactionTypeButtons.expense")}
       </CustomButton>
+      {/* Income Button */}
       <CustomButton
         mode={transactionType === "income" ? "outlined" : "contained"}
         style={[

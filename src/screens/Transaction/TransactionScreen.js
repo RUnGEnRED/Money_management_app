@@ -3,15 +3,19 @@ import { View, StyleSheet, ScrollView } from "react-native";
 import { TextInput, Snackbar, Divider } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import custom components
 import CustomButton from "../../components/CustomButton";
 import Keypad from "../../components/Keypad";
 import DropdownInput from "../../components/DropdownInput";
 import DateInput from "../../components/DateInput";
 import TransactionTypeButtons from "../../components/TransactionTypeButtons";
 
+// Import the custom hook for managing the transaction form
 import useTransactionForm from "../../hooks/Transaction/useTransactionForm";
 
+// TransactionScreen component definition
 const TransactionScreen = () => {
+  // Get translation function and form data using the custom hook
   const { t } = useTranslation();
   const {
     transactionType,
@@ -35,19 +39,24 @@ const TransactionScreen = () => {
   } = useTransactionForm();
 
   return (
+    // View container that renders the transaction form
     <View style={styles.container}>
       <ScrollView>
+        {/* Render the transaction type buttons */}
         <TransactionTypeButtons
           transactionType={transactionType}
           setTransactionType={setTransactionType}
         />
+        {/* Input for amount */}
         <TextInput
           style={styles.amountInput}
           value={`${currency} ${amount}`}
           editable={false}
           mode="outlined"
         />
+        {/* Render the keypad for amount input */}
         <Keypad number={amount} setNumber={setAmount} />
+        {/* Dropdown to choose category */}
         <DropdownInput
           label={t("transactionScreen.category")}
           iconName="cart"
@@ -63,6 +72,7 @@ const TransactionScreen = () => {
           }))}
         />
         <Divider />
+        {/* Dropdown to choose wallet */}
         <DropdownInput
           label={t("transactionScreen.wallet")}
           iconName="wallet"
@@ -78,12 +88,14 @@ const TransactionScreen = () => {
           }))}
         />
         <Divider />
+        {/* Input for date selection */}
         <DateInput
           label={t("transactionScreen.date")}
           date={date}
           setDate={setDate}
         />
         <Divider />
+        {/* Button to save the transaction */}
         <CustomButton
           mode="contained"
           style={styles.saveButton}
@@ -93,7 +105,7 @@ const TransactionScreen = () => {
           {t("transactionScreen.save")}
         </CustomButton>
       </ScrollView>
-
+      {/* Snackbar for notifications */}
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}

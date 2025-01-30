@@ -5,14 +5,19 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 
+// DateInput component definition
 const DateInput = ({ label, date, setDate }) => {
+  // State for the date menu visibility
   const [dataMenuVisible, setDataMenuVisible] = useState(false);
+  // Get translation function and theme
   const { t } = useTranslation();
   const theme = useTheme();
   const dateTheme = theme.components.DateInput.styleOverrides;
 
+  // Function to open date menu
   const openDataMenu = () => setDataMenuVisible(true);
 
+  // Function to handle date changes in the DateTimePicker
   const handleDateChange = (event, selectedDate) => {
     setDataMenuVisible(false);
     if (selectedDate) {
@@ -21,6 +26,7 @@ const DateInput = ({ label, date, setDate }) => {
   };
 
   return (
+    // Container for date input that includes the touchable input and picker
     <View style={dateTheme.container}>
       <TouchableOpacity onPress={openDataMenu}>
         <View style={dateTheme.dropdown}>
@@ -43,6 +49,7 @@ const DateInput = ({ label, date, setDate }) => {
           </View>
         </View>
       </TouchableOpacity>
+      {/* Show the DateTimePicker if the menu is visible */}
       {dataMenuVisible && (
         <View style={dateTheme.dateTimePickerContainer}>
           <DateTimePicker
