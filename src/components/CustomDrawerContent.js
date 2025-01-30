@@ -7,10 +7,12 @@ import {
 } from "@react-navigation/drawer";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 import { removeAuthToken } from "../services/Auth/AuthService";
 
 function CustomDrawerContent(props) {
+  const { t } = useTranslation();
   const theme = useTheme();
   const navigation = useNavigation();
 
@@ -34,7 +36,7 @@ function CustomDrawerContent(props) {
       </View>
       <View>
         <DrawerItem
-          label="Log out"
+          label={t("drawerNavigator.logout")}
           onPress={handleLogOut}
           style={{
             backgroundColor: theme.colors.buttonBackground,

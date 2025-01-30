@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 import StartScreen from "../screens/Auth/StartScreen";
 import LoginScreen from "../screens/Auth/LoginScreen";
@@ -16,6 +17,7 @@ const Stack = createStackNavigator();
 
 // StackNavigator component
 const StackNavigator = () => {
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const styles = StyleSheet.create({
@@ -50,10 +52,26 @@ const StackNavigator = () => {
         component={RegisterScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="Add New Wallet" component={AddNewWalletScreen} />
-      <Stack.Screen name="Add New Category" component={AddNewCategoryScreen} />
-      <Stack.Screen name="Edit Category" component={EditCategoryScreen} />
-      <Stack.Screen name="Edit Wallet" component={EditWalletScreen} />
+      <Stack.Screen
+        name="Add New Wallet"
+        component={AddNewWalletScreen}
+        options={{ title: t("stackNavigator.addNewWallet") }}
+      />
+      <Stack.Screen
+        name="Add New Category"
+        component={AddNewCategoryScreen}
+        options={{ title: t("stackNavigator.addNewCategoryScreen") }}
+      />
+      <Stack.Screen
+        name="Edit Category"
+        component={EditCategoryScreen}
+        options={{ title: t("stackNavigator.editCategoryScreen") }}
+      />
+      <Stack.Screen
+        name="Edit Wallet"
+        component={EditWalletScreen}
+        options={{ title: t("stackNavigator.editWalletScreen") }}
+      />
       <Stack.Screen
         name="DrawerNavigator"
         component={DrawerNavigator}

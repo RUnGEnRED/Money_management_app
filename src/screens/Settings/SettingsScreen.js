@@ -44,7 +44,6 @@ const SettingsScreen = () => {
         items={[
           { value: "en", label: "English - EN" },
           { value: "pl", label: "Polish - PL" },
-          { value: "de", label: "Deutsch - DE" },
         ]}
       />
 

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useTheme } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 import TabNavigator from "./TabNavigator";
 import ReportScreen from "../screens/Report/ReportScreen";
@@ -15,6 +16,7 @@ const Drawer = createDrawerNavigator();
 
 // DrawerNavigator component
 const DrawerNavigator = () => {
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const styles = StyleSheet.create({
@@ -48,12 +50,28 @@ const DrawerNavigator = () => {
       <Drawer.Screen
         name="TabNavigator"
         component={TabNavigator}
-        options={{ title: "Main" }}
+        options={{ title: t("drawerNavigator.mainScreen") }}
       />
-      <Drawer.Screen name="Report" component={ReportScreen} />
-      <Drawer.Screen name="Wallets" component={WalletsScreen} />
-      <Drawer.Screen name="Categories" component={CategoriesScreen} />
-      <Drawer.Screen name="Settings" component={SettingsScreen} />
+      <Drawer.Screen
+        name="Report"
+        component={ReportScreen}
+        options={{ title: t("drawerNavigator.reportScreen") }}
+      />
+      <Drawer.Screen
+        name="Wallets"
+        component={WalletsScreen}
+        options={{ title: t("drawerNavigator.walletsScreen") }}
+      />
+      <Drawer.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{ title: t("drawerNavigator.categoriesScreen") }}
+      />
+      <Drawer.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: t("drawerNavigator.settingsScreen") }}
+      />
     </Drawer.Navigator>
   );
 };

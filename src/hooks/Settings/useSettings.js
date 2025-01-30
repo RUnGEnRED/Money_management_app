@@ -35,11 +35,11 @@ function useSettings() {
       await i18n.changeLanguage(language);
       await AsyncStorage.setItem("language", language);
       setSelectedLanguage(language);
-      setSnackbarMessage(t("settingsScreen.languageChanged"));
+      setSnackbarMessage(t("useSettings.languageChanged"));
       setSnackbarVisible(true);
     } catch (error) {
       console.error("Error changing language:", error);
-      setSnackbarMessage(t("settingsScreen.errorLanguage"));
+      setSnackbarMessage(t("useSettings.errorLanguage"));
       setSnackbarVisible(true);
     }
   };
@@ -48,11 +48,11 @@ function useSettings() {
     try {
       await AsyncStorage.setItem("currency", currency);
       setSelectedCurrency(currency);
-      setSnackbarMessage(t("settingsScreen.currencyChanged"));
+      setSnackbarMessage(t("useSettings.currencyChanged"));
       setSnackbarVisible(true);
     } catch (error) {
       console.error("Error changing currency:", error);
-      setSnackbarMessage(t("settingsScreen.errorCurrency"));
+      setSnackbarMessage(t("useSettings.errorCurrency"));
       setSnackbarVisible(true);
     }
   };

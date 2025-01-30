@@ -2,6 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 import { useTheme } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 
 import HomeScreen from "../screens/Home/HomeScreen";
 import TransactionScreen from "../screens/Transaction/TransactionScreen";
@@ -12,6 +13,7 @@ const Tab = createBottomTabNavigator();
 
 // TabNavigator component
 const TabNavigator = () => {
+  const { t } = useTranslation();
   const theme = useTheme();
 
   return (
@@ -30,6 +32,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
+          title: t("tabNavigator.homeScreen"),
         }}
       />
       <Tab.Screen
@@ -43,6 +46,7 @@ const TabNavigator = () => {
               size={size}
             />
           ),
+          title: t("tabNavigator.transactionScreen"),
         }}
       />
       <Tab.Screen
@@ -52,6 +56,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="transfer" color={color} size={size} />
           ),
+          title: t("tabNavigator.transferScreen"),
         }}
       />
       <Tab.Screen
@@ -61,6 +66,7 @@ const TabNavigator = () => {
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="history" color={color} size={size} />
           ),
+          title: t("tabNavigator.historyScreen"),
         }}
       />
     </Tab.Navigator>

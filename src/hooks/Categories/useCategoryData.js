@@ -3,7 +3,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 
-import { getCategories } from "../../services/Categories/CategoryService";
+import * as CategoryService from "../../services/Categories/CategoryService";
 
 const useCategoryData = () => {
   const { t } = useTranslation();
@@ -20,7 +20,7 @@ const useCategoryData = () => {
   const fetchData = useCallback(async () => {
     try {
       setLoading(true);
-      const categoriesData = await getCategories(t);
+      const categoriesData = await CategoryService.getCategories(t);
 
       const expenseCategories = categoriesData.filter(
         (category) => category.type === "expense"
@@ -52,10 +52,15 @@ const useCategoryData = () => {
 
   const deleteCategory = async (id) => {
     try {
-      await deleteCategory(id, t);
+      await CategoryService.deleteCategory(id, t);
       setSnackbarMessage(t("useCategoryData.categoryDeleted"));
       setSnackbarVisible(true);
-      fetchData();
+      setCategoryExpenseList((prev) =>
+        prev.filter((category) => category.id !== id)
+      );
+      setCategoryIncomeList((prev) =>
+        prev.filter((category) => category.id !== id)
+      );
     } catch (error) {
       console.error("Error deleting category:", error);
       setSnackbarMessage(t("useCategoryData.deleteFailed"));
