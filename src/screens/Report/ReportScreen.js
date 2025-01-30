@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
@@ -7,155 +7,96 @@ import {
   RefreshControl,
 } from "react-native";
 import { Snackbar, Divider } from "react-native-paper";
-import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-
-import axios from "../../api/AxiosInstance";
-import { getAuthToken } from "../../services/Auth/AuthService";
 
 import DropdownInput from "../../components/DropdownInput";
 import DateInput from "../../components/DateInput";
-import TransactionItem from "../../components/TransactionItem";
+import PieChart from "../../components/PieChart";
+import SummaryView from "../../components/SummaryView";
+
+import useReportData from "../../hooks/Report/useReportData";
 
 const ReportScreen = () => {
   const { t } = useTranslation();
-  const isFocused = useIsFocused();
-
-  const [categoryExpenseList, setCategoryExpenseList] = useState([]);
-  const [categoryIncomeList, setCategoryIncomeList] = useState([]);
-  const [walletList, setWalletList] = useState([]);
-
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(new Date());
-
-  const [selectedCategory, setSelectedCategory] = useState("Choose");
-  const [selectedWallet, setSelectedWallet] = useState("Choose");
-
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const fetchData = useCallback(async () => {
-    try {
-      // Simulate a network request
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // Set your data here
-      // setCategoryIncomeList([...]); // Replace with actual data
-      // setWalletList([...]); // Replace with actual data
-    } catch (error) {
-      console.error("Data fetch error: ", error);
-      setSnackbarMessage(t("homeScreen.errorFetchWallets"));
-      setSnackbarVisible(true);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }, [t]);
-
-  useEffect(() => {
-    fetchData();
-  }, [isFocused, fetchData]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    fetchData();
-  }, [fetchData]);
-
-  const handleSnackbarDismiss = () => setSnackbarVisible(false);
-
-  // TEST TO DELETE TRANSACTIONS
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      categoryName: "Food",
-      walletName: "Credit Card",
-      date: "22-11-2024",
-      amount: -1000,
-      iconName: "silverware-fork-knife",
-    },
-    {
-      id: 2,
-      categoryName: "Transport",
-      walletName: "Cash",
-      date: "21-11-2024",
-      amount: -100,
-      iconName: "bus",
-    },
-    {
-      id: 3,
-      categoryName: "Salary",
-      walletName: "Bank Account",
-      date: "20-11-2024",
-      amount: 5000,
-      iconName: "cash-multiple",
-    },
-  ]);
-
-  const handleDeleteTransaction = (id) => {
-    setTransactions(
-      transactions.filter((transaction) => transaction.id !== id)
-    );
-  };
-  // TEST END
+  const {
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    selectedWallet,
+    handleWalletChange,
+    snackbarVisible,
+    snackbarMessage,
+    setSnackbarVisible,
+    loading,
+    refreshing,
+    onRefresh,
+    incomeData,
+    expenseData,
+    totalIncome,
+    totalExpenses,
+    wallets,
+    handleSnackbarDismiss,
+  } = useReportData();
 
   return (
     <View style={styles.container}>
-      <DateInput label={t("test.data")} date={date} setDate={setDate} />
-
+      <DateInput
+        label={t("reportScreen.startDate")}
+        date={startDate}
+        setDate={setStartDate}
+      />
       <Divider />
 
-      <DateInput label={t("test.data")} date={date} setDate={setDate} />
+      <DateInput
+        label={t("reportScreen.endDate")}
+        date={endDate}
+        setDate={setEndDate}
+      />
 
       <Divider />
 
       <DropdownInput
-        label={t("test.wallet")}
+        label={t("reportScreen.wallet")}
         iconName="wallet"
-        value={selectedWallet}
-        setValue={setSelectedWallet}
+        value={
+          selectedWallet ? selectedWallet.name : t("reportScreen.allWallets")
+        }
+        setValue={handleWalletChange}
         items={[
-          { value: "cash", label: "Cash" },
-          {
-            value: "credit",
-            label: "Credit Card",
-          },
-          { value: "bank", label: "Bank Account" },
+          { value: null, label: t("reportScreen.allWallets") },
+          ...wallets.map((wallet) => ({
+            value: wallet.id,
+            label: wallet.name,
+          })),
         ]}
       />
 
       <Divider />
-      <ScrollView>
-        {/* TODO: NEED TO ADD RAPORT - DATA VISUALIZATION, GRAPH */}
-      </ScrollView>
-      {/* {loading && <ActivityIndicator size="large" />}
+
+      {loading && <ActivityIndicator size="large" />}
       <ScrollView
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        {!loading &&
-          transactions.map((transaction) => (
-            <TransactionItem
-              key={transaction.id}
-              id={transaction.id}
-              categoryName={transaction.categoryName}
-              walletName={transaction.walletName}
-              date={transaction.date}
-              amount={transaction.amount}
-              iconName={transaction.iconName}
-              iconColor={transaction.amount > 0 ? "#33cc33" : "#ff0000"}
-              onDelete={handleDeleteTransaction}
-              style={{ marginTop: 10 }}
+        {!loading && (
+          <>
+            <SummaryView
+              income={totalIncome}
+              expenses={totalExpenses}
+              style={styles.summaryView}
             />
-          ))}
-      </ScrollView> */}
+            <PieChart title={t("reportScreen.expense")} data={expenseData} />
+            <PieChart title={t("reportScreen.income")} data={incomeData} />
+          </>
+        )}
+      </ScrollView>
 
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}
+        duration={3000}
       >
         {snackbarMessage}
       </Snackbar>
@@ -168,6 +109,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     backgroundColor: "#f5f5f5",
+  },
+  summaryView: {
+    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
