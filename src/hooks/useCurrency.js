@@ -4,7 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // Custom hook to manage currency settings
 const useCurrency = () => {
   // State to hold the currency value
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("");
 
   // Effect to fetch stored currency on component mount
   useEffect(() => {
