@@ -26,7 +26,7 @@ const WalletsScreen = () => {
     snackbarMessage,
     setSnackbarVisible,
     onRefresh,
-    deleteWallet,
+    deleteWallet: handleDeleteWallet,
     handleEditWallet,
     handleSnackbarDismiss,
   } = useWalletData();
@@ -48,7 +48,7 @@ const WalletsScreen = () => {
               iconName={wallet.icon}
               iconColor={wallet.color || "#339933"}
               onEdit={() => handleEditWallet(wallet)}
-              onDelete={deleteWallet}
+              onDelete={handleDeleteWallet}
               style={{ marginBottom: 10 }}
             />
           ))}
@@ -66,7 +66,7 @@ const WalletsScreen = () => {
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}
+        duration={3000}
       >
         {snackbarMessage}
       </Snackbar>

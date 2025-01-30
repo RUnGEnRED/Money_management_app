@@ -3,7 +3,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 import { useNavigation } from "@react-navigation/native";
 
-import { getWallets } from "../../services/Wallets/WalletService";
+import { getWallets, deleteWallet } from "../../services/Wallets/WalletService";
 
 const useWalletData = () => {
   const { t } = useTranslation();
@@ -40,12 +40,12 @@ const useWalletData = () => {
     fetchData();
   }, [fetchData]);
 
-  const deleteWallet = async (id) => {
+  const handleDeleteWallet = async (id) => {
     try {
       await deleteWallet(id, t);
       setSnackbarMessage(t("useWalletData.walletDeleted"));
       setSnackbarVisible(true);
-      fetchData();
+      setWalletList((prev) => prev.filter((wallet) => wallet.id !== id));
     } catch (error) {
       console.error("Error deleting wallet:", error);
       setSnackbarMessage(t("useWalletData.deleteFailed"));
@@ -72,7 +72,7 @@ const useWalletData = () => {
     snackbarMessage,
     setSnackbarVisible,
     onRefresh,
-    deleteWallet,
+    deleteWallet: handleDeleteWallet,
     handleEditWallet,
     handleSnackbarDismiss,
   };

@@ -83,12 +83,12 @@
   },
 
   "calendarService": {
-    "incomeEvent": "Przychód: ",
-    "expenseEvent": "Wydatek: ",
-    "amount": "Kwota: ",
-    "category": "Kategoria: ",
-    "wallet": "Portfel: ",
-    "user": "Użytkownik: ",
+    "incomeEvent": "Przychód",
+    "expenseEvent": "Wydatek",
+    "amount": "Kwota",
+    "category": "Kategoria",
+    "wallet": "Portfel",
+    "user": "Użytkownik",
     "calendarSaveError": "Błąd podczas zapisywania wydarzenia w kalendarzu.",
     "calendarError": "Błąd podczas pobierania wydarzeń z kalendarza."
   },

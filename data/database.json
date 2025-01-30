@@ -9,7 +9,7 @@
   "wallets": [
     {
       "name": "Wallet",
-      "balance": 101,
+      "balance": 150,
       "icon": "cash",
       "user_id": "d6f8",
       "id": "a4c8"
@@ -17,7 +17,7 @@
     {
       "id": "aa1e",
       "name": "CC",
-      "balance": 227.22,
+      "balance": 1000.22,
       "icon": "credit-card",
       "user_id": "d6f8"
     }
@@ -70,6 +70,42 @@
       "categorie_id": "c17a",
       "user_id": "d6f8",
       "date": "2025-01-21T09:15:00.000Z"
+    },
+    {
+      "id": "03b3",
+      "type": "expense",
+      "amount": 27,
+      "wallet_id": "aa1e",
+      "categorie_id": "c17a",
+      "user_id": "d6f8",
+      "date": "2025-01-09T09:23:00.000Z"
+    },
+    {
+      "id": "bb50",
+      "type": "expense",
+      "amount": 17,
+      "wallet_id": "a4c8",
+      "categorie_id": "c712",
+      "user_id": "d6f8",
+      "date": "2025-01-04T09:33:00.000Z"
+    },
+    {
+      "id": "4210",
+      "type": "income",
+      "amount": 800,
+      "wallet_id": "aa1e",
+      "categorie_id": "d963",
+      "user_id": "d6f8",
+      "date": "2025-01-30T09:47:16.189Z"
+    },
+    {
+      "id": "7f71",
+      "type": "income",
+      "amount": 66,
+      "wallet_id": "a4c8",
+      "categorie_id": "d963",
+      "user_id": "d6f8",
+      "date": "2025-01-07T09:47:00.000Z"
     }
   ]
 }

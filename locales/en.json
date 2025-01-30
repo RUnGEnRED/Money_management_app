@@ -83,12 +83,12 @@
   },
 
   "calendarService": {
-    "incomeEvent": "Income: ",
-    "expenseEvent": "Expense: ",
-    "amount": "Amount: ",
-    "category": "Category: ",
-    "wallet": "Wallet: ",
-    "user": "User: ",
+    "incomeEvent": "Income",
+    "expenseEvent": "Expense",
+    "amount": "Amount",
+    "category": "Category",
+    "wallet": "Wallet",
+    "user": "User",
     "calendarSaveError": "Error saving calendar event.",
     "calendarError": "Error fetching calendar events."
   },

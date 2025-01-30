@@ -1,9 +1,12 @@
 import * as Calendar from "expo-calendar";
 import { Platform } from "react-native";
+import * as ReportService from "../Report/ReportService";
+import { getAuthToken } from "../Auth/AuthService";
+import AxiosInstance from "../../api/AxiosInstance";
 
 const MYPENNYS_CALENDAR_NAME = "MyPennys Calendar";
 
-export const addTransactionToCalendar = async (transaction, t) => {
+const addTransactionToCalendar = async (transaction, t) => {
   try {
     const { status } = await Calendar.requestCalendarPermissionsAsync();
 
@@ -18,6 +21,18 @@ export const addTransactionToCalendar = async (transaction, t) => {
       console.log("Calendar not created or found.");
       return;
     }
+    const [categories, wallets, user] = await Promise.all([
+      ReportService.getCategories(t),
+      ReportService.getWallets(t),
+      getUser(t),
+    ]);
+
+    const category = categories.find((c) => c.id === transaction.categorie_id);
+    const wallet = wallets.find((w) => w.id === transaction.wallet_id);
+
+    const categoryName = category ? category.name : t("general.unknown");
+    const walletName = wallet ? wallet.name : t("general.unknown");
+    const userName = user ? user.username : t("general.unknown");
 
     const eventDetails = {
       title:
@@ -28,9 +43,9 @@ export const addTransactionToCalendar = async (transaction, t) => {
       endDate: new Date(transaction.date),
       notes: `${t("calendarService.amount")}: $${transaction.amount}\n${t(
         "calendarService.category"
-      )}: ${transaction.categorie_id}\n${t("calendarService.wallet")}: ${
-        transaction.wallet_id
-      }\n${t("calendarService.user")}: ${transaction.user_id}`,
+      )}: ${categoryName}\n${t("calendarService.wallet")}: ${walletName}\n${t(
+        "calendarService.user"
+      )}: ${userName}`,
       calendarId: calendarId,
     };
 
@@ -80,7 +95,23 @@ const getOrCreateCalendar = async (t) => {
   }
 };
 
-async function getDefaultCalendarSource() {
+const getDefaultCalendarSource = async () => {
   const defaultCalendar = await Calendar.getDefaultCalendarAsync();
   return defaultCalendar.source;
-}
+};
+
+const getUser = async (t) => {
+  try {
+    const user = await getAuthToken();
+    if (!user || !user.id) {
+      throw new Error(t("authService.messageNoAuth"));
+    }
+    const response = await AxiosInstance.get(`/users/${user.id}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    throw new Error(t("authService.messageErrorLogin"));
+  }
+};
+
+export { addTransactionToCalendar };

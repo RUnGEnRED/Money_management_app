@@ -16,7 +16,7 @@ const AddNewWalletScreen = () => {
     walletName,
     setWalletName,
     balance,
-    setBalance,
+    handleBalanceChange,
     selectedIcon,
     handleIconSelect,
     snackbarVisible,
@@ -37,7 +37,7 @@ const AddNewWalletScreen = () => {
       <CustomTextInput
         label={t("addWalletScreen.initialBalance")}
         value={balance}
-        onChangeText={setBalance}
+        onChangeText={handleBalanceChange}
         keyboardType="numeric"
         style={{ marginBottom: 24 }}
       />

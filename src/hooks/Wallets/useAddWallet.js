@@ -18,6 +18,15 @@ const useAddWallet = () => {
     setSelectedIcon(icon);
   };
 
+  const handleBalanceChange = (text) => {
+    const formattedText = text
+      .replace(/[^0-9.]/g, "")
+      .replace(/(\..*)\./g, "$1");
+    const decimalMatch = formattedText.match(/(\d+\.\d{0,2})/);
+
+    setBalance(decimalMatch ? decimalMatch[1] : formattedText);
+  };
+
   const handleAddWallet = async () => {
     if (!selectedIcon || walletName.trim() === "" || balance.trim() === "") {
       setSnackbarMessage(t("useAddWallet.emptyFields"));
@@ -53,7 +62,7 @@ const useAddWallet = () => {
     walletName,
     setWalletName,
     balance,
-    setBalance,
+    handleBalanceChange,
     selectedIcon,
     handleIconSelect,
     snackbarVisible,
