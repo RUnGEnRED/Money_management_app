@@ -142,6 +142,91 @@
     "income": "Incomes"
   },
 
+  "walletsScreen": {
+    "add": "Add Wallet"
+  },
+
+  "editWalletScreen": {
+    "walletName": "Wallet Name",
+    "save": "Save"
+  },
+
+  "addWalletScreen": {
+    "walletName": "Wallet Name",
+    "initialBalance": "Initial Balance",
+    "add": "Add"
+  },
+
+  "useWalletData": {
+    "errorFetchWallets": "Error fetching wallets.",
+    "walletDeleted": "Wallet deleted.",
+    "deleteFailed": "Error deleting wallet."
+  },
+
+  "useEditWallet": {
+    "emptyFields": "Please fill in all fields.",
+    "walletUpdated": "Wallet updated.",
+    "updateWalletFailed": "Error updating wallet.",
+    "updateWalletError": "Error updating wallet."
+  },
+
+  "useAddWallet": {
+    "emptyFields": "Please fill in all fields.",
+    "walletAdded": "Wallet added.",
+    "walletError": "Error adding wallet.",
+    "addWalletError": "Error adding wallet."
+  },
+
+  "walletService": {
+    "messageNoAuth": "User is not authenticated or invalid token.",
+    "errorFetchWallets": "Error fetching wallets.",
+    "deleteWalletError": "Error deleting wallet.",
+    "deleteTransactionsError": "Error deleting transactions.",
+    "updateWalletError": "Error updating wallet.",
+    "addWalletError": "Error adding wallet."
+  },
+  
+  "categoriesScreen": {
+    "add": "Add Category"
+  },
+
+  "editCategoryScreen": {
+    "categoryName": "Category Name",
+    "save": "Save"
+  },
+
+  "addCategoryScreen": {
+    "categoryName": "Category Name",
+    "add": "Add"
+  },
+
+  "useCategoryData": {
+    "errorFetchCategories": "Error fetching categories.",
+    "categoryDeleted": "Category deleted.",
+    "deleteFailed": "Error deleting category."
+  },
+
+  "useEditCategory": {
+    "emptyFields": "Please fill in all fields.",
+    "categoryUpdated": "Category updated.",
+    "updateCategoryFailed": "Error updating category.",
+    "updateCategoryError": "Error updating category."
+  },
+
+  "useAddCategory": {
+    "emptyFields": "Please fill in all fields.",
+    "categoryAdded": "Category added.",
+    "addCategoryError": "Error adding category."
+  },
+
+  "categoryService": {
+    "messageNoAuth": "User is not authenticated or invalid token.",
+    "errorFetchCategories": "Error fetching categories.",
+    "deleteCategoryError": "Error deleting category.",
+    "addCategoryError": "Error adding category.",
+    "updateCategoryError": "Error updating category."
+  },
+
   "general":{
     "unknown": "Unknown"
   }
