@@ -12,7 +12,7 @@ const useAuthCheck = () => {
       try {
         const storedCurrency = await AsyncStorage.getItem("currency");
         if (storedCurrency === null) {
-          await AsyncStorage.setItem("currency", "USD");
+          await AsyncStorage.setItem("currency", "$ ");
           console.log("Currency initialized to USD");
         }
       } catch (error) {

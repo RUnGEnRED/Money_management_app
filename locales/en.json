@@ -227,6 +227,11 @@
     "updateCategoryError": "Error updating category."
   },
 
+  "settingsScreen": {
+    "currency": "Currency",
+    "language": "Language"
+  },
+
   "general":{
     "unknown": "Unknown"
   }
