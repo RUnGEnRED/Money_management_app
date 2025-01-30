@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import {
   View,
   StyleSheet,
@@ -7,125 +7,70 @@ import {
   RefreshControl,
 } from "react-native";
 import { Snackbar, Divider } from "react-native-paper";
-import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
-
-import axios from "../../api/AxiosInstance";
-import { getAuthToken } from "../../services/Auth/AuthService";
 
 import DropdownInput from "../../components/DropdownInput";
 import DateInput from "../../components/DateInput";
 import TransactionItem from "../../components/TransactionItem";
+import useHistoryData from "../../hooks/History/useHistoryData";
 
 const HistoryScreen = () => {
   const { t } = useTranslation();
-  const isFocused = useIsFocused();
-
-  const [categoryExpenseList, setCategoryExpenseList] = useState([]);
-  const [categoryIncomeList, setCategoryIncomeList] = useState([]);
-  const [walletList, setWalletList] = useState([]);
-
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState(new Date());
-
-  const [selectedCategory, setSelectedCategory] = useState("Choose");
-  const [selectedWallet, setSelectedWallet] = useState("Choose");
-
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-
-  const fetchData = useCallback(async () => {
-    try {
-      // Simulate a network request
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      // Set your data here
-      // setCategoryIncomeList([...]); // Replace with actual data
-      // setWalletList([...]); // Replace with actual data
-    } catch (error) {
-      console.error("Data fetch error: ", error);
-      setSnackbarMessage(t("homeScreen.errorFetchWallets"));
-      setSnackbarVisible(true);
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  }, [t]);
-
-  useEffect(() => {
-    fetchData();
-  }, [isFocused, fetchData]);
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    fetchData();
-  }, [fetchData]);
-
-  const handleSnackbarDismiss = () => setSnackbarVisible(false);
-
-  // TEST TO DELETE TRANSACTIONS
-  const [transactions, setTransactions] = useState([
-    {
-      id: 1,
-      categoryName: "Food",
-      walletName: "Credit Card",
-      date: "22-11-2024",
-      amount: -1000,
-      iconName: "silverware-fork-knife",
-    },
-    {
-      id: 2,
-      categoryName: "Transport",
-      walletName: "Cash",
-      date: "21-11-2024",
-      amount: -100,
-      iconName: "bus",
-    },
-    {
-      id: 3,
-      categoryName: "Salary",
-      walletName: "Bank Account",
-      date: "20-11-2024",
-      amount: 5000,
-      iconName: "cash-multiple",
-    },
-  ]);
-
-  const handleDeleteTransaction = (id) => {
-    setTransactions(
-      transactions.filter((transaction) => transaction.id !== id)
-    );
-  };
-  // TEST END
+  const {
+    categories,
+    transactions,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    selectedCategory,
+    handleCategoryChange,
+    snackbarVisible,
+    setSnackbarVisible,
+    snackbarMessage,
+    loading,
+    refreshing,
+    onRefresh,
+    filteredTransactions,
+    handleDeleteTransaction,
+    handleSnackbarDismiss,
+  } = useHistoryData();
 
   return (
     <View style={styles.container}>
-      <DateInput label={t("test.data")} date={date} setDate={setDate} />
-
+      <DateInput
+        label={t("historyScreen.startDate")}
+        date={startDate}
+        setDate={setStartDate}
+      />
       <Divider />
 
-      <DateInput label={t("test.data")} date={date} setDate={setDate} />
-
+      <DateInput
+        label={t("historyScreen.endDate")}
+        date={endDate}
+        setDate={setEndDate}
+      />
       <Divider />
 
       <DropdownInput
-        label={t("test.category")}
+        label={t("historyScreen.category")}
         iconName="cart"
-        value={selectedCategory}
-        setValue={setSelectedCategory}
+        value={
+          selectedCategory
+            ? selectedCategory.name
+            : t("historyScreen.allCategories")
+        }
+        setValue={handleCategoryChange}
         items={[
-          { value: "food", label: "Food" },
-          { value: "transport", label: "Transport" },
-          {
-            value: "shopping",
-            label: "Shopping",
-          },
+          { value: null, label: t("historyScreen.allCategories") },
+          ...categories.map((category) => ({
+            value: category.id,
+            label: category.name,
+          })),
         ]}
       />
-
       <Divider />
+
       {loading && <ActivityIndicator size="large" />}
       <ScrollView
         refreshControl={
@@ -133,15 +78,15 @@ const HistoryScreen = () => {
         }
       >
         {!loading &&
-          transactions.map((transaction) => (
+          filteredTransactions.map((transaction) => (
             <TransactionItem
               key={transaction.id}
               id={transaction.id}
-              categoryName={transaction.categoryName}
-              walletName={transaction.walletName}
+              categoryName={transaction.category?.name || t("general.unknown")}
+              walletName={transaction.wallet?.name || t("general.unknown")}
               date={transaction.date}
               amount={transaction.amount}
-              iconName={transaction.iconName}
+              iconName={transaction.category?.icon || "help-circle"}
               iconColor={transaction.amount > 0 ? "#33cc33" : "#ff0000"}
               onDelete={handleDeleteTransaction}
               style={{ marginTop: 10 }}
@@ -152,7 +97,7 @@ const HistoryScreen = () => {
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}
+        duration={3000}
       >
         {snackbarMessage}
       </Snackbar>

@@ -11,7 +11,14 @@
       "id": "f483",
       "name": "Wallet",
       "icon": "wallet",
-      "balance": 123.45,
+      "balance": 68,
+      "user_id": "2358"
+    },
+    {
+      "id": "z243",
+      "name": "Bank",
+      "icon": "bank",
+      "balance": 523,
       "user_id": "2358"
     }
   ],
@@ -20,7 +27,7 @@
       "id": "78d9",
       "name": "Salary",
       "type": "income",
-      "icon": "coins",
+      "icon": "bitcoin",
       "user_id": "2358"
     },
     {
@@ -47,13 +54,22 @@
   ],
   "transactions": [
     {
-      "id": "7263",
+      "id": "ca79",
       "type": "income",
-      "amount": 123.45,
-      "wallet_id": "f483",
+      "amount": 12,
+      "wallet_id": "z243",
       "categorie_id": "78d9",
       "user_id": "2358",
-      "date": "2025-01-27T21:59:00.000Z"
+      "date": "2025-01-30T04:07:23.448Z"
+    },
+    {
+      "id": "9e2e",
+      "type": "expense",
+      "amount": 55,
+      "wallet_id": "z243",
+      "categorie_id": "a243",
+      "user_id": "2358",
+      "date": "2025-01-23T04:16:00.000Z"
     }
   ]
 }

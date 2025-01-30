@@ -55,7 +55,7 @@
 
   "transactionService": {
     "createTransactionError": "Error creating transaction: ",
-    "messageNoAuth": "You are not authorized to perform this action.",
+    "messageNoAuth": "User is not authenticated or invalid token.",
     "walletUpdateError": "Error updating wallet."
   },
 
@@ -89,9 +89,35 @@
   },
 
   "transferService": {
+    "messageNoAuth": "User is not authenticated or invalid token.",
     "errorFetchWallets": "Error fetching wallets.",
     "notEnoughFunds": "Not enough funds.",
     "transferSuccess": "Transfer successful.",
     "transferFailed": "Transfer failed."
+  },
+
+  "historyScreen": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "category": "Category",
+    "allCategories": "All Categories"
+  },
+
+  "useHistoryData": {
+    "errorFetchData": "Error fetching data.",
+    "transactionDeleted": "Transaction deleted.",
+    "errorDeletingTransaction": "Error deleting transaction."
+  },
+
+  "historyService": {
+    "messageNoAuth": "User is not authenticated or invalid token.",
+    "categoriesError": "Error fetching categories.",
+    "walletsError": "Error fetching wallets.",
+    "transactionsError": "Error fetching transactions.",
+    "deleteTransactionError": "Error deleting transaction."
+  },
+
+  "general":{
+    "unknown": "Unknown"
   }
 }
