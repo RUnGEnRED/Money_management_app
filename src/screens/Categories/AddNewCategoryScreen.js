@@ -1,100 +1,30 @@
-import React, { useState } from "react";
-import { View, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+// src/screens/Categories/AddNewCategoryScreen.js
+import React from "react";
+import { View, StyleSheet } from "react-native";
 import { Snackbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-import axios from "../../api/AxiosInstance";
-import { getAuthToken } from "../../services/Auth/AuthService";
 
 import CustomButton from "../../components/CustomButton";
 import CustomTextInput from "../../components/CustomTextInput";
 import TransactionTypeButtons from "../../components/TransactionTypeButtons";
+import IconPicker from "../../components/IconPicker";
+import { iconsCategorie } from "../../constants/icons";
+import useAddCategory from "../../hooks/Categories/useAddCategory";
 
-const AddNewCategoryScreen = ({ navigation }) => {
+const AddNewCategoryScreen = () => {
   const { t } = useTranslation();
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [text, setText] = useState("");
-  const [transactionType, setTransactionType] = useState("expense");
-
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-
-  const icons = [
-    "currency-usd",
-    "gift",
-    "food",
-    "trending-up",
-    "car",
-    "movie",
-    "flower",
-    "home",
-    "briefcase",
-    "account-circle",
-    "account-check",
-    "bank",
-    "brush",
-    "cloud",
-    "coffee",
-    "camera",
-    "star",
-    "heart",
-    "checkbox-marked",
-    "bell",
-    "credit-card",
-    "cash",
-    "plus-circle",
-    "hammer",
-    "scale-balance",
-    "lightbulb",
-    "headphones",
-    "rocket",
-    "recycle",
-    "bank",
-    "wallet",
-    "cog",
-    "map-marker",
-    "television",
-    "bicycle",
-  ];
-
-  const handleIconSelect = (icon) => {
-    setSelectedCategory(icon);
-  };
-
-  const saveCategory = async () => {
-    if (!selectedCategory || text.trim() === "") {
-      setSnackbarMessage("Please select an icon and enter a category name.");
-      setSnackbarVisible(true);
-      return;
-    }
-
-    try {
-      const user = await getAuthToken();
-
-      if (user && user.id) {
-        const categoryData = {
-          name: text,
-          type: transactionType,
-          icon: selectedCategory,
-          user_id: user.id,
-        };
-
-        const response = await axios.post("/categories", categoryData);
-        const transaction = response.data;
-
-        navigation.goBack();
-      } else {
-        throw new Error("Brak autentykacji użytkownika.");
-      }
-    } catch (error) {
-      throw new Error("Błąd przy tworzeniu kategorii: " + error.message);
-    }
-
-    setSnackbarVisible(true);
-  };
-
-  const handleSnackbarDismiss = () => setSnackbarVisible(false);
+  const {
+    selectedIcon,
+    handleIconSelect,
+    categoryName,
+    setCategoryName,
+    transactionType,
+    setTransactionType,
+    snackbarVisible,
+    snackbarMessage,
+    handleAddCategory,
+    handleSnackbarDismiss,
+  } = useAddCategory();
 
   return (
     <View style={styles.container}>
@@ -104,40 +34,33 @@ const AddNewCategoryScreen = ({ navigation }) => {
       />
 
       <CustomTextInput
-        label='Category Name'
-        value={text}
-        onChangeText={setText}
+        label={t("addCategoryScreen.categoryName")}
+        value={categoryName}
+        onChangeText={setCategoryName}
         style={{ marginBottom: 12 }}
       />
 
-      <View style={styles.iconContainer}>
-        <View style={styles.iconRow}>
-          {icons.map((icon, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.iconBox,
-                selectedCategory === icon && styles.selectedIcon,
-              ]}
-              onPress={() => handleIconSelect(icon)}>
-              <Icon name={icon} size={30} color='darkgreen' />
-            </TouchableOpacity>
-          ))}
-        </View>
-      </View>
+      {/* Siatka ikon do wyboru */}
+      <IconPicker
+        icons={iconsCategorie}
+        onIconSelect={handleIconSelect}
+        selectedIcon={selectedIcon}
+      />
 
       <CustomButton
-        mode='contained'
+        mode="contained"
         style={styles.saveButton}
-        onPress={saveCategory}
-        icon='content-save-outline'>
-        {t("test.save")}
+        onPress={handleAddCategory}
+        icon="content-save-outline"
+      >
+        {t("addCategoryScreen.add")}
       </CustomButton>
 
       <Snackbar
         visible={snackbarVisible}
         onDismiss={handleSnackbarDismiss}
-        duration={6000}>
+        duration={6000}
+      >
         {snackbarMessage}
       </Snackbar>
     </View>
