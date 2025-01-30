@@ -2,12 +2,14 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import { useIsFocused } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
 
+// Import services to get report data
 import {
   getCategories,
   getWallets,
   getTransactions,
 } from "../../services/Report/ReportService";
 
+// Define the color palette and max categories
 const COLORS = [
   "#FF6B6B", // Red
   "#4ECDC4", // Teal
@@ -15,13 +17,15 @@ const COLORS = [
   "#C7F464", // Lime
   "#81D8D0", // Light Sea Green
 ];
-
 const MAX_CATEGORIES = 5;
 
+// Custom hook for managing report data and logic
 const useReportData = () => {
+  // Get translation and isFocused hook
   const { t } = useTranslation();
   const isFocused = useIsFocused();
 
+  // State variables for managing data, snackbar, loading, and more
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [wallets, setWallets] = useState([]);
@@ -30,7 +34,7 @@ const useReportData = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-
+  // State variables for the date pickers
   const [endDate, setEndDate] = useState(new Date());
   const [startDate, setStartDate] = useState(() => {
     const today = new Date();
@@ -39,13 +43,15 @@ const useReportData = () => {
     return lastMonth;
   });
 
+  // Function to fetch necessary report data
   const fetchReportData = useCallback(async () => {
     try {
       setLoading(true);
+      // Get categories, transactions, wallets using a promise all
       const [categoriesData, transactionsData, walletsData] = await Promise.all(
         [getCategories(t), getTransactions(t), getWallets(t)]
       );
-
+      // Map transactions to add category, wallet and formatted date
       const mergedTransactions = transactionsData.map((t) => {
         const category = categoriesData.find((c) => c.id === t.categorie_id);
         const wallet = walletsData.find((w) => w.id === t.wallet_id);
@@ -59,11 +65,12 @@ const useReportData = () => {
           amount: t.type === "expense" ? -t.amount : t.amount,
         };
       });
-
+      // Set the data in the state variables
       setCategories(categoriesData);
       setTransactions(mergedTransactions);
       setWallets(walletsData);
     } catch (error) {
+      // If there is an error fetchin the data, show a snackbar with an error message.
       console.error("Error fetching data:", error);
       setSnackbarMessage(t("useReportData.errorFetchData"));
       setSnackbarVisible(true);
@@ -72,16 +79,17 @@ const useReportData = () => {
       setRefreshing(false);
     }
   }, [t]);
-
+  // Fetch data when the screen is focused
   useEffect(() => {
     if (isFocused) fetchReportData();
   }, [isFocused, fetchReportData]);
-
+  // Function to handle refreshing the data
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     fetchReportData();
   }, [fetchReportData]);
 
+  // Function to filter the transactions based on date and selected wallet
   const filteredTransactions = useMemo(() => {
     const start = new Date(startDate);
     start.setHours(0, 0, 0, 0);
@@ -98,6 +106,7 @@ const useReportData = () => {
     return filtered;
   }, [transactions, startDate, endDate, selectedWallet]);
 
+  // Function to calculate the income data for the pie chart
   const incomeData = useMemo(() => {
     const incomeCategoriesMap = new Map();
 
@@ -132,6 +141,7 @@ const useReportData = () => {
     }));
   }, [filteredTransactions, t]);
 
+  // Function to calculate the expense data for the pie chart
   const expenseData = useMemo(() => {
     const expenseCategoriesMap = new Map();
 
@@ -166,12 +176,14 @@ const useReportData = () => {
     }));
   }, [filteredTransactions, t]);
 
+  // Function to calculate total income
   const totalIncome = useMemo(() => {
     return filteredTransactions
       .filter((t) => t.amount > 0)
       .reduce((sum, t) => sum + t.amount, 0);
   }, [filteredTransactions]);
 
+  // Function to calculate total expenses
   const totalExpenses = useMemo(() => {
     return Math.abs(
       filteredTransactions
@@ -180,13 +192,16 @@ const useReportData = () => {
     );
   }, [filteredTransactions]);
 
+  // Function to handle snackbar dismiss
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
 
+  // Function to handle wallet changes
   const handleWalletChange = (walletId) => {
     const wallet = wallets.find((wal) => wal.id === walletId);
     setSelectedWallet(wallet);
   };
 
+  // Return the state variables and functions
   return {
     startDate,
     setStartDate,
