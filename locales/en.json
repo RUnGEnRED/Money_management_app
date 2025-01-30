@@ -1,4 +1,27 @@
 {
+  "stackNavigator": {
+    "addNewWallet": "Add New Wallet",
+    "addNewCategoryScreen": "Add New Category",
+    "editCategoryScreen": "Edit Category",
+    "editWalletScreen": "Edit Wallet"
+  },
+
+  "drawerNavigator": {
+    "mainScreen": "Main",
+    "reportScreen": "Reports",
+    "walletsScreen": "Wallets",
+    "categoriesScreen": "Categories",
+    "settingsScreen": "Settings",
+    "logout": "Logout"
+  },
+
+  "tabNavigator": {
+    "homeScreen": "Home",
+    "transactionScreen": "Transaction",
+    "transferScreen": "Transfer",
+    "historyScreen": "History"
+  },
+
   "startScreen": {
     "login": "Login",
     "register": "Register"
@@ -230,6 +253,13 @@
   "settingsScreen": {
     "currency": "Currency",
     "language": "Language"
+  },
+
+  "useSettings": {
+    "languageChanged": "Language changed.",
+    "errorLanguage": "Error changing language.",
+    "currencyChanged": "Currency changed.",
+    "errorCurrency": "Error changing currency."
   },
 
   "general":{
