@@ -1,6 +1,7 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+// Import language files
 import en from "../../../locales/en.json";
 import pl from "../../../locales/pl.json";
 

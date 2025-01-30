@@ -1,4 +1,5 @@
-import AxiosInstance from "../../api/AxiosInstance";
+// Import necessary dependencies
+import axios from "../../api/AxiosInstance";
 import { getAuthToken } from "../Auth/AuthService";
 import { addTransactionToCalendar } from "./CalendarService";
 
@@ -28,7 +29,7 @@ const createTransaction = async (
       date: date.toISOString(),
     };
     // Make the API call to create the transaction
-    const response = await AxiosInstance.post("/transactions", transactionData);
+    const response = await axios.post("/transactions", transactionData);
     // Update the wallet balance after the transaction
     await updateWalletBalance(
       wallet_id,
@@ -52,7 +53,7 @@ const createTransaction = async (
 const updateWalletBalance = async (wallet_id, amount, transactionType, t) => {
   try {
     // Get the wallet information
-    const walletResponse = await AxiosInstance.get(`/wallets/${wallet_id}`);
+    const walletResponse = await axios.get(`/wallets/${wallet_id}`);
     const wallet = walletResponse.data;
     // Calculate the new balance
     let newBalance;
@@ -62,7 +63,7 @@ const updateWalletBalance = async (wallet_id, amount, transactionType, t) => {
       newBalance = wallet.balance - amount;
     }
     // Make the API call to update wallet
-    await AxiosInstance.put(`/wallets/${wallet_id}`, {
+    await axios.put(`/wallets/${wallet_id}`, {
       ...wallet,
       balance: newBalance,
     });

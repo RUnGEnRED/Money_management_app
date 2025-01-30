@@ -4,7 +4,6 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    // TODO: SET YOUR COLORS
     primary: "#6C9C43",
     secondary: "#9CD49F",
     accent: "#00FF00",
