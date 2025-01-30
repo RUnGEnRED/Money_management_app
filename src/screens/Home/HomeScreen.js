@@ -8,12 +8,16 @@ import {
 } from "react-native";
 import { Snackbar } from "react-native-paper";
 
+// Import the shake detector component and the wallet info item component
 import ShakeDetector from "../../components/ShakeDetector";
 import WalletInfoItem from "../../components/WalletInfoItem";
 
+// Import the custom hook for wallet data
 import useWallets from "../../hooks/Home/useWallets";
 
+// HomeScreen component definition
 const HomeScreen = ({ navigation }) => {
+  // Use the custom hook to get wallet data and related functions
   const {
     walletList,
     loading,
@@ -26,6 +30,7 @@ const HomeScreen = ({ navigation }) => {
   } = useWallets();
 
   return (
+    // Container view that renders shake detector, loading indicator, scrollview, and snackbar
     <>
       <ShakeDetector targetScreen={"Transaction"} navigation={navigation} />
       <View style={styles.container}>

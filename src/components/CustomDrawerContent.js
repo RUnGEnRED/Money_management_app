@@ -9,13 +9,17 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import the function for removing the authentication token
 import { removeAuthToken } from "../services/Auth/AuthService";
 
-function CustomDrawerContent(props) {
+// CustomDrawerContent component definition
+const CustomDrawerContent = (props) => {
+  // Use translation, theme and navigation hooks
   const { t } = useTranslation();
   const theme = useTheme();
   const navigation = useNavigation();
 
+  // Function to handle user logout
   const handleLogOut = async () => {
     try {
       await removeAuthToken();
@@ -30,6 +34,7 @@ function CustomDrawerContent(props) {
   };
 
   return (
+    // Drawer Content ScrollView with the main content and logout button
     <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <DrawerItemList {...props} />
@@ -46,6 +51,6 @@ function CustomDrawerContent(props) {
       </View>
     </DrawerContentScrollView>
   );
-}
+};
 
 export default CustomDrawerContent;

@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import screen components for the stack navigation
 import StartScreen from "../screens/Auth/StartScreen";
 import LoginScreen from "../screens/Auth/LoginScreen";
 import RegisterScreen from "../screens/Auth/RegisterScreen";
@@ -13,13 +14,16 @@ import EditCategoryScreen from "../screens/Categories/EditCategoryScreen";
 import EditWalletScreen from "../screens/Wallets/EditWalletScreen";
 import DrawerNavigator from "./DrawerNavigator";
 
+// Initialize stack navigator
 const Stack = createStackNavigator();
 
-// StackNavigator component
+// StackNavigator component definition
 const StackNavigator = () => {
+  // Use the translation and theme hooks
   const { t } = useTranslation();
   const theme = useTheme();
 
+  // Create styles for the header
   const styles = StyleSheet.create({
     header: {
       backgroundColor: theme.colors.header,
@@ -30,6 +34,7 @@ const StackNavigator = () => {
   });
 
   return (
+    // Configure the stack navigator with default header styles
     <Stack.Navigator
       screenOptions={{
         headerStyle: styles.header,
@@ -37,6 +42,7 @@ const StackNavigator = () => {
         headerTitleAlign: "center",
       }}
     >
+      {/* Define the screens for the stack navigator */}
       <Stack.Screen
         name="Start"
         component={StartScreen}

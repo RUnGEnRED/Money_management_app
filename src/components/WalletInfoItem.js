@@ -3,15 +3,22 @@ import { View, Text } from "react-native";
 import { useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
+
+// Import custom hook for currency format
 import useCurrency from "../hooks/useCurrency";
 
+// WalletInfoItem component definition
 const WalletInfoItem = ({ wallet }) => {
+  // Get translation, currency, theme and styles
   const { t } = useTranslation();
   const currency = useCurrency();
   const theme = useTheme();
+
+  // Get styling overrides from the theme
   const walletInfoItemStyles = theme.components.WalletInfoItem.styleOverrides;
 
   return (
+    // Render the wallet info item with wallet details and icon
     <View key={wallet.id} style={walletInfoItemStyles.walletInfoItem}>
       <View style={walletInfoItemStyles.textContainer}>
         <Text style={walletInfoItemStyles.totalBalanceText}>

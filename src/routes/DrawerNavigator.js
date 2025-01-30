@@ -4,6 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
+// Import screen and component dependencies
 import TabNavigator from "./TabNavigator";
 import ReportScreen from "../screens/Report/ReportScreen";
 import WalletsScreen from "../screens/Wallets/WalletsScreen";
@@ -12,13 +13,16 @@ import SettingsScreen from "../screens/Settings/SettingsScreen";
 
 import CustomDrawerContent from "../components/CustomDrawerContent";
 
+// Initialize drawer navigator
 const Drawer = createDrawerNavigator();
 
-// DrawerNavigator component
+// DrawerNavigator component definition
 const DrawerNavigator = () => {
+  // Use translation and theme hooks
   const { t } = useTranslation();
   const theme = useTheme();
 
+  // Create styles for the drawer and header
   const styles = StyleSheet.create({
     drawerItem: {
       backgroundColor: theme.colors.buttonBackground,
@@ -37,6 +41,7 @@ const DrawerNavigator = () => {
   });
 
   return (
+    // Configure drawer navigator with custom content and options
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
       screenOptions={{
@@ -47,6 +52,7 @@ const DrawerNavigator = () => {
         headerTitleAlign: "center",
       }}
     >
+      {/* Define the screens for the drawer navigator */}
       <Drawer.Screen
         name="TabNavigator"
         component={TabNavigator}
