@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 // Import custom components
 import DropdownInput from "../../components/DropdownInput";
 import DateInput from "../../components/DateInput";
-import PieChart from "../../components/PieChart";
+import PieChartComponent from "../../components/PieChartComponent";
 import SummaryView from "../../components/SummaryView";
 
 // Import custom hook for managing report data
@@ -86,15 +86,21 @@ const ReportScreen = () => {
         }
       >
         {!loading && (
-          // Show the SummaryView and two PieChart components if the loading is false
+          // Show the SummaryView and two PieChartComponent components if the loading is false
           <>
             <SummaryView
               income={totalIncome}
               expenses={totalExpenses}
               style={styles.summaryView}
             />
-            <PieChart title={t("reportScreen.expense")} data={expenseData} />
-            <PieChart title={t("reportScreen.income")} data={incomeData} />
+            <PieChartComponent
+              title={t("reportScreen.expense")}
+              data={expenseData}
+            />
+            <PieChartComponent
+              title={t("reportScreen.income")}
+              data={incomeData}
+            />
           </>
         )}
       </ScrollView>

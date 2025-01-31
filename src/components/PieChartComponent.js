@@ -1,35 +1,36 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { PieChart as SvgPieChart } from "react-native-svg-charts";
+import PieChart from "react-native-pie-chart";
 import { useTheme } from "react-native-paper";
 import useCurrency from "../hooks/useCurrency";
 
-// PieChart component definition
-const PieChart = ({ title, data }) => {
+// PieChartComponent component definition
+const PieChartComponent = ({ title, data }) => {
   // Get theme, style overrides and the currency
   const theme = useTheme();
   const pieChartTheme = theme.components.PieChart.styleOverrides;
   const currency = useCurrency();
 
-  // Convert input data to correct format
-  const pieData = data.map((item, index) => ({
-    key: `slice-${index}`,
+  // Directly use the data structure the library requires
+  const series = data.map((item) => ({
     value: item.percent,
-    svg: { fill: item.color },
+    color: item.color,
   }));
 
   return (
-    // Container for PieChart component including chart and legend
+    // Container for the pie chart and legend
     <View style={pieChartTheme.container}>
-      {/* Render the pie chart title */}
+      {/* Title of the pie chart title*/}
       <Text style={pieChartTheme.title}>{title}</Text>
       <View style={{ flexDirection: "row" }}>
-        {/* Svg Pie chart component */}
-        <SvgPieChart
-          style={{ flex: 1, height: 200, width: 200 }}
-          data={pieData}
+        {/* Pie chart component */}
+        <PieChart
+          widthAndHeight={200}
+          series={series}
+          chartProps={{ style: { marginRight: 16 } }}
+          cover={0.75}
         />
-        {/* Legend of the PieChart */}
+        {/* Legend for the pie chart */}
         <View style={pieChartTheme.legendContainer}>
           {data.map((item, index) => (
             <View key={index} style={pieChartTheme.legendItem}>
@@ -62,4 +63,4 @@ const PieChart = ({ title, data }) => {
   );
 };
 
-export default PieChart;
+export default PieChartComponent;
