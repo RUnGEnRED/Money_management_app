@@ -1,111 +1,118 @@
 {
   "users": [
     {
-      "id": "d6f8",
+      "id": "974c",
       "username": "user1",
       "password": "user1"
     }
   ],
   "wallets": [
     {
+      "id": "ba43",
       "name": "Wallet",
-      "balance": 150,
-      "icon": "cash",
-      "user_id": "d6f8",
-      "id": "a4c8"
+      "icon": "wallet",
+      "balance": "199.69",
+      "user_id": "974c"
     },
     {
-      "id": "aa1e",
+      "id": "c939",
       "name": "CC",
-      "balance": 1000.22,
+      "balance": "1479.02",
       "icon": "credit-card",
-      "user_id": "d6f8"
+      "user_id": "974c"
     }
   ],
   "categories": [
     {
-      "id": "78c7",
+      "id": "48f6",
       "name": "Salary",
       "type": "income",
       "icon": "cash",
-      "user_id": "d6f8"
+      "user_id": "974c"
     },
     {
-      "id": "d963",
+      "id": "2278",
       "name": "Saving",
       "type": "income",
       "icon": "piggy-bank",
-      "user_id": "d6f8"
+      "user_id": "974c"
     },
     {
-      "id": "c17a",
-      "name": "Transport",
-      "type": "expense",
-      "icon": "car",
-      "user_id": "d6f8"
-    },
-    {
-      "id": "c712",
+      "id": "cd99",
       "name": "Food",
       "type": "expense",
       "icon": "food",
-      "user_id": "d6f8"
+      "user_id": "974c"
+    },
+    {
+      "id": "96c4",
+      "name": "Gym",
+      "type": "expense",
+      "icon": "dumbbell",
+      "user_id": "974c"
+    },
+    {
+      "id": "0c9c",
+      "name": "Pet",
+      "type": "expense",
+      "icon": "bone",
+      "user_id": "974c"
     }
   ],
   "transactions": [
     {
-      "id": "c13f",
+      "id": "6df9",
       "type": "income",
       "amount": 123.45,
-      "wallet_id": "a4c8",
-      "categorie_id": "78c7",
-      "user_id": "d6f8",
-      "date": "2025-01-30T09:00:54.430Z"
+      "wallet_id": "ba43",
+      "categorie_id": "48f6",
+      "user_id": "974c",
+      "date": "2025-02-01T04:53:12.855Z"
     },
     {
-      "id": "a649",
+      "id": "b28a",
       "type": "expense",
-      "amount": 45.45,
-      "wallet_id": "a4c8",
-      "categorie_id": "c17a",
-      "user_id": "d6f8",
-      "date": "2025-01-21T09:15:00.000Z"
+      "amount": 55,
+      "wallet_id": "c939",
+      "categorie_id": "96c4",
+      "user_id": "974c",
+      "date": "2025-02-01T05:00:49.853Z"
     },
     {
-      "id": "03b3",
+      "id": "47a4",
       "type": "expense",
-      "amount": 27,
-      "wallet_id": "aa1e",
-      "categorie_id": "c17a",
-      "user_id": "d6f8",
-      "date": "2025-01-09T09:23:00.000Z"
+      "amount": 56.77,
+      "wallet_id": "c939",
+      "categorie_id": "96c4",
+      "user_id": "974c",
+      "date": "2025-02-24T05:06:00.000Z"
     },
     {
-      "id": "bb50",
+      "id": "9f4d",
       "type": "expense",
-      "amount": 17,
-      "wallet_id": "a4c8",
-      "categorie_id": "c712",
-      "user_id": "d6f8",
-      "date": "2025-01-04T09:33:00.000Z"
+      "amount": 8,
+      "wallet_id": "ba43",
+      "categorie_id": "cd99",
+      "user_id": "974c",
+      "date": "2025-02-01T05:06:50.510Z"
     },
     {
-      "id": "4210",
+      "id": "4523",
+      "type": "expense",
+      "amount": 99.99,
+      "wallet_id": "c939",
+      "categorie_id": "cd99",
+      "user_id": "974c",
+      "date": "2025-01-16T05:07:00.000Z"
+    },
+    {
+      "id": "4913",
       "type": "income",
-      "amount": 800,
-      "wallet_id": "aa1e",
-      "categorie_id": "d963",
-      "user_id": "d6f8",
-      "date": "2025-01-30T09:47:16.189Z"
-    },
-    {
-      "id": "7f71",
-      "type": "income",
-      "amount": 66,
-      "wallet_id": "a4c8",
-      "categorie_id": "d963",
-      "user_id": "d6f8",
-      "date": "2025-01-07T09:47:00.000Z"
+      "amount": 420,
+      "wallet_id": "c939",
+      "categorie_id": "2278",
+      "user_id": "974c",
+      "date": "2025-02-01T05:07:50.366Z"
     }
   ]
 }

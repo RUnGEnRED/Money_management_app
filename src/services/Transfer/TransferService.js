@@ -21,67 +21,40 @@ const fetchWallets = async (t) => {
   }
 };
 
-// Function to handle transfer of funds
 const handleTransfer = async (fromWallet, toWallet, amount, t) => {
   try {
-    // Check if there is enough funds in the fromWallet
-    if (fromWallet.balance < amount) {
-      throw new Error(t("transferService.notEnoughFunds"));
-    }
-    // Set transfer data
-    const transferData = {
-      amount: amount,
-      fromWalletId: fromWallet.id,
-      toWalletId: toWallet.id,
-    };
-    // Call transfer funds with the transfer data
-    const updatedWallets = await transferFunds(transferData, t);
-    // If succesfull return success message
-    return t("transferService.transferSuccess");
-  } catch (error) {
-    // Throw the error
-    throw new Error(error.message);
-  }
-};
-
-// Function to transfer funds from one wallet to another
-const transferFunds = async (transferData, t) => {
-  try {
-    // Get the data from transfer data
-    const { fromWalletId, toWalletId, amount } = transferData;
     // Make a call to get data from fromWallet
     const fromWalletResponse = await AxiosInstance.get(
-      `/wallets/${fromWalletId}`
+      `/wallets/${fromWallet.id}`
     );
+    const fromWalletData = fromWalletResponse.data;
 
-    const fromWallet = fromWalletResponse.data;
     // Make a call to get data from toWallet
-    const toWalletResponse = await AxiosInstance.get(`/wallets/${toWalletId}`);
-    const toWallet = toWalletResponse.data;
+    const toWalletResponse = await AxiosInstance.get(`/wallets/${toWallet.id}`);
+    const toWalletData = toWalletResponse.data;
+
     // Calculate the new balances
-    const newFromWalletBalance = parseFloat(
-      (fromWallet.balance - amount).toFixed(2)
-    );
-    const newToWalletBalance = parseFloat(
-      (toWallet.balance + amount).toFixed(2)
-    );
+    const newFromWalletBalance =
+      parseFloat(fromWalletData.balance) - parseFloat(amount);
+    const newToWalletBalance =
+      parseFloat(toWalletData.balance) + parseFloat(amount);
+
     // Update from wallet with the new balance
-    await AxiosInstance.put(`/wallets/${fromWalletId}`, {
-      ...fromWallet,
-      balance: newFromWalletBalance,
+    await AxiosInstance.put(`/wallets/${fromWallet.id}`, {
+      ...fromWalletData,
+      balance: newFromWalletBalance.toFixed(2),
     });
     // Update to wallet with the new balance
-    await AxiosInstance.put(`/wallets/${toWalletId}`, {
-      ...toWallet,
-      balance: newToWalletBalance,
+    await AxiosInstance.put(`/wallets/${toWallet.id}`, {
+      ...toWalletData,
+      balance: newToWalletBalance.toFixed(2),
     });
-    // Return success status and the updated wallets
-    return {
-      success: true,
-      data: { newFromWalletBalance, newToWalletBalance },
-    };
+
+    // Return success message if transfer successfull
+    return t("transferService.transferSuccess");
   } catch (error) {
-    // Throw the error
+    // Throw the error if transfer failed
+    console.error("Error handling transfer:", error);
     throw new Error(t("transferService.transferFailed"));
   }
 };

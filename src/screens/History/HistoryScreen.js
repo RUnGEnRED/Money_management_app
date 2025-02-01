@@ -15,7 +15,7 @@ import DateInput from "../../components/DateInput";
 import TransactionItem from "../../components/TransactionItem";
 
 // Import custom hook for managing history data
-import useHistoryData from "../../hooks/History/useHistoryData";
+import useHistory from "../../hooks/History/useHistory";
 
 // HistoryScreen component definition
 const HistoryScreen = () => {
@@ -39,7 +39,7 @@ const HistoryScreen = () => {
     filteredTransactions,
     handleDeleteTransaction,
     handleSnackbarDismiss,
-  } = useHistoryData();
+  } = useHistory();
 
   return (
     // Main container for history screen including loading indicator, filters, and transaction list

@@ -15,7 +15,7 @@ import WalletItem from "../../components/WalletItem";
 import CustomButton from "../../components/CustomButton";
 
 // Import custom hook for managing wallet data
-import useWalletData from "../../hooks/Wallets/useWalletData";
+import useWallet from "../../hooks/Wallets/useWallet";
 
 // WalletsScreen component definition
 const WalletsScreen = () => {
@@ -33,7 +33,7 @@ const WalletsScreen = () => {
     deleteWallet: handleDeleteWallet,
     handleEditWallet,
     handleSnackbarDismiss,
-  } = useWalletData();
+  } = useWallet();
 
   return (
     // Main container for wallets screen including loading indicator, wallet list and add button

@@ -7,7 +7,7 @@ import AxiosInstance from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
 
 // Custom hook for managing wallet data
-const useWallets = () => {
+const useHome = () => {
   // Get translation function and focus state
   const { t } = useTranslation();
   const isFocused = useIsFocused();
@@ -20,7 +20,7 @@ const useWallets = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // Function to fetch wallet data from the API
-  const fetchWallets = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
 
     try {
@@ -32,7 +32,7 @@ const useWallets = () => {
       }
     } catch (error) {
       console.error("Wallets fetch error: ", error);
-      setSnackbarMessage(t("homeScreen.errorFetchWallets"));
+      setSnackbarMessage(t("useHome.errorFetchWallets"));
       setSnackbarVisible(true);
     } finally {
       setLoading(false);
@@ -42,14 +42,14 @@ const useWallets = () => {
 
   // Fetch wallets when the screen is focused
   useEffect(() => {
-    fetchWallets();
-  }, [isFocused, fetchWallets]);
+    if (isFocused) fetchData();
+  }, [isFocused, fetchData]);
 
   // Function to handle refreshing the wallet list
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchWallets();
-  }, [fetchWallets]);
+    fetchData();
+  }, [fetchData]);
 
   // Function to dismiss the snackbar
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
@@ -67,4 +67,4 @@ const useWallets = () => {
   };
 };
 
-export default useWallets;
+export default useHome;

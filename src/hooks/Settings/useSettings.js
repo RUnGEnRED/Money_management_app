@@ -2,15 +2,22 @@ import { useState, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// Import custom hook for currency format
+import { useCurrencyContext } from "../../context/CurrencyContext";
+
 // Custom hook for managing settings data and logic
 const useSettings = () => {
   // Get translation and internationalization hooks
   const { t, i18n } = useTranslation();
+
   // State variables for managing settings, snackbar
   const [selectedCurrency, setSelectedCurrency] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  // Hook for managing currency in context provider
+  const { currency, setCurrency } = useCurrencyContext();
 
   // Function to fetch settings from AsyncStorage
   const fetchSettings = useCallback(async () => {
@@ -31,10 +38,12 @@ const useSettings = () => {
       console.error("Error fetching settings:", error);
     }
   }, []);
+
   // Fetch the settings when the screen loads
   useEffect(() => {
     fetchSettings();
   }, []);
+
   // Function to handle changing the app language
   const handleChangeLanguage = async (language) => {
     try {
@@ -55,7 +64,8 @@ const useSettings = () => {
   // Function to handle changing the app currency
   const handleChangeCurrency = async (currency) => {
     try {
-      // Set the currency to the storage and state variable
+      // Set the currency to the context provider, storage and state variable
+      setCurrency(currency);
       await AsyncStorage.setItem("currency", currency);
       setSelectedCurrency(currency);
       // Set success snackbar

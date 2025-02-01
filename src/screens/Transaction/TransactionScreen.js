@@ -11,7 +11,7 @@ import DateInput from "../../components/DateInput";
 import TransactionTypeButtons from "../../components/TransactionTypeButtons";
 
 // Import the custom hook for managing the transaction form
-import useTransactionForm from "../../hooks/Transaction/useTransactionForm";
+import useTransaction from "../../hooks/Transaction/useTransaction";
 
 // TransactionScreen component definition
 const TransactionScreen = () => {
@@ -36,7 +36,7 @@ const TransactionScreen = () => {
     walletList,
     handleSaveTransaction,
     currency,
-  } = useTransactionForm();
+  } = useTransaction();
 
   return (
     // View container that renders the transaction form
@@ -78,13 +78,13 @@ const TransactionScreen = () => {
           iconName="wallet"
           value={
             selectedWallet
-              ? selectedWallet.name
+              ? `${selectedWallet.name} (${currency}${selectedWallet.balance})`
               : t("transactionScreen.chooseWallet")
           }
           setValue={handleWalletChange}
           items={walletList.map((wallet) => ({
             value: wallet.id,
-            label: wallet.name,
+            label: `${wallet.name} (${currency}${wallet.balance})`,
           }))}
         />
         <Divider />

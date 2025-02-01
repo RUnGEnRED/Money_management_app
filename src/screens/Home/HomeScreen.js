@@ -13,7 +13,7 @@ import ShakeDetector from "../../components/ShakeDetector";
 import WalletInfoItem from "../../components/WalletInfoItem";
 
 // Import the custom hook for wallet data
-import useWallets from "../../hooks/Home/useWallets";
+import useHome from "../../hooks/Home/useHome";
 
 // HomeScreen component definition
 const HomeScreen = ({ navigation }) => {
@@ -27,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
     setSnackbarVisible,
     onRefresh,
     handleSnackbarDismiss,
-  } = useWallets();
+  } = useHome();
 
   return (
     // Container view that renders shake detector, loading indicator, scrollview, and snackbar

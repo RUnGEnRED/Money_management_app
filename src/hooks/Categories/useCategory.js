@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as CategoryService from "../../services/Categories/CategoryService";
 
 // Custom hook to manage category data and logic
-const useCategoryData = () => {
+const useCategory = () => {
   // Get translation, navigation and focus hooks
   const { t } = useTranslation();
   const isFocused = useIsFocused();
@@ -40,7 +40,7 @@ const useCategoryData = () => {
     } catch (error) {
       // Catch any errors that occur and show snackbar
       console.error("Error fetching data:", error);
-      setSnackbarMessage(t("useCategoryData.errorFetchCategories"));
+      setSnackbarMessage(t("useCategory.errorFetchCategories"));
       setSnackbarVisible(true);
     } finally {
       setLoading(false);
@@ -64,7 +64,7 @@ const useCategoryData = () => {
     try {
       await CategoryService.deleteCategory(id, t);
       // If delete is succesful show snackbar
-      setSnackbarMessage(t("useCategoryData.categoryDeleted"));
+      setSnackbarMessage(t("useCategory.categoryDeleted"));
       setSnackbarVisible(true);
       // Filter category from the state variables
       setCategoryExpenseList((prev) =>
@@ -76,7 +76,7 @@ const useCategoryData = () => {
     } catch (error) {
       // If any errors occur, log it and show snackbar
       console.error("Error deleting category:", error);
-      setSnackbarMessage(t("useCategoryData.deleteFailed"));
+      setSnackbarMessage(t("useCategory.deleteFailed"));
       setSnackbarVisible(true);
     }
   };
@@ -88,7 +88,6 @@ const useCategoryData = () => {
       categoryName: category.name,
       categoryType: category.type,
       iconName: category.icon,
-      iconColor: category.iconColor,
     });
   };
 
@@ -111,4 +110,4 @@ const useCategoryData = () => {
   };
 };
 
-export default useCategoryData;
+export default useCategory;

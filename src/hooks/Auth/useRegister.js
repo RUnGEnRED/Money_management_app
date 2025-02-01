@@ -24,13 +24,13 @@ const useRegister = () => {
   const handleRegister = async () => {
     // If fields are empty show snackbar
     if (!username || !password || !passwordConfirm) {
-      setSnackbarMessage(t("loginScreen.emptyFields"));
+      setSnackbarMessage(t("useRegister.emptyFields"));
       setSnackbarVisible(true);
       return;
     }
     // If password and confirm password don't match show snackbar
     if (password !== passwordConfirm) {
-      setSnackbarMessage(t("registerScreen.passwordsNotMatch"));
+      setSnackbarMessage(t("useRegister.passwordsNotMatch"));
       setSnackbarVisible(true);
       return;
     }
@@ -60,7 +60,7 @@ const useRegister = () => {
     } catch (error) {
       // If any errors are thrown log and set message
       console.error("Register error:", error);
-      setSnackbarMessage(t("authService.messageErrorRegister"));
+      setSnackbarMessage(t("registerScreen.messageErrorRegister"));
       setSnackbarVisible(true);
     } finally {
       setLoading(false);

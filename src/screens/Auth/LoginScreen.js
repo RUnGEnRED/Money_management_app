@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
         onPress={handleLogin}
         loading={loading}
       >
-        {t("startScreen.login")}
+        {t("loginScreen.login")}
       </CustomButton>
       {/* Text to navigate to register screen */}
       <TouchableOpacity onPress={() => navigation.navigate("Register")}>

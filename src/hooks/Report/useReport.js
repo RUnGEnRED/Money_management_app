@@ -20,7 +20,7 @@ const COLORS = [
 const MAX_CATEGORIES = 5;
 
 // Custom hook for managing report data and logic
-const useReportData = () => {
+const useReport = () => {
   // Get translation and isFocused hook
   const { t } = useTranslation();
   const isFocused = useIsFocused();
@@ -34,6 +34,7 @@ const useReportData = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+
   // State variables for the date pickers
   const [endDate, setEndDate] = useState(new Date());
   const [startDate, setStartDate] = useState(() => {
@@ -44,27 +45,29 @@ const useReportData = () => {
   });
 
   // Function to fetch necessary report data
-  const fetchReportData = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true);
       // Get categories, transactions, wallets using a promise all
       const [categoriesData, transactionsData, walletsData] = await Promise.all(
         [getCategories(t), getTransactions(t), getWallets(t)]
       );
+
       // Map transactions to add category, wallet and formatted date
-      const mergedTransactions = transactionsData.map((t) => {
-        const category = categoriesData.find((c) => c.id === t.categorie_id);
-        const wallet = walletsData.find((w) => w.id === t.wallet_id);
-        const transactionDate = new Date(t.date);
+      const mergedTransactions = transactionsData.map((tr) => {
+        const category = categoriesData.find((c) => c.id === tr.categorie_id);
+        const wallet = walletsData.find((w) => w.id === tr.wallet_id);
+        const transactionDate = new Date(tr.date);
 
         return {
-          ...t,
+          ...tr,
           category,
           wallet,
           originalDate: transactionDate,
-          amount: t.type === "expense" ? -t.amount : t.amount,
+          amount: tr.type === "expense" ? -tr.amount : tr.amount,
         };
       });
+
       // Set the data in the state variables
       setCategories(categoriesData);
       setTransactions(mergedTransactions);
@@ -72,22 +75,24 @@ const useReportData = () => {
     } catch (error) {
       // If there is an error fetchin the data, show a snackbar with an error message.
       console.error("Error fetching data:", error);
-      setSnackbarMessage(t("useReportData.errorFetchData"));
+      setSnackbarMessage(t("useReport.errorFetchData"));
       setSnackbarVisible(true);
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
   }, [t]);
+
   // Fetch data when the screen is focused
   useEffect(() => {
-    if (isFocused) fetchReportData();
-  }, [isFocused, fetchReportData]);
+    if (isFocused) fetchData();
+  }, [isFocused, fetchData]);
+
   // Function to handle refreshing the data
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    fetchReportData();
-  }, [fetchReportData]);
+    fetchData();
+  }, [fetchData]);
 
   // Function to filter the transactions based on date and selected wallet
   const filteredTransactions = useMemo(() => {
@@ -96,12 +101,12 @@ const useReportData = () => {
     const end = new Date(endDate);
     end.setHours(23, 59, 59, 999);
 
-    let filtered = transactions.filter((t) => {
-      return t.originalDate >= start && t.originalDate <= end;
+    let filtered = transactions.filter((tr) => {
+      return tr.originalDate >= start && tr.originalDate <= end;
     });
 
     if (selectedWallet) {
-      filtered = filtered.filter((t) => t.wallet?.id === selectedWallet.id);
+      filtered = filtered.filter((tr) => tr.wallet?.id === selectedWallet.id);
     }
     return filtered;
   }, [transactions, startDate, endDate, selectedWallet]);
@@ -111,10 +116,10 @@ const useReportData = () => {
     const incomeCategoriesMap = new Map();
 
     filteredTransactions
-      .filter((t) => t.amount > 0)
-      .forEach((t) => {
-        const categoryName = t.category?.name || t("general.unknown");
-        const categoryBalance = t.amount;
+      .filter((tr) => tr.amount > 0)
+      .forEach((tr) => {
+        const categoryName = tr.category?.name || t("general.unknown");
+        const categoryBalance = tr.amount;
         if (incomeCategoriesMap.has(categoryName)) {
           incomeCategoriesMap.set(
             categoryName,
@@ -126,8 +131,8 @@ const useReportData = () => {
       });
 
     const totalIncome = filteredTransactions
-      .filter((t) => t.amount > 0)
-      .reduce((sum, t) => sum + t.amount, 0);
+      .filter((tr) => tr.amount > 0)
+      .reduce((sum, tr) => sum + tr.amount, 0);
 
     const sortedCategories = Array.from(incomeCategoriesMap)
       .sort(([, a], [, b]) => b - a)
@@ -146,10 +151,10 @@ const useReportData = () => {
     const expenseCategoriesMap = new Map();
 
     filteredTransactions
-      .filter((t) => t.amount < 0)
-      .forEach((t) => {
-        const categoryName = t.category?.name || t("general.unknown");
-        const categoryBalance = t.amount;
+      .filter((tr) => tr.amount < 0)
+      .forEach((tr) => {
+        const categoryName = tr.category?.name || t("general.unknown");
+        const categoryBalance = tr.amount;
         if (expenseCategoriesMap.has(categoryName)) {
           expenseCategoriesMap.set(
             categoryName,
@@ -161,8 +166,8 @@ const useReportData = () => {
       });
 
     const totalExpenses = filteredTransactions
-      .filter((t) => t.amount < 0)
-      .reduce((sum, t) => sum + t.amount, 0);
+      .filter((tr) => tr.amount < 0)
+      .reduce((sum, tr) => sum + tr.amount, 0);
 
     const sortedCategories = Array.from(expenseCategoriesMap)
       .sort(([, a], [, b]) => a - b)
@@ -179,18 +184,18 @@ const useReportData = () => {
   // Function to calculate total income
   const totalIncome = useMemo(() => {
     return filteredTransactions
-      .filter((t) => t.amount > 0)
-      .reduce((sum, t) => sum + t.amount, 0);
+      .filter((tr) => tr.amount > 0)
+      .reduce((sum, tr) => sum + tr.amount, 0);
   }, [filteredTransactions]);
 
   // Function to calculate total expenses
   const totalExpenses = useMemo(() => {
     return Math.abs(
       filteredTransactions
-        .filter((t) => t.amount < 0)
-        .reduce((sum, t) => sum + t.amount, 0)
+        .filter((tr) => tr.amount < 0)
+        .reduce((sum, tr) => sum + tr.amount, 0)
     );
-  }, [filteredTransactions]);
+  }, [filteredTransactions, t]);
 
   // Function to handle snackbar dismiss
   const handleSnackbarDismiss = () => setSnackbarVisible(false);
@@ -224,4 +229,4 @@ const useReportData = () => {
   };
 };
 
-export default useReportData;
+export default useReport;

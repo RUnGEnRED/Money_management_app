@@ -2,15 +2,15 @@ import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { useTranslation } from "react-i18next";
 
-// Import custom components and auth check hook
+// Import custom components and hooks
 import CustomButton from "../../components/CustomButton";
-import useAuthCheck from "../../hooks/Auth/useAuthCheck";
+import useStart from "../../hooks/Auth/useStart";
 
 // StartScreen component definition
 const StartScreen = ({ navigation }) => {
   // Get translation function, and check auth using custom hook
   const { t } = useTranslation();
-  useAuthCheck();
+  useStart();
 
   return (
     // Main container with logo and buttons

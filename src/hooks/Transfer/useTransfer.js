@@ -7,17 +7,19 @@ import {
   fetchWallets,
   handleTransfer,
 } from "../../services/Transfer/TransferService";
-import useCurrency from "../useCurrency";
+import { useCurrencyContext } from "../../context/CurrencyContext";
 
 // Custom hook for managing transfer form data and logic
-const useTransferForm = () => {
+const useTransfer = () => {
   // Get translation, focus state, and currency format
   const { t } = useTranslation();
   const isFocused = useIsFocused();
-  const currency = useCurrency();
+  const { currency, setCurrency } = useCurrencyContext();
+
+  // State variables wallets
+  const [walletList, setWalletList] = useState([]);
 
   // State variables for managing wallet data, form inputs, and snackbar
-  const [walletList, setWalletList] = useState([]);
   const [amount, setAmount] = useState("");
   const [selectedFromWallet, setSelectedFromWallet] = useState(null);
   const [selectedToWallet, setSelectedToWallet] = useState(null);
@@ -25,7 +27,7 @@ const useTransferForm = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
   // Function to fetch wallets
-  const fetchWalletsData = useCallback(async () => {
+  const fetchData = useCallback(async () => {
     try {
       // Get wallets from the service
       const wallets = await fetchWallets(t);
@@ -37,10 +39,20 @@ const useTransferForm = () => {
     }
   }, [t]);
 
-  // Fetch wallet data when screen is focused
+  // Reset form to initial state
+  const resetForm = useCallback(() => {
+    setAmount("");
+    setSelectedFromWallet(null);
+    setSelectedToWallet(null);
+  }, []);
+
+  // Fetch data when the screen is focused
   useEffect(() => {
-    fetchWalletsData();
-  }, [isFocused, fetchWalletsData]);
+    if (isFocused) {
+      fetchData();
+      resetForm();
+    }
+  }, [isFocused, fetchData]);
 
   // Function to handle the transfer
   const handleTransferPress = async () => {
@@ -48,19 +60,19 @@ const useTransferForm = () => {
 
     // If no wallets are selected, show error message using snackbar
     if (!selectedFromWallet || !selectedToWallet) {
-      setSnackbarMessage(t("transferScreen.selectWallets"));
+      setSnackbarMessage(t("useTransfer.selectWallets"));
       setSnackbarVisible(true);
       return;
     }
     // If wallets are the same, show error message using snackbar
     if (selectedFromWallet.id === selectedToWallet.id) {
-      setSnackbarMessage(t("transferScreen.sameWallets"));
+      setSnackbarMessage(t("useTransfer.sameWallets"));
       setSnackbarVisible(true);
       return;
     }
     // If amount is invalid show snackbar with error message
     if (isNaN(transferAmount) || transferAmount <= 0) {
-      setSnackbarMessage(t("transferScreen.invalidAmount"));
+      setSnackbarMessage(t("useTransfer.invalidAmount"));
       setSnackbarVisible(true);
       return;
     }
@@ -73,15 +85,12 @@ const useTransferForm = () => {
         transferAmount,
         t
       );
-      // If succesful show snackbar with success message and reset values
+
+      // Show success message and clear the amount
+      await fetchData();
+      resetForm();
       setSnackbarMessage(message);
       setSnackbarVisible(true);
-
-      setAmount("");
-      setSelectedFromWallet(null);
-      setSelectedToWallet(null);
-      // Refresh the wallet data
-      fetchWalletsData();
     } catch (error) {
       // If any error happens show a snackbar with error message
       setSnackbarMessage(error.message);
@@ -122,4 +131,4 @@ const useTransferForm = () => {
   };
 };
 
-export default useTransferForm;
+export default useTransfer;

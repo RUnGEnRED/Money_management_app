@@ -126,5 +126,6 @@ const getUser = async (t) => {
     throw new Error(t("authService.messageErrorLogin"));
   }
 };
+
 // Export function to add event to calendar
 export { addTransactionToCalendar };

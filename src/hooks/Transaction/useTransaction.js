@@ -6,14 +6,14 @@ import { useTranslation } from "react-i18next";
 import AxiosInstance from "../../api/AxiosInstance";
 import { getAuthToken } from "../../services/Auth/AuthService";
 import { createTransaction } from "../../services/Transaction/TransactionService";
-import useCurrency from "../useCurrency";
+import { useCurrencyContext } from "../../context/CurrencyContext";
 
 // Custom hook for managing transaction form data and logic
-const useTransactionForm = () => {
+const useTransaction = () => {
   // Get translation function, focus state, and currency format
   const { t } = useTranslation();
   const isFocused = useIsFocused();
-  const currency = useCurrency();
+  const { currency, setCurrency } = useCurrencyContext();
 
   // State variables for categories, wallets, form inputs, snackbar, etc.
   const [categoryExpenseList, setCategoryExpenseList] = useState([]);
@@ -34,15 +34,12 @@ const useTransactionForm = () => {
       // Get the auth token
       const user = await getAuthToken();
       if (user && user.id) {
-        console.log("User token:", user);
-        // Get the wallets data
-        const walletsList = await AxiosInstance.get(
-          `/wallets?user_id=${user.id}`
-        );
-        // Get the categories data
-        const categoriesList = await AxiosInstance.get(
-          `/categories?user_id=${user.id}`
-        );
+        // Get the wallets and categories data
+        const [walletsList, categoriesList] = await Promise.all([
+          AxiosInstance.get(`/wallets?user_id=${user.id}`),
+          AxiosInstance.get(`/categories?user_id=${user.id}`),
+        ]);
+
         // Filter categories by type and set the states
         const expenseCategories = categoriesList.data.filter(
           (category) => category.type === "expense"
@@ -58,14 +55,26 @@ const useTransactionForm = () => {
     } catch (error) {
       // If there was an error, show snackbar with message
       console.error("Error fetching data:", error);
-      setSnackbarMessage(t("useTransactionForm.errorFetchData"));
+      setSnackbarMessage(t("useTransaction.errorFetchData"));
       setSnackbarVisible(true);
     }
   }, [t]);
 
+  // Reset form to initial state
+  const resetForm = useCallback(() => {
+    setTransactionType("expense");
+    setAmount("");
+    setSelectedCategory(null);
+    setSelectedWallet(null);
+    setDate(new Date());
+  }, []);
+
   // Fetch data when the screen is focused
   useEffect(() => {
-    fetchData();
+    if (isFocused) {
+      fetchData();
+      resetForm();
+    }
   }, [isFocused, fetchData]);
 
   // Function to handle snackbar dismiss
@@ -90,7 +99,7 @@ const useTransactionForm = () => {
   const handleSaveTransaction = async () => {
     if (!amount || !selectedCategory || !selectedWallet) {
       // If fields are empty show snackbar
-      setSnackbarMessage(t("useTransactionForm.emptyFields"));
+      setSnackbarMessage(t("useTransaction.emptyFields"));
       setSnackbarVisible(true);
       return;
     }
@@ -107,7 +116,9 @@ const useTransactionForm = () => {
       );
 
       // Show success message and clear the amount
-      setSnackbarMessage(t("useTransactionForm.success"));
+      await fetchData();
+      resetForm();
+      setSnackbarMessage(t("useTransaction.success"));
       setSnackbarVisible(true);
       setAmount("");
     } catch (error) {
@@ -145,4 +156,4 @@ const useTransactionForm = () => {
   };
 };
 
-export default useTransactionForm;
+export default useTransaction;

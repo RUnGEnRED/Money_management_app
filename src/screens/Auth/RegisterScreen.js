@@ -35,7 +35,7 @@ const RegisterScreen = ({ navigation }) => {
       <Text style={styles.title}>{t("registerScreen.title")}</Text>
       {/* Username Input */}
       <TextInput
-        label={t("loginScreen.username")}
+        label={t("registerScreen.username")}
         value={username}
         onChangeText={setUsername}
         style={styles.input}
@@ -43,7 +43,7 @@ const RegisterScreen = ({ navigation }) => {
       />
       {/* Password Input */}
       <TextInput
-        label={t("loginScreen.password")}
+        label={t("registerScreen.password")}
         value={password}
         onChangeText={setPassword}
         style={styles.input}

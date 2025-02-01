@@ -9,7 +9,7 @@ const getWallets = async (t) => {
     const user = await getAuthToken();
     // Check if user is authenticated
     if (!user || !user.id) {
-      throw new Error(t("walletService.messageNoAuth"));
+      throw new Error(t("authService.messageNoAuth"));
     }
     // Make the API call to get wallets
     const response = await AxiosInstance.get(`/wallets?user_id=${user.id}`);
@@ -28,7 +28,7 @@ const deleteWallet = async (id, t) => {
     const user = await getAuthToken();
     // Check if user is authenticated
     if (!user || !user.id) {
-      throw new Error(t("walletService.messageNoAuth"));
+      throw new Error(t("authService.messageNoAuth"));
     }
     // Make an API call to delete the wallet
     await AxiosInstance.delete(`/wallets/${id}`, {
@@ -50,7 +50,7 @@ const deleteTransactionsByWalletId = async (walletId, t) => {
     const user = await getAuthToken();
     // Check if user is authenticated
     if (!user || !user.id) {
-      throw new Error(t("walletService.messageNoAuth"));
+      throw new Error(t("authService.messageNoAuth"));
     }
     // Make the api call to get transactions from a specific wallet
     const response = await AxiosInstance.get(
@@ -77,7 +77,7 @@ const updateWallet = async (id, name, balance, icon, t) => {
     const user = await getAuthToken();
     // Check if user is authenticated
     if (!user || !user.id) {
-      throw new Error(t("walletService.messageNoAuth"));
+      throw new Error(t("authService.messageNoAuth"));
     }
     // Prepare the wallet data
     const walletData = {
@@ -103,7 +103,7 @@ const addWallet = async (name, balance, icon, t) => {
     const user = await getAuthToken();
     // Check if user is authenticated
     if (!user || !user.id) {
-      throw new Error(t("walletService.messageNoAuth"));
+      throw new Error(t("authService.messageNoAuth"));
     }
     // Prepare wallet data
     const walletData = {

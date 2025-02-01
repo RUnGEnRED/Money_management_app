@@ -1,4 +1,35 @@
 {
+  "categoryItem": {
+    "income": "Przychód",
+    "expense": "Wydatek"
+  },
+
+  "customDrawerContent": {
+    "logout": "Wyloguj"
+  },
+
+  "customTextInput": {
+    "fillHereText": "Wpisz tutaj"
+  },
+
+  "pieChartComponent": {
+    "noDataText": "Brak danych do wyświetlenia."
+  },
+
+  "summaryView": {
+    "expense": "Wydatki",
+    "income": "Przychody"
+  },
+
+  "transactionTypeButtons": {
+    "income": "Przychód",
+    "expense": "Wydatek"
+  },
+
+  "walletInfoItem": {
+    "totalBalance": "Całkowite saldo"
+  },
+
   "stackNavigator": {
     "addNewWallet": "Dodaj nowy portfel",
     "addNewCategoryScreen": "Dodaj nową kategorię",
@@ -7,7 +38,7 @@
   },
 
   "drawerNavigator": {
-    "mainScreen": "Główna Strona",
+    "mainScreen": "Główna",
     "reportScreen": "Raporty",
     "walletsScreen": "Portfele",
     "categoriesScreen": "Kategorie",
@@ -18,105 +49,131 @@
   "tabNavigator": {
     "homeScreen": "Strona główna",
     "transactionScreen": "Transakcja",
-    "transferScreen": "Transfer",
+    "transferScreen": "Przelew",
     "historyScreen": "Historia"
   },
 
-  "startScreen": {
-    "login": "Zaloguj się",
-    "register": "Zarejestruj się"
-  },
-
-  "loginScreen": {
-    "title": "Logowanie",
-    "continue": "Kontynuuj",
-    "username": "Nazwa użytkownika",
-    "password": "Hasło",
+  "useLogin": {
+    "emptyFields": "Proszę wypełnić wszystkie pola.",
     "success": "Pomyślnie zalogowano.",
-    "noAccount": "Nie masz konta?",
-    "emptyFields": "Proszę wypełnić wszystkie pola."
+    "messageErrorLogin": "Błąd podczas logowania."
   },
 
-  "registerScreen": {
-    "title": "Rejestracja",
-    "confirmPassword": "Potwierdź hasło",
+  "useRegister": {
+    "emptyFields": "Proszę wypełnić wszystkie pola.",
     "passwordsNotMatch": "Hasła nie są zgodne.",
+    "terms": "Rejestrując się, akceptujesz nasze Warunki korzystania z usługi i Politykę prywatności.",
     "success": "Pomyślnie zarejestrowano.",
-    "terms": "Rejestrując się, akceptujesz nasze Warunki Usługi i Politykę Prywatności.",
-    "alreadyAccount": "Masz już konto?"
+    "messageErrorRegister": "Błąd podczas rejestracji."
   },
 
-  "authService": {
-    "messageIncData": "Nieprawidłowa nazwa lub hasło.",
-    "messageErrorLogin": "Błąd podczas logowania.",
-    "messageErrorRegister": "Błąd podczas rejestracji.",
-    "messageUserExists": "Nazwa użytkownika już istnieje."
+  "useAddCategory": {
+    "emptyFields": "Proszę wypełnić wszystkie pola.",
+    "categoryAdded": "Kategoria dodana.",
+    "addCategoryError": "Błąd podczas dodawania kategorii."
   },
 
-  "homeScreen": {
+  "useCategory": {
+    "errorFetchCategories": "Błąd podczas pobierania kategorii.",
+    "categoryDeleted": "Kategoria usunięta.",
+    "deleteFailed": "Błąd podczas usuwania kategorii."
+  },
+
+  "useEditCategory": {
+    "emptyFields": "Proszę wypełnić wszystkie pola.",
+    "categoryUpdated": "Kategoria zaktualizowana.",
+    "updateCategoryFailed": "Błąd podczas aktualizacji kategorii.",
+    "updateCategoryError": "Błąd podczas aktualizacji kategorii."
+  },
+
+  "useHistory": {
+    "errorFetchData": "Błąd podczas pobierania danych.",
+    "transactionDeleted": "Transakcja usunięta.",
+    "errorDeletingTransaction": "Błąd podczas usuwania transakcji."
+  },
+
+  "useHome": {
     "errorFetchWallets": "Błąd podczas pobierania portfeli."
   },
 
-  "walletInfoItem": {
-    "totalBalance": "Całkowite saldo"
+  "useReport": {
+    "errorFetchData": "Błąd podczas pobierania danych."
   },
 
-  "transactionScreen": {
-    "category": "Kategoria",
-    "chooseCategory": "Wybierz kategorię",
-    "wallet": "Portfel",
-    "chooseWallet": "Wybierz portfel",
-    "date": "Data",
-    "save": "Zapisz"
+  "useSettings": {
+    "languageChanged": "Język zmieniony.",
+    "errorLanguage": "Błąd podczas zmiany języka.",
+    "currencyChanged": "Waluta zmieniona.",
+    "errorCurrency": "Błąd podczas zmiany waluty."
   },
 
-  "useTransactionForm": {
+  "useTransaction": {
     "errorFetchData": "Błąd podczas pobierania danych.",
     "emptyFields": "Proszę wypełnić wszystkie pola.",
-    "success": "Transakcja została pomyślnie dodana."
+    "success": "Transakcja pomyślnie dodana."
   },
 
-  "transactionService": {
-    "createTransactionError": "Błąd podczas tworzenia transakcji: ",
-    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
-    "walletUpdateError": "Błąd podczas aktualizacji portfela."
-  },
-
-  "calendarService": {
-    "incomeEvent": "Przychód",
-    "expenseEvent": "Wydatek",
-    "amount": "Kwota",
-    "category": "Kategoria",
-    "wallet": "Portfel",
-    "user": "Użytkownik",
-    "calendarSaveError": "Błąd podczas zapisywania wydarzenia w kalendarzu.",
-    "calendarError": "Błąd podczas pobierania wydarzeń z kalendarza."
-  },
-
-  "transactionTypeButtons" : {
-    "income": "Przychód",
-    "expense": "Wydatek"
-  },
-
-  "transferScreen": {
-    "fromWallet": "Z portfela",
-    "toWallet": "Do portfela",
-    "chooseWallet": "Wybierz portfel",
-    "save": "Zapisz"
-  },
-
-  "useTransferForm": {
+  "useTransfer": {
     "selectWallets": "Proszę wybrać portfele.",
     "sameWallets": "Nie można przelać środków do tego samego portfela.",
     "invalidAmount": "Nieprawidłowa kwota."
   },
 
-  "transferService": {
-    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
+  "useAddWallet": {
+    "emptyFields": "Proszę wypełnić wszystkie pola.",
+    "walletAdded": "Portfel dodany.",
+    "walletError": "Błąd podczas dodawania portfela.",
+    "addWalletError": "Błąd podczas dodawania portfela."
+  },
+
+  "useEditWallet": {
+    "emptyFields": "Proszę wypełnić wszystkie pola.",
+    "walletUpdated": "Portfel zaktualizowany.",
+    "updateWalletFailed": "Błąd podczas aktualizacji portfela.",
+    "updateWalletError": "Błąd podczas aktualizacji portfela."
+  },
+
+  "useWallet": {
     "errorFetchWallets": "Błąd podczas pobierania portfeli.",
-    "notEnoughFunds": "Niewystarczające środki.",
-    "transferSuccess": "Transfer zakończony pomyślnie.",
-    "transferFailed": "Transfer nie powiódł się."
+    "walletDeleted": "Portfel usunięty.",
+    "deleteFailed": "Błąd podczas usuwania portfela."
+  },
+
+  "loginScreen": {
+    "title": "Logowanie",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "login": "Zaloguj",
+    "noAccount": "Nie masz konta?"
+  },
+
+  "registerScreen": {
+    "title": "Rejestracja",
+    "username": "Nazwa użytkownika",
+    "password": "Hasło",
+    "confirmPassword": "Potwierdź hasło",
+    "terms": "Rejestrując się, akceptujesz nasze Warunki korzystania z usługi i Politykę prywatności.",
+    "register": "Zarejestruj",
+    "alreadyAccount": "Masz już konto?"
+  },
+
+  "startScreen": {
+    "login": "Logowanie",
+    "register": "Rejestracja"
+  },
+
+  "addCategoryScreen": {
+    "categoryName": "Nazwa kategorii",
+    "add": "Dodaj"
+  },
+
+  "categoriesScreen": {
+    "add": "Dodaj kategorię"
+  },
+
+  "editCategoryScreen": {
+    "categoryName": "Nazwa kategorii",
+    "save": "Zapisz"
   },
 
   "historyScreen": {
@@ -126,18 +183,8 @@
     "allCategories": "Wszystkie kategorie"
   },
 
-  "useHistoryData": {
-    "errorFetchData": "Błąd podczas pobierania danych.",
-    "transactionDeleted": "Transakcja usunięta.",
-    "errorDeletingTransaction": "Błąd podczas usuwania transakcji."
-  },
-
-  "historyService": {
-    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
-    "categoriesError": "Błąd podczas pobierania kategorii.",
-    "walletsError": "Błąd podczas pobierania portfeli.",
-    "transactionsError": "Błąd podczas pobierania transakcji.",
-    "deleteTransactionError": "Błąd podczas usuwania transakcji."
+  "homeScreen": {
+    "errorFetchWallets": "Błąd podczas pobierania portfeli."
   },
 
   "reportScreen": {
@@ -149,24 +196,25 @@
     "income": "Przychody"
   },
 
-  "useReportData": {
-    "errorFetchData": "Błąd podczas pobierania danych."
+  "settingsScreen": {
+    "currency": "Waluta",
+    "language": "Język"
   },
 
-  "reportService": {
-    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
-    "categoriesError": "Błąd podczas pobierania kategorii.",
-    "walletsError": "Błąd podczas pobierania portfeli.",
-    "transactionsError": "Błąd podczas pobierania transakcji."
+  "transactionScreen": {
+    "category": "Kategoria",
+    "chooseCategory": "Wybierz kategorię",
+    "wallet": "Portfel",
+    "chooseWallet": "Wybierz portfel",
+    "date": "Data",
+    "save": "Zapisz"
   },
 
-  "summaryView": {
-    "expense": "Wydatki",
-    "income": "Przychody"
-  },
-
-  "walletsScreen": {
-    "add": "Dodaj portfel"
+  "transferScreen": {
+    "fromWallet": "Z portfela",
+    "toWallet": "Do portfela",
+    "chooseWallet": "Wybierz portfel",
+    "save": "Zapisz"
   },
 
   "editWalletScreen": {
@@ -180,89 +228,72 @@
     "add": "Dodaj"
   },
 
-  "useWalletData": {
-    "errorFetchWallets": "Błąd podczas pobierania portfeli.",
-    "walletDeleted": "Portfel usunięty.",
-    "deleteFailed": "Błąd podczas usuwania portfela."
+  "walletsScreen": {
+    "add": "Dodaj portfel"
   },
 
-  "useEditWallet": {
-    "emptyFields": "Proszę wypełnić wszystkie pola.",
-    "walletUpdated": "Portfel zaktualizowany.",
-    "updateWalletFailed": "Błąd podczas aktualizacji portfela.",
-    "updateWalletError": "Błąd podczas aktualizacji portfela."
-  },
-
-  "useAddWallet": {
-    "emptyFields": "Proszę wypełnić wszystkie pola.",
-    "walletAdded": "Portfel dodany.",
-    "walletError": "Błąd podczas dodawania portfela.",
-    "addWalletError": "Błąd podczas dodawania portfela."
-  },
-
-  "walletService": {
-    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
-    "errorFetchWallets": "Błąd podczas pobierania portfeli.",
-    "deleteWalletError": "Błąd podczas usuwania portfela.",
-    "deleteTransactionsError": "Błąd podczas usuwania transakcji.",
-    "updateWalletError": "Błąd podczas aktualizacji portfela.",
-    "addWalletError": "Błąd podczas dodawania portfela."
-  },
-  
-  "categoriesScreen": {
-    "add": "Dodaj kategorię"
-  },
-
-  "editCategoryScreen": {
-    "categoryName": "Nazwa kategorii",
-    "save": "Zapisz"
-  },
-
-  "addCategoryScreen": {
-    "categoryName": "Nazwa kategorii",
-    "add": "Dodaj"
-  },
-
-  "useCategoryData": {
-    "errorFetchCategories": "Błąd podczas pobierania kategorii.",
-    "categoryDeleted": "Kategoria usunięta.",
-    "deleteFailed": "Błąd podczas usuwania kategorii."
-  },
-
-  "useEditCategory": {
-    "emptyFields": "Proszę wypełnić wszystkie pola.",
-    "categoryUpdated": "Kategoria zaktualizowana.",
-    "updateCategoryFailed": "Błąd podczas aktualizacji kategorii.",
-    "updateCategoryError": "Błąd podczas aktualizacji kategorii."
-  },
-
-  "useAddCategory": {
-    "emptyFields": "Proszę wypełnić wszystkie pola.",
-    "categoryAdded": "Kategoria dodana.",
-    "addCategoryError": "Błąd podczas dodawania kategorii."
+  "authService": {
+    "messageIncData": "Nieprawidłowa nazwa użytkownika lub hasło.",
+    "messageErrorLogin": "Błąd podczas logowania.",
+    "messageErrorRegister": "Błąd podczas rejestracji.",
+    "messageUserExists": "Nazwa użytkownika już istnieje."
   },
 
   "categoryService": {
-    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
     "errorFetchCategories": "Błąd podczas pobierania kategorii.",
     "deleteCategoryError": "Błąd podczas usuwania kategorii.",
     "addCategoryError": "Błąd podczas dodawania kategorii.",
     "updateCategoryError": "Błąd podczas aktualizacji kategorii."
   },
 
-  "settingsScreen": {
-    "currency": "Waluta",
-    "language": "Język"
+  "historyService": {
+    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
+    "categoriesError": "Błąd podczas pobierania kategorii.",
+    "walletsError": "Błąd podczas pobierania portfeli.",
+    "transactionsError": "Błąd podczas pobierania transakcji.",
+    "deleteTransactionError": "Błąd podczas usuwania transakcji."
   },
 
-  "useSettings": {
-    "languageChanged": "Język zmieniony.",
-    "errorLanguage": "Błąd podczas zmiany języka.",
-    "currencyChanged": "Waluta zmieniona.",
-    "errorCurrency": "Błąd podczas zmiany waluty."
+  "reportService": {
+    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
+    "categoriesError": "Błąd podczas pobierania kategorii.",
+    "walletsError": "Błąd podczas pobierania portfeli.",
+    "transactionsError": "Błąd podczas pobierania transakcji."
   },
 
-  "general":{
+  "calendarService": {
+    "incomeEvent": "Przychód",
+    "expenseEvent": "Wydatek",
+    "amount": "Kwota",
+    "category": "Kategoria",
+    "wallet": "Portfel",
+    "user": "Użytkownik",
+    "calendarSaveError": "Błąd podczas zapisywania wydarzenia w kalendarzu.",
+    "calendarError": "Błąd podczas pobierania wydarzeń z kalendarza."
+  },
+
+  "transactionService": {
+    "createTransactionError": "Błąd podczas tworzenia transakcji: ",
+    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
+    "walletUpdateError": "Błąd podczas aktualizacji portfela."
+  },
+
+  "transferService": {
+    "messageNoAuth": "Użytkownik nie jest uwierzytelniony lub token jest nieprawidłowy.",
+    "errorFetchWallets": "Błąd podczas pobierania portfeli.",
+    "transferSuccess": "Przelew zakończony pomyślnie.",
+    "transferFailed": "Przelew nie powiódł się."
+  },
+
+  "walletService": {
+    "errorFetchWallets": "Błąd podczas pobierania portfeli.",
+    "deleteWalletError": "Błąd podczas usuwania portfela.",
+    "deleteTransactionsError": "Błąd podczas usuwania transakcji.",
+    "updateWalletError": "Błąd podczas aktualizacji portfela.",
+    "addWalletError": "Błąd podczas dodawania portfela."
+  },
+
+  "general": {
     "unknown": "Nieznany"
   }
 }

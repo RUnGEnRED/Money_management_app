@@ -34,10 +34,10 @@ const EditCategoryScreen = () => {
     // Main container for edit category screen
     <View style={styles.container}>
       {/* Render the transaction type buttons */}
-      <TransactionTypeButtons
+      {/* <TransactionTypeButtons
         transactionType={transactionType}
         setTransactionType={setTransactionType}
-      />
+      /> */}
       {/* Input to set the category name */}
       <CustomTextInput
         label={t("editCategoryScreen.categoryName")}

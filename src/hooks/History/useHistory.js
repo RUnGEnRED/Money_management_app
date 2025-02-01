@@ -11,7 +11,7 @@ import {
 } from "../../services/History/HistoryService";
 
 // Custom hook to manage history data and logic
-const useHistoryData = () => {
+const useHistory = () => {
   // Get translation, focus hook
   const { t } = useTranslation();
   const isFocused = useIsFocused();
@@ -51,6 +51,7 @@ const useHistoryData = () => {
       const [categoriesData, transactionsData, walletsData] = await Promise.all(
         [getCategories(t), getTransactions(t), getWallets(t)]
       );
+
       // Map transactions to add category, wallet and formatted date
       const mergedTransactions = transactionsData.map((t) => {
         const category = categoriesData.find((c) => c.id === t.categorie_id);
@@ -72,13 +73,14 @@ const useHistoryData = () => {
       setWallets(walletsData);
     } catch (error) {
       // If any errors occur, show snackbar with error message
-      setSnackbarMessage(t("useHistoryData.errorFetchData"));
+      setSnackbarMessage(t("useHistory.errorFetchData"));
       setSnackbarVisible(true);
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
   }, [t]);
+
   // Fetch data if the screen is focused
   useEffect(() => {
     if (isFocused) fetchData();
@@ -115,10 +117,10 @@ const useHistoryData = () => {
     try {
       await deleteTransaction(id, t);
       setTransactions(transactions.filter((t) => t.id !== id));
-      setSnackbarMessage(t("useHistoryData.transactionDeleted"));
+      setSnackbarMessage(t("useHistory.transactionDeleted"));
       setSnackbarVisible(true);
     } catch (error) {
-      setSnackbarMessage(t("useHistoryData.errorDeletingTransaction"));
+      setSnackbarMessage(t("useHistory.errorDeletingTransaction"));
       setSnackbarVisible(true);
     }
   };
@@ -154,4 +156,4 @@ const useHistoryData = () => {
   };
 };
 
-export default useHistoryData;
+export default useHistory;

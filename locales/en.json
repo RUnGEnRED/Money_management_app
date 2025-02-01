@@ -1,4 +1,35 @@
 {
+  "categoryItem" : {
+    "income": "Income",
+    "expense": "Expense"
+  },
+
+  "customDrawerContent": {
+    "logout": "Logout"
+  },
+
+  "customTextInput": {
+    "fillHereText": "Fill here"
+  },
+
+  "pieChartComponent": {
+    "noDataText": "No data to display."
+  },
+
+  "summaryView": {
+    "expense": "Expenses",
+    "income": "Incomes"
+  },
+
+  "transactionTypeButtons" : {
+    "income": "Income",
+    "expense": "Expense"
+  },
+
+  "walletInfoItem": {
+    "totalBalance": "Total Balance"
+  },
+
   "stackNavigator": {
     "addNewWallet": "Add New Wallet",
     "addNewCategoryScreen": "Add New Category",
@@ -22,43 +53,152 @@
     "historyScreen": "History"
   },
 
+  "useLogin" : {
+    "emptyFields":"Please fill in all fields.",
+    "success": "Successfully logged in.",
+    "messageErrorLogin":"Error logging in."
+  },
+
+  "useRegister" : {
+    "emptyFields": "Please fill in all fields.",
+    "passwordsNotMatch": "Passwords do not match.",
+    "terms": "By registering, you agree to our Terms of Service and Privacy Policy.",
+    "success": "Successfully registered.",
+    "messageErrorRegister": "Error registering."
+  },
+
+  "useAddCategory": {
+    "emptyFields": "Please fill in all fields.",
+    "categoryAdded": "Category added.",
+    "addCategoryError": "Error adding category."
+  },
+
+  "useCategory": {
+    "errorFetchCategories": "Error fetching categories.",
+    "categoryDeleted": "Category deleted.",
+    "deleteFailed": "Error deleting category."
+  },
+
+  "useEditCategory": {
+    "emptyFields": "Please fill in all fields.",
+    "categoryUpdated": "Category updated.",
+    "updateCategoryFailed": "Error updating category.",
+    "updateCategoryError": "Error updating category."
+  },
+
+  "useHistory": {
+    "errorFetchData": "Error fetching data.",
+    "transactionDeleted": "Transaction deleted.",
+    "errorDeletingTransaction": "Error deleting transaction."
+  },
+
+  "useHome": {
+    "errorFetchWallets": "Error fetching wallets."
+  },
+
+  "useReport": {
+    "errorFetchData": "Error fetching data."
+  },
+
+  "useSettings": {
+    "languageChanged": "Language changed.",
+    "errorLanguage": "Error changing language.",
+    "currencyChanged": "Currency changed.",
+    "errorCurrency": "Error changing currency."
+  },
+
+  "useTransaction": {
+    "errorFetchData": "Error fetching data.",
+    "emptyFields": "Please fill in all fields.",
+    "success": "Transaction successfully added."
+  },
+
+  "useTransfer": {
+    "selectWallets": "Please select wallets.",
+    "sameWallets": "You can't transfer to the same wallet.",
+    "invalidAmount": "Invalid amount."
+  },
+
+  "useAddWallet": {
+    "emptyFields": "Please fill in all fields.",
+    "walletAdded": "Wallet added.",
+    "walletError": "Error adding wallet.",
+    "addWalletError": "Error adding wallet."
+  },
+
+  "useEditWallet": {
+    "emptyFields": "Please fill in all fields.",
+    "walletUpdated": "Wallet updated.",
+    "updateWalletFailed": "Error updating wallet.",
+    "updateWalletError": "Error updating wallet."
+  },
+
+  "useWallet": {
+    "errorFetchWallets": "Error fetching wallets.",
+    "walletDeleted": "Wallet deleted.",
+    "deleteFailed": "Error deleting wallet."
+  },
+
+  "loginScreen": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "noAccount": "Don't have an account?"
+  },
+
+  "registerScreen": {
+    "title": "Register",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "terms": "By registering, you agree to our Terms of Service and Privacy Policy.",
+    "register": "Register",
+    "alreadyAccount": "Already have an account?"
+  },
+
   "startScreen": {
     "login": "Login",
     "register": "Register"
   },
 
-  "loginScreen": {
-    "title": "Login",
-    "continue": "Continue",
-    "username": "Username",
-    "password": "Password",
-    "success": "Successfully logged in.",
-    "noAccount": "Don't have an account?",
-    "emptyFields": "Please fill in all fields."
+  "addCategoryScreen": {
+    "categoryName": "Category Name",
+    "add": "Add"
+  },
+  
+  "categoriesScreen": {
+    "add": "Add Category"
   },
 
-  "registerScreen": {
-    "title": "Register",
-    "confirmPassword": "Confirm Password",
-    "passwordsNotMatch": "Passwords do not match.",
-    "success": "Successfully registered.",
-    "terms": "By registering, you agree to our Terms of Service and Privacy Policy.",
-    "alreadyAccount": "Already have an account?"
+  "editCategoryScreen": {
+    "categoryName": "Category Name",
+    "save": "Save"
   },
 
-  "authService": {
-    "messageIncData": "Incorrect name or password.",
-    "messageErrorLogin": "Error logging in.",
-    "messageErrorRegister": "Error registering.",
-    "messageUserExists": "Name already exists."
+  "historyScreen": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "category": "Category",
+    "allCategories": "All Categories"
   },
 
   "homeScreen": {
     "errorFetchWallets": "Error fetching wallets."
   },
 
-  "walletInfoItem": {
-    "totalBalance": "Total Balance"
+  "reportScreen": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "wallet": "Wallet",
+    "allWallets": "All Wallets",
+    "expense": "Expenses",
+    "income": "Incomes"
+  },
+
+  "settingsScreen": {
+    "currency": "Currency",
+    "language": "Language"
   },
 
   "transactionScreen": {
@@ -70,16 +210,55 @@
     "save": "Save"
   },
 
-  "useTransactionForm": {
-    "errorFetchData": "Error fetching data.",
-    "emptyFields": "Please fill in all fields.",
-    "success": "Transaction successfully added."
+  "transferScreen": {
+    "fromWallet": "From Wallet",
+    "toWallet": "To Wallet",
+    "chooseWallet": "Choose a wallet",
+    "save": "Save"
+  },
+  
+  "editWalletScreen": {
+    "walletName": "Wallet Name",
+    "save": "Save"
+  },
+  
+  "addWalletScreen": {
+    "walletName": "Wallet Name",
+    "initialBalance": "Initial Balance",
+    "add": "Add"
+  },
+  
+  "walletsScreen": {
+    "add": "Add Wallet"
   },
 
-  "transactionService": {
-    "createTransactionError": "Error creating transaction: ",
+  "authService": {
+    "messageIncData": "Incorrect name or password.",
+    "messageErrorLogin": "Error logging in.",
+    "messageErrorRegister": "Error registering.",
+    "messageUserExists": "Name already exists."
+  },
+
+  "categoryService": {
+    "errorFetchCategories": "Error fetching categories.",
+    "deleteCategoryError": "Error deleting category.",
+    "addCategoryError": "Error adding category.",
+    "updateCategoryError": "Error updating category."
+  },
+
+  "historyService": {
     "messageNoAuth": "User is not authenticated or invalid token.",
-    "walletUpdateError": "Error updating wallet."
+    "categoriesError": "Error fetching categories.",
+    "walletsError": "Error fetching wallets.",
+    "transactionsError": "Error fetching transactions.",
+    "deleteTransactionError": "Error deleting transaction."
+  },
+
+  "reportService": {
+    "messageNoAuth": "User is not authenticated or invalid token.",
+    "categoriesError": "Error fetching categories.",
+    "walletsError": "Error fetching wallets.",
+    "transactionsError": "Error fetching transactions."
   },
 
   "calendarService": {
@@ -93,173 +272,25 @@
     "calendarError": "Error fetching calendar events."
   },
 
-  "transactionTypeButtons" : {
-    "income": "Income",
-    "expense": "Expense"
-  },
-
-  "transferScreen": {
-    "fromWallet": "From Wallet",
-    "toWallet": "To Wallet",
-    "chooseWallet": "Choose a wallet",
-    "save": "Save"
-  },
-
-  "useTransferForm": {
-    "selectWallets": "Please select wallets.",
-    "sameWallets": "You can't transfer to the same wallet.",
-    "invalidAmount": "Invalid amount."
+  "transactionService": {
+    "createTransactionError": "Error creating transaction: ",
+    "messageNoAuth": "User is not authenticated or invalid token.",
+    "walletUpdateError": "Error updating wallet."
   },
 
   "transferService": {
     "messageNoAuth": "User is not authenticated or invalid token.",
     "errorFetchWallets": "Error fetching wallets.",
-    "notEnoughFunds": "Not enough funds.",
     "transferSuccess": "Transfer successful.",
     "transferFailed": "Transfer failed."
   },
 
-  "historyScreen": {
-    "startDate": "Start Date",
-    "endDate": "End Date",
-    "category": "Category",
-    "allCategories": "All Categories"
-  },
-
-  "useHistoryData": {
-    "errorFetchData": "Error fetching data.",
-    "transactionDeleted": "Transaction deleted.",
-    "errorDeletingTransaction": "Error deleting transaction."
-  },
-
-  "historyService": {
-    "messageNoAuth": "User is not authenticated or invalid token.",
-    "categoriesError": "Error fetching categories.",
-    "walletsError": "Error fetching wallets.",
-    "transactionsError": "Error fetching transactions.",
-    "deleteTransactionError": "Error deleting transaction."
-  },
-
-  "reportScreen": {
-    "startDate": "Start Date",
-    "endDate": "End Date",
-    "wallet": "Wallet",
-    "allWallets": "All Wallets",
-    "expense": "Expenses",
-    "income": "Incomes"
-  },
-
-  "useReportData": {
-    "errorFetchData": "Error fetching data."
-  },
-
-  "reportService": {
-    "messageNoAuth": "User is not authenticated or invalid token.",
-    "categoriesError": "Error fetching categories.",
-    "walletsError": "Error fetching wallets.",
-    "transactionsError": "Error fetching transactions."
-  },
-
-  "summaryView": {
-    "expense": "Expenses",
-    "income": "Incomes"
-  },
-
-  "walletsScreen": {
-    "add": "Add Wallet"
-  },
-
-  "editWalletScreen": {
-    "walletName": "Wallet Name",
-    "save": "Save"
-  },
-
-  "addWalletScreen": {
-    "walletName": "Wallet Name",
-    "initialBalance": "Initial Balance",
-    "add": "Add"
-  },
-
-  "useWalletData": {
-    "errorFetchWallets": "Error fetching wallets.",
-    "walletDeleted": "Wallet deleted.",
-    "deleteFailed": "Error deleting wallet."
-  },
-
-  "useEditWallet": {
-    "emptyFields": "Please fill in all fields.",
-    "walletUpdated": "Wallet updated.",
-    "updateWalletFailed": "Error updating wallet.",
-    "updateWalletError": "Error updating wallet."
-  },
-
-  "useAddWallet": {
-    "emptyFields": "Please fill in all fields.",
-    "walletAdded": "Wallet added.",
-    "walletError": "Error adding wallet.",
-    "addWalletError": "Error adding wallet."
-  },
-
   "walletService": {
-    "messageNoAuth": "User is not authenticated or invalid token.",
     "errorFetchWallets": "Error fetching wallets.",
     "deleteWalletError": "Error deleting wallet.",
     "deleteTransactionsError": "Error deleting transactions.",
     "updateWalletError": "Error updating wallet.",
     "addWalletError": "Error adding wallet."
-  },
-  
-  "categoriesScreen": {
-    "add": "Add Category"
-  },
-
-  "editCategoryScreen": {
-    "categoryName": "Category Name",
-    "save": "Save"
-  },
-
-  "addCategoryScreen": {
-    "categoryName": "Category Name",
-    "add": "Add"
-  },
-
-  "useCategoryData": {
-    "errorFetchCategories": "Error fetching categories.",
-    "categoryDeleted": "Category deleted.",
-    "deleteFailed": "Error deleting category."
-  },
-
-  "useEditCategory": {
-    "emptyFields": "Please fill in all fields.",
-    "categoryUpdated": "Category updated.",
-    "updateCategoryFailed": "Error updating category.",
-    "updateCategoryError": "Error updating category."
-  },
-
-  "useAddCategory": {
-    "emptyFields": "Please fill in all fields.",
-    "categoryAdded": "Category added.",
-    "addCategoryError": "Error adding category."
-  },
-
-  "categoryService": {
-    "messageNoAuth": "User is not authenticated or invalid token.",
-    "errorFetchCategories": "Error fetching categories.",
-    "deleteCategoryError": "Error deleting category.",
-    "addCategoryError": "Error adding category.",
-    "updateCategoryError": "Error updating category."
-  },
-
-  "settingsScreen": {
-    "currency": "Currency",
-    "language": "Language"
-  },
-
-  "useSettings": {
-    "languageChanged": "Language changed.",
-    "errorLanguage": "Error changing language.",
-    "currencyChanged": "Currency changed.",
-    "errorCurrency": "Error changing currency."
   },
 
   "general":{

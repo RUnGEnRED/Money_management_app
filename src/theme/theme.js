@@ -330,7 +330,7 @@ const theme = {
         },
       },
     },
-    PieChart: {
+    PieChartComponent: {
       styleOverrides: {
         container: {
           backgroundColor: "#D4E4CB",
@@ -343,6 +343,12 @@ const theme = {
           fontWeight: "bold",
           marginBottom: 10,
           textAlign: "center",
+        },
+        noDataText: {
+          textAlign: "center",
+          marginVertical: 20,
+          color: "#999",
+          fontStyle: "italic",
         },
         legendContainer: {
           flex: 1,

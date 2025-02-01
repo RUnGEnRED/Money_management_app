@@ -22,7 +22,7 @@ const useLogin = () => {
   const handleLogin = async () => {
     // If fields are empty show snackbar
     if (!username || !password) {
-      setSnackbarMessage(t("loginScreen.emptyFields"));
+      setSnackbarMessage(t("useLogin.emptyFields"));
       setSnackbarVisible(true);
       return;
     }
@@ -32,7 +32,7 @@ const useLogin = () => {
       const result = await loginUser(username, password, t);
       // If login is successful, navigate to main screen
       if (result.success) {
-        setSnackbarMessage(t("loginScreen.success"));
+        setSnackbarMessage(t("useLogin.success"));
         setSnackbarVisible(true);
         navigation.reset({
           index: 0,
@@ -46,7 +46,7 @@ const useLogin = () => {
     } catch (error) {
       // If there is any error log it and set error message
       console.error("Login error:", error);
-      setSnackbarMessage(t("authService.messageErrorLogin"));
+      setSnackbarMessage(t("useLogin.messageErrorLogin"));
       setSnackbarVisible(true);
     } finally {
       // Set loading to false

@@ -9,7 +9,7 @@ import Keypad from "../../components/Keypad";
 import DropdownInput from "../../components/DropdownInput";
 
 // Import custom hook for transfer form data
-import useTransferForm from "../../hooks/Transfer/useTransferForm";
+import useTransfer from "../../hooks/Transfer/useTransfer";
 
 // TransferScreen component definition
 const TransferScreen = () => {
@@ -29,7 +29,7 @@ const TransferScreen = () => {
     handleTransferPress,
     handleSnackbarDismiss,
     currency,
-  } = useTransferForm();
+  } = useTransfer();
 
   return (
     // Main container for transfer screen including inputs, button and snackbar
@@ -50,13 +50,13 @@ const TransferScreen = () => {
           iconName="wallet"
           value={
             selectedFromWallet
-              ? `${selectedFromWallet.name} ($${selectedFromWallet.balance})`
+              ? `${selectedFromWallet.name} (${currency}${selectedFromWallet.balance})`
               : t("transferScreen.chooseWallet")
           }
           setValue={handleFromWalletChange}
           items={walletList.map((wallet) => ({
             value: wallet.id,
-            label: `${wallet.name} ($${wallet.balance})`,
+            label: `${wallet.name} (${currency}${wallet.balance})`,
           }))}
         />
 
@@ -67,13 +67,13 @@ const TransferScreen = () => {
           iconName="wallet"
           value={
             selectedToWallet
-              ? `${selectedToWallet.name} ($${selectedToWallet.balance})`
+              ? `${selectedToWallet.name} (${currency}${selectedToWallet.balance})`
               : t("transferScreen.chooseWallet")
           }
           setValue={handleToWalletChange}
           items={walletList.map((wallet) => ({
             value: wallet.id,
-            label: `${wallet.name} ($${wallet.balance})`,
+            label: `${wallet.name} (${currency}${wallet.balance})`,
           }))}
         />
 

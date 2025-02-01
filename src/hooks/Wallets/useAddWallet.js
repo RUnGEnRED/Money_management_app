@@ -25,11 +25,15 @@ const useAddWallet = () => {
 
   // Function to handle balance changes (format the input)
   const handleBalanceChange = (text) => {
-    const formattedText = text
-      .replace(/[^0-9.]/g, "")
-      .replace(/(\..*)\./g, "$1");
-    const decimalMatch = formattedText.match(/(\d+\.\d{0,2})/);
-
+    let formattedText = text;
+    if (formattedText.startsWith("-")) {
+      formattedText = "-" + formattedText.slice(1).replace(/-/g, "");
+    } else {
+      formattedText = formattedText.replace(/-/g, "");
+    }
+    formattedText = formattedText.replace(/[^0-9.-]/g, "");
+    formattedText = formattedText.replace(/(\..*)\./g, "$1");
+    const decimalMatch = formattedText.match(/(-?\d+\.\d{0,2})/);
     setBalance(decimalMatch ? decimalMatch[1] : formattedText);
   };
 

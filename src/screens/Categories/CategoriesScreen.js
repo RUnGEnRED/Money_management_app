@@ -15,7 +15,7 @@ import CategoryItem from "../../components/CategoryItem";
 import CustomButton from "../../components/CustomButton";
 
 // Import custom hook for managing category data
-import useCategoryData from "../../hooks/Categories/useCategoryData";
+import useCategory from "../../hooks/Categories/useCategory";
 
 // CategoriesScreen component definition
 const CategoriesScreen = () => {
@@ -34,7 +34,7 @@ const CategoriesScreen = () => {
     deleteCategory,
     handleEditCategory,
     handleSnackbarDismiss,
-  } = useCategoryData();
+  } = useCategory();
 
   return (
     // Main container for categories screen

@@ -16,12 +16,14 @@ import PieChartComponent from "../../components/PieChartComponent";
 import SummaryView from "../../components/SummaryView";
 
 // Import custom hook for managing report data
-import useReportData from "../../hooks/Report/useReportData";
+import useReport from "../../hooks/Report/useReport";
 
 // ReportScreen component definition
 const ReportScreen = () => {
-  // Get translation function and report data using custom hook
+  // Initialize translations at the top of the component
   const { t } = useTranslation();
+  
+  // Get report data using custom hook
   const {
     startDate,
     setStartDate,
@@ -41,7 +43,7 @@ const ReportScreen = () => {
     totalExpenses,
     wallets,
     handleSnackbarDismiss,
-  } = useReportData();
+  } = useReport();
 
   return (
     // Main container for report screen including loading indicator, filters, summary, and charts

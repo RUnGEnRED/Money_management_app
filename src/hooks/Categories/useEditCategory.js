@@ -13,8 +13,7 @@ const useEditCategory = () => {
   const route = useRoute();
 
   // Get route params
-  const { categoryId, categoryName, categoryType, iconName, iconColor } =
-    route.params;
+  const { categoryId, categoryName, categoryType, iconName } = route.params;
 
   // State variables for managing edit form data, snackbar, loading, and more
   const [selectedIcon, setSelectedIcon] = useState(iconName);
