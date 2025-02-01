@@ -41,7 +41,7 @@ const CustomDrawerContent = (props) => {
       </View>
       <View>
         <DrawerItem
-          label={t("drawerNavigator.logout")}
+          label={t("customDrawerContent.logout")}
           onPress={handleLogOut}
           style={{
             backgroundColor: theme.colors.buttonBackground,

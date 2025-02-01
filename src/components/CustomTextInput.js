@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, TextInput } from "react-native";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "react-native-paper";
 
 // CustomTextInput component definition
 const CustomTextInput = ({ label, value, onChangeText, style }) => {
-  // Get theme and style overrides
+  // Get translation, theme and style overrides
+  const { t } = useTranslation();
   const theme = useTheme();
   const customTextInputTheme = theme.components.CustomTextInput.styleOverrides;
 
@@ -18,7 +20,7 @@ const CustomTextInput = ({ label, value, onChangeText, style }) => {
         style={customTextInputTheme.input}
         value={value}
         onChangeText={onChangeText}
-        placeholder="Fill here"
+        placeholder={t("customTextInput.fillHereText")}
         selectionColor="black"
       />
     </View>

@@ -4,7 +4,7 @@ import { useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // Import custom hook for currency
-import useCurrency from "../hooks/useCurrency";
+import { useCurrencyContext } from "../context/CurrencyContext";
 
 // TransactionItem component definition
 const TransactionItem = ({
@@ -19,7 +19,7 @@ const TransactionItem = ({
   style,
 }) => {
   // Get currency, theme and style overrides
-  const currency = useCurrency();
+  const { currency, setCurrency } = useCurrencyContext();
   const theme = useTheme();
   const transactionItemTheme = theme.components.TransactionItem.styleOverrides;
 

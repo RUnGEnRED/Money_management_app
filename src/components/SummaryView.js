@@ -4,7 +4,7 @@ import { useTheme } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 
 // Import custom hook for currency
-import useCurrency from "../hooks/useCurrency";
+import { useCurrencyContext } from "../context/CurrencyContext";
 
 // SummaryView component definition
 const SummaryView = ({ income, expenses }) => {
@@ -12,7 +12,7 @@ const SummaryView = ({ income, expenses }) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const summaryViewTheme = theme.components.SummaryView.styleOverrides;
-  const currency = useCurrency();
+  const { currency, setCurrency } = useCurrencyContext();
 
   return (
     // Render the container that shows the summary of the expenses and income.

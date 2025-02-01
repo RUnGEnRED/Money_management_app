@@ -5,13 +5,13 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 
 // Import custom hook for currency format
-import useCurrency from "../hooks/useCurrency";
+import { useCurrencyContext } from "../context/CurrencyContext";
 
 // WalletInfoItem component definition
 const WalletInfoItem = ({ wallet }) => {
   // Get translation, currency, theme and styles
   const { t } = useTranslation();
-  const currency = useCurrency();
+  const { currency, setCurrency } = useCurrencyContext();
   const theme = useTheme();
 
   // Get styling overrides from the theme

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // CategoryItem component definition
@@ -14,7 +15,8 @@ const CategoryItem = ({
   onDelete,
   style,
 }) => {
-  // Get theme and style overrides
+  // Get translation, theme and style overrides
+  const { t } = useTranslation();
   const theme = useTheme();
   const categoryItemTheme = theme.components.CategoryItem.styleOverrides;
 
@@ -43,7 +45,11 @@ const CategoryItem = ({
       {/* Text Container with category data */}
       <View style={categoryItemTheme.textContainer}>
         <Text style={categoryItemTheme.categoryName}>{categoryName}</Text>
-        <Text style={categoryItemTheme.categoryType}>{categoryType}</Text>
+        <Text style={categoryItemTheme.categoryType}>
+          {categoryType == "income"
+            ? t("categoryItem.income")
+            : t("categoryItem.expense")}
+        </Text>
       </View>
       {/* Edit Button container */}
       <TouchableOpacity
